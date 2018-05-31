@@ -1,0 +1,24 @@
+#MyEclipse Hibernate Properties
+#Tue Jul 31 11:36:58 CST 2018
+sessionFactoryName=
+genBasicCompId=false
+profile=
+daoSFId=
+version=3.3
+jndiPath=
+detectM2M=false
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+genAnnotations=false
+reSettingsFile=/HousingFund/hibernate.reveng.xml
+configFile=/HousingFund/src/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

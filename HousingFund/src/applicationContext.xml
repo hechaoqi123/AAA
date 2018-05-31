@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	">
+	   
+        <!-- 开启类扫描 -->
+         <context:component-scan base-package="com.aaa"/>
+        <!-- 开启AOP自动代理 -->
+        <aop:aspectj-autoproxy/>
+        <!-- 开启事务注解驱动 -->
+         <tx:annotation-driven/>
+       <!-- 开启这个配置，spring才能识别@Scheduled注解   -->  
+    <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
+    <task:scheduler id="qbScheduler" pool-size="10"/>
+   <!-- 数据源 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost/project"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!-- SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		  <!-- 依赖注入 -->
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		  <!-- Hibernate属性 -->
+		<property name="hibernateProperties">
+		   <props merge="default">
+		   	<prop key="hibernate.dialect">  <!-- 方言 -->
+		   		org.hibernate.dialect.MySQLDialect
+		   	</prop>
+		  <!--  	 <prop key="hibernate.hbm2ddl.auto">正向工程
+		   	  update
+		   	 </prop> -->
+		 <!--    <prop key="hibernate.show_sql">  
+		   		true
+		   	</prop> 
+		   	<prop key="hibernate.format_sql"> 
+		   		true
+		   	</prop>  -->
+		   </props>
+		</property>
+		
+		
+		<property name="mappingResources">
+			<list>
+				<value>com/aaa/entity/Useoffunds.hbm.xml</value>
+				<value>com/aaa/entity/Guaranteemode.hbm.xml</value>
+				<value>com/aaa/entity/Indaccountinfo.hbm.xml</value>
+				<value>
+					com/aaa/entity/Borrowmoneyagreement.hbm.xml
+				</value>
+				<value>
+					com/aaa/entity/Guarantorinfoestimate.hbm.xml
+				</value>
+				<value>
+					com/aaa/entity/Identificationpaper.hbm.xml
+				</value>
+				<value>com/aaa/entity/Retireti.hbm.xml</value>
+				<value>com/aaa/entity/Remittancedetail.hbm.xml</value>
+				<value>com/aaa/entity/Extractdetails.hbm.xml</value>
+				<value>com/aaa/entity/Loanaccountinfo.hbm.xml</value>
+				<value>com/aaa/entity/Extractionmode.hbm.xml</value>
+				<value>com/aaa/entity/Fundtranreco.hbm.xml</value>
+				<value>com/aaa/entity/Unitinfo.hbm.xml</value>
+				<value>com/aaa/entity/Repayprincprove.hbm.xml</value>
+				<value>com/aaa/entity/Materialproof.hbm.xml</value>
+				<value>com/aaa/entity/Loanfinal.hbm.xml</value>
+				<value>
+					com/aaa/entity/Extractionandapproval.hbm.xml
+				</value>
+				<value>
+					com/aaa/entity/Collateralvalueestimate.hbm.xml
+				</value>
+				<value>com/aaa/entity/Causeofextraction.hbm.xml</value>
+				<value>com/aaa/entity/Loanbook.hbm.xml</value>
+				<value>com/aaa/entity/Supdetailed.hbm.xml</value>
+				<value>com/aaa/entity/Utinaccountinfo.hbm.xml</value>
+				<value>com/aaa/entity/Purchasedhinfo.hbm.xml</value>
+				<value>com/aaa/entity/Overduerepayment.hbm.xml</value>
+				<value>com/aaa/entity/Coborrower.hbm.xml</value>
+				<value>com/aaa/entity/Mpfacentrestat.hbm.xml</value>
+				<value>
+					com/aaa/entity/Repaymentplandetails.hbm.xml
+				</value>
+				<value>com/aaa/entity/Loanapplication.hbm.xml</value>
+				<value>com/aaa/entity/Purchasecontract.hbm.xml</value>
+				<value>com/aaa/entity/Collateralinfo.hbm.xml</value>
+				<value>com/aaa/entity/Utinsupapply.hbm.xml</value>
+				<value>com/aaa/entity/Indinfo.hbm.xml</value>
+				<value>com/aaa/entity/Extractionrecord.hbm.xml</value>
+				<value>com/aaa/entity/Guarantorinfo.hbm.xml</value>
+				<value>com/aaa/entity/Materialtype.hbm.xml</value>
+				<value>com/aaa/entity/Proofofdeath.hbm.xml</value>
+				<value>com/aaa/entity/Proof.hbm.xml</value>
+				<value>com/aaa/entity/Users.hbm.xml</value>
+				<value>com/aaa/entity/Powers.hbm.xml</value>
+				<value>com/aaa/entity/Personalmanagement.hbm.xml</value>
+				<value>com/aaa/entity/Purinfo.hbm.xml</value>
+				<value>com/aaa/entity/Rolemanagement.hbm.xml</value>
+				<value>com/aaa/entity/Role.hbm.xml</value>
+				<value>com/aaa/entity/Roleemployee.hbm.xml</value>
+				<value>com/aaa/entity/Rolepowers.hbm.xml</value>
+				<value>
+					com/aaa/entity/Utinremittancedetail.hbm.xml
+				</value>
+				<value>com/aaa/entity/Flupay.hbm.xml</value>
+				<value>com/aaa/entity/Beforereturn.hbm.xml</value>
+				<value>com/aaa/entity/Fush.hbm.xml</value>
+				<value>com/aaa/entity/Log.hbm.xml</value></list>
+		</property></bean>
+	<!-- 配置HibernateTemplate -->
+        <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+           <!-- 依赖注入 -->
+           <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>	
+	<!-- 配置事务管理类 -->
+	     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+           <!-- 依赖注入 -->
+           <property name="sessionFactory" ref="sessionFactory"/>
+        </bean>	
+	</beans>
