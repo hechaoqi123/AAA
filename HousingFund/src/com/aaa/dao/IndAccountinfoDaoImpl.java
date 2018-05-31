@@ -79,7 +79,6 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	       } else {  
 	           sGender = "女";  
 	      } 
-	       System.out.println(1);
 		indinfo.setSex(sGender);
 		indaccountinfo.setLoginAccount(idnumber);
 		indaccountinfo.setIndStatus("正常");
@@ -92,7 +91,6 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 		Serializable save = hibernateTemplate.save(indinfo);
 		Indinfo indinfoEntity = hibernateTemplate.get(Indinfo.class, save.hashCode());
 		Utinaccountinfo utinaccountinfoEntity = hibernateTemplate.get(Utinaccountinfo.class, utinaccountinfoID);
-		System.out.println("缴存人数更新=="+(utinaccountinfoEntity.getUtinDepositPeople()+1));
 		if(utinaccountinfoEntity.getUtinSumPeople() != null){
 			utinaccountinfoEntity.setUtinSumPeople((utinaccountinfoEntity.getUtinSumPeople()+1));
 			System.out.println("缴存人数更新=="+(utinaccountinfoEntity.getUtinDepositPeople()+1));
