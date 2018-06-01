@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <center class="td" >个人账户历史借贷记录</center>
                   <table  style="border-top:1px solid #999;font-family: '楷体'">
                      <tr>
-                        <th style="width:100px">借款账户</th>
+                        <th style="width:100px;padding-left:15px;">借款账户</th>
                         <th>借款人</th>
                         <th>借款时间</th>
                         <th>借款状态</th>

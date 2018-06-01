@@ -321,8 +321,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },
             success:function(data){
               
-                alert(data);
-              return false;
                if(data=="true"){
                  result=true;
                }else{

@@ -146,6 +146,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<b class="arrow"></b>
 					</li>
+					<!-- 业务进度查询 -->
+					<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-edit"></i>
+							<span class="menu-text">进度查询</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '进度查询'}">
+									<li class="">
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
 					<!-- 信息管理 -->
 					<li class="Myli">
 						<a href="#" class="dropdown-toggle">
@@ -238,7 +261,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:forEach>
 						</ul>
 					</li>
-						<!-- 还贷业务 -->
+						<!-- 还款业务 -->
 						<li class="Myli">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-opera"></i>
@@ -250,6 +273,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<ul class="submenu">
 							<c:forEach items="${list_Powers}" var="Powers">
 								<c:if test="${Powers.ptype == '还款业务'}">
+									<li class="">
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
+				    <!-- 冲贷业务 -->
+				   	<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-opera"></i>
+							<span class="menu-text">冲贷业务</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '冲贷业务'}">
 									<li class="">
 									<a href="${Powers.purl }" class="test" target="right_main">
 										<i class="menu-icon fa fa-caret-right"></i>
