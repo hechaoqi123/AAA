@@ -1,5 +1,6 @@
 package com.aaa.dao;
 
+import java.io.File;
 import java.util.List;
 
 import com.aaa.entity.Indaccountinfo;
@@ -28,4 +29,6 @@ public interface IndAccountinfoDao extends BaseDao<Indaccountinfo>{
 		public int updateEmpInfo(Indaccountinfo indaccountinfo, Indinfo indinfo, Integer utinaccountinfoID);
 		//删除
 		public int delEmp(Indaccountinfo indaccountinfo);
+		//文件增加员工
+		public List saveFileIndaccountinfo(File file) throws Exception;
 }

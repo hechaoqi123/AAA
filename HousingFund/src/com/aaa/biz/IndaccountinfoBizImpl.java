@@ -1,5 +1,6 @@
 package com.aaa.biz;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -101,6 +102,10 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 						Indinfo indinfo, Integer utinaccountinfoID) {
 					dao.updateEmpInfo(indaccountinfo, indinfo, utinaccountinfoID);
 					return 0;
+				}
+				@Override
+				public List saveFileIndaccountinfo(File file) throws Exception {
+					return dao.saveFileIndaccountinfo(file);
 				}
 
 }

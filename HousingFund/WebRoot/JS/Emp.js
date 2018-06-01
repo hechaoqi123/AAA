@@ -36,18 +36,30 @@ function get_one_Utinaccountinfo(obj){
 	 });
 };
 
-var indDepositRadices = 0;
-$(".indDepositRadices").blur(function(){
-	indDepositRadices = $(this).val();
-});
 //修改基数
+$(".indDepositRadices").blur(function(){
+	var indAccountId = $(this).attr("name");
+	var Ids = "indStatus"+indAccountId;
+	var indDepositRadices = indDepositRadices = $(this).val();
+	var tests = /^([1-9][0-9]*)+(.[0-9]{1,2})?$/;
+	if(tests.test(indDepositRadices)){
+		$.ajax({
+			url:"updateRadices.action",
+			type:"post",
+			data:{"indaccountinfo.indAccountId":indAccountId, "indaccountinfo.indDepositRadices":indDepositRadices}
+		});
+	}else{
+		alert("输入错误");
+	}
+});
+/*
 function updateRadices(obj){
 	$.ajax({
 		url:"updateRadices.action",
 		type:"post",
 		data:{"indaccountinfo.indAccountId":obj, "indaccountinfo.indDepositRadices":indDepositRadices}
 	});
-};
+};*/
 //账号封存
 function updateRadicesSeal(obj){
 	var valSeal = obj.value;
@@ -86,7 +98,7 @@ function getFuzzyEmp(){
 			          	  " <td>"+data[i].indAccountId+"</td>"+
 				          " <td>"+data[i].trueName+"</td>"+
 				          " <td>"+data[i].duties+" </td>"+
-				          " <td><input type='number' class='form-control indDepositRadices' name='indaccountinfo.indDepositRadices' value='"+data[i].indDepositRadices+"'> </td>"+
+				          " <td><input type='number' class='form-control indDepositRadices' name='"+data[i].indAccountId+"' value='"+data[i].indDepositRadices+"'> </td>"+
 				          " <td>"+data[i].presentSumRem+"</td>"+
 				          " <td>"+data[i].usableRem+"</td>"+
 				          " <td class='indStatus"+data[i].indAccountId+"'>"+data[i].indStatus+"</td>"+
@@ -98,7 +110,7 @@ function getFuzzyEmp(){
 					         tr += "<input type='button' class='btn btn-primary' name='Indaccountinfo.indAccountId' onclick='updateRadicesSeal(this)' value='正常'>";
 					      }
 				          
-				           	tr += "<input type='button' class='btn btn-primary' onclick='updateRadices("+data[i].indAccountId+")'  value='修改基数'>"+
+				           	tr += "<input type='button' class='btn btn-primary'  value='修改基数'>"+
 				            "</td>"+
 			         	"</tr>";
 				           	$("#tbs").append(tr);

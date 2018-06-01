@@ -1,6 +1,10 @@
 package com.aaa.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +15,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.aaa.entity.*;
+
+import jxl.Sheet;
+import jxl.Workbook;
 
 @Repository
 public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implements IndAccountinfoDao {
@@ -93,10 +100,8 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 		Utinaccountinfo utinaccountinfoEntity = hibernateTemplate.get(Utinaccountinfo.class, utinaccountinfoID);
 		if(utinaccountinfoEntity.getUtinSumPeople() != null){
 			utinaccountinfoEntity.setUtinSumPeople((utinaccountinfoEntity.getUtinSumPeople()+1));
-			System.out.println("缴存人数更新=="+(utinaccountinfoEntity.getUtinDepositPeople()+1));
 			utinaccountinfoEntity.setUtinDepositPeople((utinaccountinfoEntity.getUtinDepositPeople()+1));
 		}else{
-			System.out.println("缴存人数更新=="+(utinaccountinfoEntity.getUtinDepositPeople()+1));
 			utinaccountinfoEntity.setUtinSumPeople(1);
 			utinaccountinfoEntity.setUtinDepositPeople((utinaccountinfoEntity.getUtinDepositPeople()+1));
 		}
@@ -118,6 +123,7 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	//模糊
 	@Override
 	public List getFuzzy(Integer utinaccountinfoID, Indaccountinfo indaccountinfo){
+		//查新某个公司的员工
 		String hql = "select new map(a.indAccountId as indAccountId, " +
 									"a.indinfo.trueName as trueName, " +
 									"a.indinfo.duties as duties, " +
@@ -126,28 +132,30 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 									"a.indStatus as indStatus, " +
 									"a.presentSumRem as presentSumRem" +
 									") from Indaccountinfo a where a.indinfo.trueName like '%"+indaccountinfo.getIndinfo().getTrueName()+"%' and  a.utinaccountinfo.utinAccountId = "+utinaccountinfoID;
+		//员工信息修改时模糊查询
 		if(utinaccountinfoID==-1){
 			hql = "select new map(a.indAccountId as indAccountId, " +
-					"a.indinfo.trueName as trueName, " +
-					"a.indinfo.duties as duties, " +
-					"a.indDepositRadices as indDepositRadices, " +
-					"a.usableRem as usableRem, " +
-					"a.indStatus as indStatus, " +
-					"a.presentSumRem as presentSumRem) from Indaccountinfo a where a.indinfo.trueName like '%"+indaccountinfo.getIndinfo().getTrueName()+"%'";
+									"a.indinfo.trueName as trueName, " +
+									"a.indinfo.duties as duties, " +
+									"a.indDepositRadices as indDepositRadices, " +
+									"a.usableRem as usableRem, " +
+									"a.indStatus as indStatus, " +
+									"a.presentSumRem as presentSumRem) from Indaccountinfo a where a.indinfo.trueName like '%"+indaccountinfo.getIndinfo().getTrueName()+"%'";
 		}
+		//员工信息修改时查询所有员工
 		if(utinaccountinfoID==0){
 			hql = "select new map(a.indAccountId as indAccountId, " +
-					"a.indinfo.trueName as trueName, " +
-					"a.indinfo.duties as duties, " +
-					"a.indDepositRadices as indDepositRadices, " +
-					"a.usableRem as usableRem, " +
-					"a.indStatus as indStatus, " +
-					"a.presentSumRem as presentSumRem) from Indaccountinfo a ";
+									"a.indinfo.trueName as trueName, " +
+									"a.indinfo.duties as duties, " +
+									"a.indDepositRadices as indDepositRadices, " +
+									"a.usableRem as usableRem, " +
+									"a.indStatus as indStatus, " +
+									"a.presentSumRem as presentSumRem) from Indaccountinfo a ";
 		}
 		List list_Indaccountinfo = hibernateTemplate.find(hql);
 		return list_Indaccountinfo;
 		}
-	//修改
+	//修改基数和状态
 	@Override
 	public int updateRadices(Indaccountinfo indaccountinfo) {
 		Indaccountinfo indaccountinfoEntity = hibernateTemplate.get(Indaccountinfo.class, indaccountinfo.getIndAccountId());
@@ -160,9 +168,10 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 			indaccountinfoEntity.setIndStatus(indaccountinfo.getIndStatus());
 			//调整公司封存人数和正常人数
 			Utinaccountinfo utinaccountinfoEntity = hibernateTemplate.get(Utinaccountinfo.class, indaccountinfoEntity.getUtinaccountinfo().getUtinAccountId());
+			//封存员工
 			if(indaccountinfo.getIndStatus().equals("封存")){
-				utinaccountinfoEntity.setUtinSealPeople(utinaccountinfoEntity.getUtinSealPeople()+1);
-				utinaccountinfoEntity.setUtinDepositPeople((utinaccountinfoEntity.getUtinDepositPeople()-1));
+				utinaccountinfoEntity.setUtinSealPeople(utinaccountinfoEntity.getUtinSealPeople()+1);//utinaccountinfoEntity.getUtinSealPeople()单位封存人数
+				utinaccountinfoEntity.setUtinDepositPeople((utinaccountinfoEntity.getUtinDepositPeople()-1));//正常缴存人数
 			}
 			if(indaccountinfo.getIndStatus().equals("正常")){
 				utinaccountinfoEntity.setUtinSealPeople(utinaccountinfoEntity.getUtinSealPeople()-1);
@@ -178,7 +187,6 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 		Utinaccountinfo utinaccountinfoEntity = hibernateTemplate.get(Utinaccountinfo.class, utinaccountinfoID);
 		Indinfo indinfoEntity = hibernateTemplate.get(Indinfo.class, indinfo.getIndInfoId());
 		Indaccountinfo indaccountinfoEntity = hibernateTemplate.get(Indaccountinfo.class, indaccountinfo.getIndAccountId());
-		System.out.println(1112);
 		indinfoEntity.setTrueName(indinfo.getTrueName());
 		indinfoEntity.setIdnumber(indinfo.getIdnumber());
 		indinfoEntity.setFixedPhone(indinfo.getFixedPhone());
@@ -217,5 +225,74 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 			hibernateTemplate.delete(indinfo);
 			return 1;
 		}
+	}
+	@Override
+	public List saveFileIndaccountinfo(File file) throws Exception {
+	 	List<Indinfo> list_indinfos = new ArrayList<Indinfo>();
+	 	List<Indaccountinfo> list_indaccountinfos = new ArrayList<Indaccountinfo>();
+	 	Utinaccountinfo utinaccountinfo = new Utinaccountinfo();
+		//导入已存在的Excel文件，获得只读的工作薄对象
+	 	//File f =new File("D:/公积金信息登记.xls");
+        FileInputStream fis=new FileInputStream(file);
+        Workbook wk=Workbook.getWorkbook(fis);
+        //获取第一张Sheet表 
+        Sheet sheet=wk.getSheet(0);
+        //拿到公司账户编号
+        utinaccountinfo.setUtinAccountId(Integer.parseInt(sheet.getCell(8, 1).getContents()));
+        //获取总行数
+        int rowNum=sheet.getRows();
+        //从数据行开始迭代每一行
+        for(int i=1;i<rowNum;i++){
+        	Indaccountinfo indaccountinfo=new Indaccountinfo();        
+        	Indinfo indinfo = new Indinfo();
+			//getCell(column,row)，表示取得指定列指定行的单元格（Cell）
+			//getContents()获取单元格的内容，返回字符串数据。适用于字符型数据的单元格
+			//使用实体类封装单元格数据
+        	
+        	//个人信息
+			indinfo.setTrueName(sheet.getCell(0, i).getContents());
+			indinfo.setFixedPhone(sheet.getCell(2, i).getContents());
+			indinfo.setPhoneNumber(sheet.getCell(3, i).getContents());
+			indinfo.setIdnumber(sheet.getCell(4, i).getContents());
+			indinfo.setWedlockStatus(sheet.getCell(5, i).getContents());
+			indinfo.setFamilyAddress(sheet.getCell(6, i).getContents());
+			indinfo.setFamilyMonthIncome(Integer.parseInt(sheet.getCell(7, i).getContents()));
+			indinfo.setDuties(sheet.getCell(10, i).getContents());
+			
+			
+			
+			//个人账户信息
+			indaccountinfo.setIndDepositRadices(Float.valueOf(sheet.getCell(11, i).getContents()));
+			indaccountinfo.setBankSaAccount(sheet.getCell(19, i).getContents());
+			indaccountinfo.setBankOpenAccount(sheet.getCell(20, i).getContents());
+			indaccountinfo.setTrueName(sheet.getCell(0, i).getContents());
+			indaccountinfo.setIdnumber(sheet.getCell(4, i).getContents());
+            //判断单元格的类型，单元格主要类型LABEL、NUMBER、DATE                    
+//		            if(sheet.getCell(2,i).getType==CellType.NUMBER){
+			//转化为数值型单元格
+		/*	NumberCell numCell=(NumberCell)sheet.getCell(2,i);
+			//NumberCell的getValue()方法取得单元格的数值型数据
+			info.setRscore(numCell.getValue());*/
+			String hql = "From Indaccountinfo i where i.idnumber = "+sheet.getCell(4, i).getContents();//查询存在该员工
+			List find = hibernateTemplate.find(hql);
+			if(find.size()>0){
+				list_indinfos.add(indinfo);
+				list_indaccountinfos.add(indaccountinfo);
+			}else{
+				Integer utinAccountId = utinaccountinfo.getUtinAccountId();
+				try {
+					saveIndaccountinfo(indinfo, indaccountinfo, utinAccountId);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+        	}
+        	fis.close();
+			wk.close();
+//====================================================
+
+
+
+			return list_indinfos;
 	}
 }

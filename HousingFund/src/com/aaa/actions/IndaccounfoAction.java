@@ -1,6 +1,9 @@
 package com.aaa.actions;
 
+import java.io.File;
 import java.util.List;
+import java.util.Map;
+
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -9,22 +12,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.aaa.biz.IndaccountinfoBiz;
-import com.aaa.biz.UtinaccountinfoBiz;
 import com.aaa.entity.Indaccountinfo;
 import com.aaa.entity.Indinfo;
-import com.aaa.entity.Utinaccountinfo;
 import com.alibaba.fastjson.JSON;
+
 @ParentPackage("struts-default")
 @Controller
 public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 	@Autowired
 	private IndaccountinfoBiz indaccountinfoBiz; 
-
+	
 	private Indinfo indinfo;
 	private List<Indinfo> list_indinfo;
 	private List<Indaccountinfo> list_indaccountinfo;
 	private Indaccountinfo indaccountinfo;
 	private Integer utinaccountinfoID;
+	private File myFile;
+	
+//添加excu
+	@Action(value="saveFileIndaccountinfo", results = {@Result(name = "saveFileIndaccountinfo", location = "/BackJsp/LDL/saveFileError.jsp")})
+	public String saveFileIndaccountinfo() throws Exception{
+		List<Indaccountinfo> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile);
+		System.out.println(list_Indaccountinfo);
+		Map requestMap = getRequestMap();
+		requestMap.put("list_Indaccountinfo", list_Indaccountinfo);
+		return "saveFileIndaccountinfo";
+	}
+	
 	
 	//添加员工
 	@Action(value="saveIndaccountinfo", results = {@Result(name = "saveIndaccountinfo", location = "/BackJsp/LDL/success.jsp")})
@@ -123,6 +137,16 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 
 	public void setList_indaccountinfo(List<Indaccountinfo> list_indaccountinfo) {
 		this.list_indaccountinfo = list_indaccountinfo;
+	}
+
+
+	public File getMyFile() {
+		return myFile;
+	}
+
+
+	public void setMyFile(File myFile) {
+		this.myFile = myFile;
 	}
 	
 	

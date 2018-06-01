@@ -52,7 +52,7 @@ function getFuzzy(){
 		   	    		  		"<td>"+data[i].utinName+"</td>"+
 		   	    		  		"<td>"+data[i].utinSumPeople+"</td>"+
 		   	    		  		"<td>"+data[i].utinDepositPeople+"</td>"+
-		   	    		  		"<td>333</td>"+
+		   	    		  		"<td>"+data[i].utinSealPeople+"</td>"+
 		   	    		  		"<td>"+data[i].utinProvRema+"</td>"+
 		   	    		  		"<td>"+data[i].accountStatus+"</td>"+
 		   	    		  		"<td><a class='btn btn-primary' href='getEmp.action?utinaccountinfoID="+data[i].utinAccountId+"'>点击进入</a>&nbsp;</td>"+

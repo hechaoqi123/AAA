@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	   <td>${Indaccountinfo.indAccountId }</td>
 	           <td>${Indaccountinfo.indinfo.trueName }</td>
 	           <td>${Indaccountinfo.indinfo.duties }</td>
-	           <td><input type="number" min="1000" max="999999" class="form-control indDepositRadices"name="indaccountinfo.indDepositRadices" required="required" value="${Indaccountinfo.indDepositRadices }"></td>
+	           <td><input type="number" min="1000" max="999999" class="form-control indDepositRadices"name="${Indaccountinfo.indAccountId }" required="required" value="${Indaccountinfo.indDepositRadices }"></td>
 	           <td>${Indaccountinfo.presentSumRem }</td>
 	           <td>${Indaccountinfo.usableRem }</td>
 	           <td class="indStatus${Indaccountinfo.indAccountId }">${Indaccountinfo.indStatus }</td>

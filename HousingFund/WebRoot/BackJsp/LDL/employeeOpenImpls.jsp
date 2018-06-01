@@ -38,10 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head>
   <body>
   	
-  	<form action="saveIndaccountinfo.action" method="post">
   	<table class="table" border="1px" bordercolor="#e3e3e3">
   		 <tr>
-           <td><input class="utinid" name="utinaccountinfoID" style="display: none;"></td>
+           <td></td>
            <td>公司名称:</td>
            <td><span class="utinName"></span></td>
            <td>单位地址:</td>
@@ -56,13 +55,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <td><span class="utinSumPeople"></span></td>
           </tr>
   	</table>
+  	<script>
+  	//解决上传路径问题
+	</script> 
+  	<form action="saveFileIndaccountinfo.action" method="post" enctype="multipart/form-data">
+	  	<table class="table">
+	  		<tr class="form-group">
+	  			<td width="140px"><span style="color: red">多添加请选择文档</span></td>
+	  		 	<td width="200px"><input type="file" name="myFile"></td>
+	  			<td><input type="submit" value="提交"></td>
+	  		</tr>
+	  	</table>
+  	</form>
+  	
+  		
+  	<form action="saveIndaccountinfo.action" method="post">
     <table class="table" style="">
          <tr>
          	   <td colspan="6" class="active">个人信息</td>
          </tr>
           <tr>
 	           <td>姓名<span style="color:red">*</span></td>
-	           <td><input class="form-control utinName" type="text" required="required" name="list_indinfo[0].trueName"/></td>
+	           <td>
+	           		<input class="form-control utinName" type="text" required="required" name="list_indinfo[0].trueName"/>
+	           		<input class="utinid" name="utinaccountinfoID" style="display: none;">
+	           	</td>
 	          	<td>证件类型<span style="color:red">*</span></td>
 				<td>
 					<select class="form-control">
