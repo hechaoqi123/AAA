@@ -85,7 +85,6 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 	}
 	@Action("thowEmp")
 	public String thowEmp(){
-		System.out.println(indaccountinfo.getIndStatus());
 		int frozenEmpReturn = indaccountinfoBiz.frozenEmp(indaccountinfo);
 		getOut().print(frozenEmpReturn);
 		return null;
