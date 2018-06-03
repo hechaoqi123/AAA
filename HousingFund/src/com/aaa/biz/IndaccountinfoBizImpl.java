@@ -89,7 +89,7 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 			Indaccountinfo ind=dao.findByExample(entity).get(0);
 			ind.setPresentSumRem(ind.getPresentSumRem()-money);
 		}
-		//É¾³ýÔ±¹¤
+		//¶³½á
 		@Override
 		public int frozenEmp(Indaccountinfo indaccountinfo) {
 			return dao.frozenEmp(indaccountinfo);
