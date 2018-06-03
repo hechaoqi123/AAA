@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.aaa.entity.Utinaccountinfo;
 
-public interface UtinaccountinfoDao {
+public interface UtinaccountinfoDao extends BaseDao<Utinaccountinfo>{
 	//查询全部
 	public List getUtinaccountinfo();
 	//增加

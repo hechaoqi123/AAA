@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aaa.dao.IndAccountinfoDao;
 import com.aaa.dao.IndAccountinfoDaoImpl;
+import com.aaa.dao.UnitinfoDao;
+import com.aaa.dao.UtinaccountinfoDao;
 import com.aaa.entity.*;
 
 @Service
-
+@Transactional
 public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 
 	@Resource
 	private IndAccountinfoDao dao;
+	@Autowired
+	private UtinaccountinfoDao uDao;
 	
 	
 	
@@ -107,6 +112,15 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 		@Override
 		public List getOneIndaf(Indinfo indinfo) {
 			return dao.getOneIndaf(indinfo);
+		}
+		@Override
+		public List UtinegetOneEmp(Indaccountinfo indaccountinfo) {
+			return dao.UtinegetOneEmp(indaccountinfo);
+		}
+		//ÕË»§×ªÒÆ
+		@Override
+		public void utine(int indId, int unitId) {
+			dao.getOne(indId).setUtinaccountinfo(uDao.getOne(unitId));
 		}
 
 }
