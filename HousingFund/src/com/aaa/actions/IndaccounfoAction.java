@@ -29,14 +29,20 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 	private Integer utinaccountinfoID;
 	private File myFile;
 	
-//添加excu
+//添加excule
 	@Action(value="saveFileIndaccountinfo", results = {@Result(name = "saveFileIndaccountinfo", location = "/BackJsp/LDL/saveFileError.jsp")})
 	public String saveFileIndaccountinfo() throws Exception{
-		List<Indaccountinfo> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile);
-		System.out.println(list_Indaccountinfo);
-		Map requestMap = getRequestMap();
-		requestMap.put("list_Indaccountinfo", list_Indaccountinfo);
+		List<List<Indaccountinfo>> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile);
+		Object str = list_Indaccountinfo.get(0);
+		if(str.equals("errorFile")){
+			Map requestMap = getRequestMap();
+			requestMap.put("list_Indaccountinfo", null);
+		}else{
+			Map requestMap = getRequestMap();
+			requestMap.put("list_Indaccountinfo", list_Indaccountinfo);
+		}
 		return "saveFileIndaccountinfo";
+		
 	}
 	
 	
@@ -70,6 +76,20 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 		}
 		return null;
 	};
+	//冻结账户
+	@Action("frozenEmp")
+	public String frozenEmp(){
+		int frozenEmpReturn = indaccountinfoBiz.frozenEmp(indaccountinfo);
+		getOut().print(frozenEmpReturn);
+		return null;
+	}
+	@Action("thowEmp")
+	public String thowEmp(){
+		System.out.println(indaccountinfo.getIndStatus());
+		int frozenEmpReturn = indaccountinfoBiz.frozenEmp(indaccountinfo);
+		getOut().print(frozenEmpReturn);
+		return null;
+	}
 	//模糊查询
 	@Action(value="getFuzzyEmp")
 	public String getFuzzy(){
@@ -82,12 +102,23 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 		}
 		return null;
 		}
-	//获取一个员工
+		//获取一个员工
 		@Action(value="getEmpinfo", results = {@Result(name = "getEmpinfo",  location = "/BackJsp/LDL/employeeOpenImpl.jsp")})
 		public String getEmpinfo(){
 			Indaccountinfo indaccountinfoObject = indaccountinfoBiz.getOne(indaccountinfo.getIndAccountId());
 			getRequestMap().put("indaccountinfoObject", indaccountinfoObject);
 			return "getEmpinfo";
+		}
+		//通过条件获取一个对象
+		@Action("getOneIndaf")
+		public String getOneIndaf(){
+			List oneIndaf = indaccountinfoBiz.getOneIndaf(list_indinfo.get(0));
+			if(oneIndaf.size()>0){
+				getOut().print("false");
+			}else{
+				getOut().print("true");
+			}
+			return null;
 		}
 		//修改
 		@Action(value="updateIndaccountinfo", results = {@Result(name = "updateIndaccountinfo",  location = "/BackJsp/LDL/success.jsp")})

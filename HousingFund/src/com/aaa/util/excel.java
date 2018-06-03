@@ -30,8 +30,13 @@ public class excel {
 	
 	
   public static void main(String[] args) throws Exception {
-	  a a = new a();
-	  a.loadScoreInfo();
+	  String c = new String("b");
+	  String b = new String("b");
+	  String a = "b";
+	  System.out.println(a==b);
+	  System.out.println(a.equals(b));
+	  System.out.println(b==c);
+	  System.out.println(b!=c);
 }
    //¶Á
  public static List<List> ready() throws Exception{

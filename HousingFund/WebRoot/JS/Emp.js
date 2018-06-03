@@ -35,12 +35,16 @@ function get_one_Utinaccountinfo(obj){
 		 }
 	 });
 };
-
+//储存修改前的基数
+var xgq = 0;
+$(".indDepositRadices").focus(function(){
+	xgq = $(this).val();
+});
 //修改基数
 $(".indDepositRadices").blur(function(){
 	var indAccountId = $(this).attr("name");
 	var Ids = "indStatus"+indAccountId;
-	var indDepositRadices = indDepositRadices = $(this).val();
+	var indDepositRadices = $(this).val();
 	var tests = /^([1-9][0-9]*)+(.[0-9]{1,2})?$/;
 	if(tests.test(indDepositRadices)){
 		$.ajax({
@@ -52,6 +56,18 @@ $(".indDepositRadices").blur(function(){
 		alert("输入错误");
 	}
 });
+function updateRadices(obj){
+	var ids = obj+"xx";
+	var bool = confirm("是否确认修改");
+	if(!bool){
+		$("#"+ids).val(xgq);
+		$.ajax({
+			url:"updateRadices.action",
+			type:"post",
+			data:{"indaccountinfo.indAccountId":obj, "indaccountinfo.indDepositRadices":xgq}
+		});
+	}
+}
 /*
 function updateRadices(obj){
 	$.ajax({
@@ -86,6 +102,7 @@ function updateRadicesSeal(obj){
 function getFuzzyEmp(){
 	var utinid = $(".utinid").val();
 	var trueName = $(".trueName").val();
+	if(trueName == "输入员工姓名"){trueName = "";};
 	$("#tbs").html("");
 	$.ajax({
 		url:"getFuzzyEmp.action",
@@ -94,6 +111,7 @@ function getFuzzyEmp(){
 		dataType:"json",
 		success:function(data){
 			for(var i=0;i<data.length;i++){
+				if(data[i].indStatus != "冻结"){
 				var tr =  "<tr>"+
 			          	  " <td>"+data[i].indAccountId+"</td>"+
 				          " <td>"+data[i].trueName+"</td>"+
@@ -110,10 +128,11 @@ function getFuzzyEmp(){
 					         tr += "<input type='button' class='btn btn-primary' name='Indaccountinfo.indAccountId' onclick='updateRadicesSeal(this)' value='正常'>";
 					      }
 				          
-				           	tr += "<input type='button' class='btn btn-primary'  value='修改基数'>"+
+				           	tr += "<input type='button' class='btn btn-primary xiuGJS'  value='修改基数'>"+
 				            "</td>"+
 			         	"</tr>";
 				           	$("#tbs").append(tr);
+				}
 			}
 		}
 	});
