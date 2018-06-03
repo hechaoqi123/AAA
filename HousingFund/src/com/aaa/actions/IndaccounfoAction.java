@@ -108,7 +108,7 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 			getRequestMap().put("indaccountinfoObject", indaccountinfoObject);
 			return "getEmpinfo";
 		}
-		//通过条件获取一个对象
+		//通过条件获取一个对象注册查询
 		@Action("getOneIndaf")
 		public String getOneIndaf(){
 			List oneIndaf = indaccountinfoBiz.getOneIndaf(list_indinfo.get(0));
@@ -119,6 +119,14 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 			}
 			return null;
 		}
+		//员工转移获取一个用户
+		@Action("UtinegetOneEmp")
+		public String UtinegetOneEmp(){
+			List utinegetOneEmp = indaccountinfoBiz.UtinegetOneEmp(indaccountinfo);
+			String jsonUtin = JSON.toJSONString(utinegetOneEmp);
+			getOut().print(jsonUtin);
+			return null;
+		}
 		//修改
 		@Action(value="updateIndaccountinfo", results = {@Result(name = "updateIndaccountinfo",  location = "/BackJsp/LDL/success.jsp")})
 		public String updateIndaccountinfo(){
@@ -127,6 +135,12 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 			}
 			indaccountinfoBiz.updateEmpInfo(indaccountinfo, indinfo, utinaccountinfoID);
 			return "updateIndaccountinfo";
+		}
+		//员工转移
+		@Action(value="empUtine", results = {@Result(name = "empUtine",  location = "/BackJsp/LDL/success.jsp")})
+		public String empUtine(){
+			indaccountinfoBiz.utine(list_indinfo.get(0).getIndInfoId(),indaccountinfo.getIndAccountId());
+			return "empUtine";
 		}
 		
 	public Indinfo getIndinfo() {

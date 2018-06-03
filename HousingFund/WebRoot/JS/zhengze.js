@@ -65,8 +65,7 @@
 			 },
 			 "list_indinfo[0].idnumber":{
 				required: true,
-				idNumTest:true,
-				getOneIndaf:true
+				idNumTest:true
 			 },
 			 "list_indinfo[0].phoneNumber":{
 				 phoneTest:true
@@ -127,21 +126,6 @@
 		 var postcode = /^([1-9]{1})(\d{14}|\d{18})$/;
 		 return postcode.test(value);
 	 }, $.validator.format("请输入正确的银行卡号"));
-	 //员工是不是已经存在
-	 var bool;
-	 $.validator.addMethod("getOneIndaf", function(value){
-		 $.ajax({
-			 url:"getOneIndaf.action",
-			 type:"post",
-			 data:{"list_indinfo[0].idnumber":value},
-			 dataType:"json",
-			 success:function(data){
-				 alert(data);
-				 bool=data;
-			 }
-		 });
-		 return bool;
-	 }, $.validator.format("该用户已经存在,您可以通知他账户转移"));
  });
 
 var utinNameBoolent = false;

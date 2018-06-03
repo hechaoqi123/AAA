@@ -42,4 +42,8 @@ public interface IndaccountinfoBiz {
 		public List saveFileIndaccountinfo(File file) throws Exception;
 		//条件查询一个信息
 		public List getOneIndaf(Indinfo indinfo);
+		//员工转移获取一个用户
+		public List UtinegetOneEmp(Indaccountinfo indaccountinfo);
+		//账户转移
+		public void utine(int indId,int unitId);
 }

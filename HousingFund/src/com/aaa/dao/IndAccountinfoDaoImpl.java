@@ -34,15 +34,10 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	 */
 	@Override
 	public int update_Indaccount(Indaccountinfo ind,RDUtil rd){
-		
 		Indaccountinfo inds=hibernateTemplate.get(Indaccountinfo.class,rd.getIndAccountId());
-		
-		System.out.println(inds.getIndDepositRadices());
-		
 		//inds.setPeMonthDep(rd.getPeMonthDep());//此处double类型被转为float
 		inds.setUsableRem(rd.getUsableRem()+rd.getPayinSumMoney());//同上
 		inds.setPresentSumRem( rd.getPresentSumRem()+rd.getPayinSumMoney());//同上
-
 		try {
 			hibernateTemplate.saveOrUpdate(inds);
 
@@ -50,9 +45,7 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
 		hibernateTemplate.clear();
-		
 		return 0;
 	}
 	public List ind_MyMoney(String idnum){
@@ -60,13 +53,10 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	   		"ic.trueName as trueName,ic.utinaccountinfo.utinName as utinname," +
 	   		"ic.utinaccountinfo.utinAccountId as utinaccountId) from Indaccountinfo ic where ic.idnumber="+idnum+"";
 		List list=hibernateTemplate.find(sql);
-
 		return list;
-		
 	}
 	//修改单位账户余额
 	public int update_utinmoney(RDUtil rd){
-		
 		Utinaccountinfo u=hibernateTemplate.get(Utinaccountinfo.class,rd.getUtinAccountId());
 		u.setUtinProvRema(rd.getUtinprovrema());
 		hibernateTemplate.update(u);
@@ -325,4 +315,18 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 		}
 		return oneIndaccountinfoObject;
 		}
+	@Override
+	public List UtinegetOneEmp(Indaccountinfo indaccountinfo) {
+		String hql = null;
+		List oneIndaccountinfoObject = null;
+		if(indaccountinfo.getIndAccountId() != 0){
+			hql = "Select new Map(i.indAccountId as indAccountId,"
+								+ "i.trueName as trueName, "
+								+ "i.utinaccountinfo.unitinfo.utinName as utinName ) "
+								+ "FROM Indaccountinfo i WHERE i.indAccountId ="+indaccountinfo.getIndAccountId();
+			oneIndaccountinfoObject = hibernateTemplate.find(hql);
+		}
+		return oneIndaccountinfoObject;
+	}
 }
+

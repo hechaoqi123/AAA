@@ -102,7 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</select>
 				</td>
 				<td>证件号码<span style="color:red">*</span></td>
-				<td><input type="text"  class="form-control" id="idnumber" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)"/></td>
+				<td>
+					<input type="text"  class="form-control" id="idnumber" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)" placeholder="请输入证件号码 "/>
+				</td>
           </tr>
           <tr>
 	           <td>单位名称<span style="color:red">*</span></td>
@@ -277,29 +279,46 @@ function MonthDep(obj){
 }
 function idNum(obj){
 	//获取输入身份证号码 
-	var idNum = obj.value; 
-	if(idNum != null && idNum != ''){
-	//获取出生日期 
-	var birthday = idNum.substring(6, 10) + "-" + idNum.substring(10, 12) + "-" + idNum.substring(12, 14); 
-	$(".birthday").val(birthday);
-	//获取性别 
-	if (parseInt(idNum.substr(16, 1)) % 2 == 1) { 
-	 $(".sex").val("男");//男 
-	} else { 
-	 $(".sex").val("女");//女 
-	} 
-	//获取年龄 
-	var myDate = new Date(); 
-	var month = myDate.getMonth() + 1; 
-	var day = myDate.getDate();
-	
-	var age = myDate.getFullYear() - idNum.substring(6, 10) - 1; 
-	if (idNum.substring(10, 12) < month || idNum.substring(10, 12) == month && idNum.substring(12, 14) <= day) { 
-	age++; 
+	var idNum = obj.value;
+	//员工是不是已经存在
+	 $.ajax({
+			 url:"getOneIndaf.action",
+			 type:"post",
+			 data:{"list_indinfo[0].idnumber":idNum},
+			 dataType:"json",
+			 success:function(data){
+				 if(data){
+					iiii(idNum);
+				}else{
+					obj.value = "";
+					obj.placeholder = "该用户已经存在,您可以通知他账户转移";
+				}
+			 }
+		 });
 	}
-	//年龄 age
-	$(".age").val(age);
-}
+
+function iiii(idNum){
+	if(idNum != null && idNum != ''){
+			//获取出生日期 
+			var birthday = idNum.substring(6, 10) + "-" + idNum.substring(10, 12) + "-" + idNum.substring(12, 14); 
+			$(".birthday").val(birthday);
+			//获取性别 
+			if (parseInt(idNum.substr(16, 1)) % 2 == 1) { 
+			 $(".sex").val("男");//男 
+			} else { 
+			 $(".sex").val("女");//女 
+			} 
+			//获取年龄 
+			var myDate = new Date(); 
+			var month = myDate.getMonth() + 1; 
+			var day = myDate.getDate();
+			var age = myDate.getFullYear() - idNum.substring(6, 10) - 1; 
+			if (idNum.substring(10, 12) < month || idNum.substring(10, 12) == month && idNum.substring(12, 14) <= day) { 
+				age++; 
+			}
+			//年龄 age
+			$(".age").val(age);
+		}
 }
 </script>
  <script type="text/javascript" src="JS/zhengze.js"></script>
