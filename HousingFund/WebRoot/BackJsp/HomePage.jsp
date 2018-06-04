@@ -146,10 +146,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<b class="arrow"></b>
 					</li>
+					<!-- 进度查询 -->
+					<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-clock-o"></i>
+							<span class="menu-text">进度查询</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '进度查询'}">
+									<li class="">
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
 					<!-- 信息管理 -->
 					<li class="Myli">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-edit"></i>
+							<i class="menu-icon fa fa-address-card-o"></i>
 							<span class="menu-text">信息管理</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -169,10 +191,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:forEach>
 						</ul>
 					</li>
+					<!--个人业务-->
+					<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-user-o"></i>
+							<span class="menu-text">个人业务</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '个人业务'}">
+									<li>
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
 					<!--单位业务-->
 					<li class="Myli">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-hospital-o"></i>
+							<i class="menu-icon fa fa-gg"></i>
 							<span class="menu-text">单位业务</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -192,11 +237,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:forEach>
 						</ul>
 					</li>
-					<!-- 汇缴提取 -->
+					<!-- 汇缴业务 -->
 						<li class="Myli">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-ils"></i>
-							<span class="menu-text">汇缴提取</span>
+							<i class="menu-icon fa fa-superpowers"></i>
+							<span class="menu-text">汇缴业务</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
 						<b class="arrow"></b>
@@ -204,6 +249,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<ul class="submenu">
 							<c:forEach items="${list_Powers}" var="Powers">
 								<c:if test="${Powers.ptype == '汇缴提取'}">
+									<li class="">
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
+						<!-- 提取业务 -->
+						<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-ravelry"></i>
+							<span class="menu-text">提取业务</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '提取业务'}">
 									<li class="">
 									<a href="${Powers.purl }" class="test" target="right_main">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -241,7 +309,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<!-- 还贷业务 -->
 						<li class="Myli">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-opera"></i>
+							<i class="menu-icon fa fa-refresh"></i>
 							<span class="menu-text">还款业务</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
@@ -250,6 +318,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<ul class="submenu">
 							<c:forEach items="${list_Powers}" var="Powers">
 								<c:if test="${Powers.ptype == '还款业务'}">
+									<li class="">
+									<a href="${Powers.purl }" class="test" target="right_main">
+										<i class="menu-icon fa fa-caret-right"></i>
+										${Powers.pname }
+									</a>
+									<b class="arrow"></b>
+									</li>
+								</c:if>
+							</c:forEach>
+						</ul>
+					</li>
+					<!-- 冲贷业务 -->
+						<li class="Myli">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-eercast"></i>
+							<span class="menu-text">冲贷业务</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+							<c:forEach items="${list_Powers}" var="Powers">
+								<c:if test="${Powers.ptype == '冲贷业务'}">
 									<li class="">
 									<a href="${Powers.purl }" class="test" target="right_main">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -287,8 +378,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- 权限管理 -->
 					<li class="Myli">
 						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-paw"></i>
-							<span class="menu-text">权限管理</span>
+							<i class="menu-icon fa fa-cog"></i>
+							<span class="menu-text">系统设置</span>
 							<b class="arrow fa fa-angle-down"></b>
 						</a>
 						<b class="arrow"></b>

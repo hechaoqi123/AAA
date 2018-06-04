@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import com.aaa.entity.Borrowmoneyagreement;
 import com.aaa.entity.Fush;
 import com.aaa.entity.Indaccountinfo;
 import com.aaa.entity.Log;
+import com.aaa.entity.PageEntity;
 import com.aaa.entity.Repaymentplandetails;
 @Service
 @Transactional
@@ -114,6 +117,26 @@ public class FushBizImpl implements FushBiz {
 			e.printStackTrace();
 		}
 		
+	}
+	//分页查询
+	@Override
+	public PageEntity getPart(PageEntity entity, Criterion criterion) {
+		return dao.findByPage(entity, Order.asc("id"), criterion);
+	}
+	//获取个人冲贷信息
+	@Override
+	public Fush getOne(Integer id) {
+		return dao.getOne(id);
+	}
+	//修改状态
+	@Override
+	public void update(int id, String status) {
+		dao.getOne(id).setStatus(status);
+	}
+	//删除记录
+	@Override
+	public void remove(int id) {
+		dao.delect(dao.getOne(id));
 	}
 	
 
