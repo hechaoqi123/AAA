@@ -211,7 +211,7 @@ MARGIN-LEFT: auto;
   <!--  -->
   <div id="lunboleft" style="width:295px;height:312px;border:0px solid black;margin-left:100px;background-image:url('png/2017051714392351103.png'); ">
   <ul style="width:290px;height:310px;border:0px solid black;" id="lunboleftul">
-    <a href="#"><li style="background-image: url('png/2017112711180357414.png');">
+    <a href="grxxcx.jsp"><li style="background-image: url('png/2017112711180357414.png');">
     个人网上业务平台
     </li></a>
     
