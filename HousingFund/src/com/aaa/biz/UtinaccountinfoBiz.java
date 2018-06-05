@@ -18,5 +18,5 @@ public interface UtinaccountinfoBiz {
 	//查询一个单位修改信息
 	public Utinaccountinfo getOneUtin(Utinaccountinfo utinaccountinfo);
 	//修改实现
-//	public void
+	public void updateUtin(Utinaccountinfo utinaccountinfo);
 }

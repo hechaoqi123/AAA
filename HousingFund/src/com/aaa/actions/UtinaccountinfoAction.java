@@ -54,6 +54,7 @@ public class UtinaccountinfoAction extends BaseAction<Utinaccountinfo> {
 	public String updateUtin(){
 		System.out.println(utinaccountinfo.getUtinAccountId());
 		System.out.println(utinaccountinfo.getUnitinfo().getUtinName());
+		utinaccountinfoBiz.updateUtin(utinaccountinfo);
 		return "updateUtin";
 	}
 	//…Û≈˙
