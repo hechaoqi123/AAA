@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aaa.dao.UtinaccountinfoDao;
+import com.aaa.entity.Unitinfo;
 import com.aaa.entity.Utinaccountinfo;
 @Service
 @Transactional
@@ -39,4 +40,17 @@ public class UtinaccountinfoBizImpl implements UtinaccountinfoBiz{
 		Utinaccountinfo one = utinaccountinfoDao.getOne(utinaccountinfo.getUtinAccountId());
 		return one;
 	};
+	@Override
+	public void updateUtin(Utinaccountinfo utinaccountinfo) {
+		Utinaccountinfo one = utinaccountinfoDao.getOne(utinaccountinfo.getUtinAccountId());
+		Unitinfo u = one.getUnitinfo();
+		u.setUtinName(utinaccountinfo.getUnitinfo().getUtinName());
+		u.setCorpRepr(utinaccountinfo.getUnitinfo().getCorpRepr());
+		u.setOperatorName(utinaccountinfo.getUnitinfo().getOperatorName());
+		u.setOperatorIdnumber(utinaccountinfo.getUnitinfo().getOperatorIdnumber());
+		u.setOperatorPhone(utinaccountinfo.getUnitinfo().getOperatorPhone());
+		u.setUtinAddress(utinaccountinfo.getUnitinfo().getUtinAddress());
+		one.setUtinDepositRatio(utinaccountinfo.getUtinDepositRatio()/100);
+	};
+	
 }
