@@ -13,7 +13,7 @@ import com.aaa.entity.Unitinfo;
 import com.aaa.entity.Utinaccountinfo;
 import com.alibaba.fastjson.JSON;
 @Repository
-public class UtinaccountinfoDaoImpl implements UtinaccountinfoDao{
+public class UtinaccountinfoDaoImpl extends BaseDaoImpl<Utinaccountinfo> implements UtinaccountinfoDao{
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 	public List getUtinaccountinfo(){

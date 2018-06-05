@@ -1,5 +1,6 @@
 package com.aaa.dao;
 
+import java.io.File;
 import java.util.List;
 
 import com.aaa.entity.Indaccountinfo;
@@ -26,6 +27,12 @@ public interface IndAccountinfoDao extends BaseDao<Indaccountinfo>{
 		public List getFuzzy(Integer utinaccountinfoID, Indaccountinfo indaccountinfo);
 		//修改所有信息
 		public int updateEmpInfo(Indaccountinfo indaccountinfo, Indinfo indinfo, Integer utinaccountinfoID);
-		//删除
-		public int delEmp(Indaccountinfo indaccountinfo);
+		//冻结
+		public int frozenEmp(Indaccountinfo indaccountinfo);
+		//文件增加员工
+		public List saveFileIndaccountinfo(File file) throws Exception;
+		//条件查询一个信息
+		public List getOneIndaf(Indinfo indinfo);
+		//员工转移获取一个用户
+		public List UtinegetOneEmp(Indaccountinfo indaccountinfo);
 }

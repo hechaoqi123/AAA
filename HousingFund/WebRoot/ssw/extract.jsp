@@ -366,7 +366,7 @@ $("#xiayibu").show();
 	 tp+="&nbsp;&nbsp;我已认真阅读上述内容，同意授权并遵守上述承诺。<br/>";
 	 tp+="<div style='margin-left:400px;margin-top:40px;'>申请人签字<input id='ffgg'/></span></div>";
 	 tp+="</div>";
-	 tp+="<button style='margin-left:300px;'onclick='submits()'>提交</button>";
+	 tp+="<button type='button' style='margin-left:300px;'onclick='submits()'>提交</button>";
 	
 	
 	}else if(optionvalue.value==5){

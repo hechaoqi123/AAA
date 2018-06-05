@@ -88,11 +88,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
           <tbody id="tbs">
           <c:forEach items="${list_Indaccountinfo}" var="Indaccountinfo">
+          <c:if test="${Indaccountinfo.indStatus != '冻结' }">
            	<tr>
           	   <td>${Indaccountinfo.indAccountId }</td>
 	           <td>${Indaccountinfo.indinfo.trueName }</td>
 	           <td>${Indaccountinfo.indinfo.duties }</td>
-	           <td><input type="number" min="1000" max="999999" class="form-control indDepositRadices"name="indaccountinfo.indDepositRadices" required="required" value="${Indaccountinfo.indDepositRadices }"></td>
+	           <td><input type="number" min="1000" max="999999" class="form-control indDepositRadices"name="${Indaccountinfo.indAccountId }" id="${Indaccountinfo.indAccountId }xx" required="required" value="${Indaccountinfo.indDepositRadices }"></td>
 	           <td>${Indaccountinfo.presentSumRem }</td>
 	           <td>${Indaccountinfo.usableRem }</td>
 	           <td class="indStatus${Indaccountinfo.indAccountId }">${Indaccountinfo.indStatus }</td>
@@ -103,9 +104,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           	<c:if test="${Indaccountinfo.indStatus == '封存'}">
      		        <input type="button" class="btn btn-primary" name="${Indaccountinfo.indAccountId}" onclick="updateRadicesSeal(this)" value="正常">
 	           	</c:if>
-	           		<input type="button" class="btn btn-primary" onclick="updateRadices(${Indaccountinfo.indAccountId })"  value="修改基数">
+	           		<input type="button" class="btn btn-primary xiuGJS" onclick="updateRadices(${Indaccountinfo.indAccountId })" value="修改基数">
 	           </td>
          	</tr>
+         	</c:if>
           </c:forEach>
           </tbody>
       </table>

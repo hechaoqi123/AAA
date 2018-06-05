@@ -20,6 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="JS/jquery-1.8.3.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	 <script src="bootstrap/laydate/laydate.js"></script> <!-- 改成你的路径 -->
+	 <script type="text/javascript" src="JS/vendor/jquery.validate-1.13.1.js"></script>
+	<script type="text/javascript" src="JS/vendor/messages_zh.js"></script>
     <script>
 	    lay('#version').html('-v'+ laydate.v);
 	
@@ -35,13 +37,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    });
 	  
     </script>
+    <style>
+   			/*去除input框number中的小箭头  */
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button{
+			    -webkit-appearance: none !important;
+			    margin: 0; 
+			}
+			input[type="number"]{-moz-appearance:textfield;}
+			.indDepositRadices{
+				width: 100px;
+			}
+   	</style>
  </head>
   <body>
   	
-  	<form action="saveIndaccountinfo.action" method="post">
   	<table class="table" border="1px" bordercolor="#e3e3e3">
   		 <tr>
-           <td><input class="utinid" name="utinaccountinfoID" style="display: none;"></td>
+           <td></td>
            <td>公司名称:</td>
            <td><span class="utinName"></span></td>
            <td>单位地址:</td>
@@ -56,13 +69,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <td><span class="utinSumPeople"></span></td>
           </tr>
   	</table>
+  	<form action="saveFileIndaccountinfo.action" method="post" enctype="multipart/form-data">
+	  	<table class="table">
+	  		<tr class="form-group">
+	  			<td width="140px"><span style="color: red">多添加请选择文档</span></td>
+	  		 	<td width="200px"><input type="file" name="myFile" required="required"></td>
+	  			<td><input type="submit" value="提交"></td>
+	  		</tr>
+	  	</table>
+  	</form>
+  	
+  		
+  	<form action="saveIndaccountinfo.action" method="post" id="FormsaveIndaccountinfo">
     <table class="table" style="">
          <tr>
          	   <td colspan="6" class="active">个人信息</td>
          </tr>
           <tr>
 	           <td>姓名<span style="color:red">*</span></td>
-	           <td><input class="form-control utinName" type="text" required="required" name="list_indinfo[0].trueName"/></td>
+	           <td>
+	           		<input class="form-control utinName" type="text" required="required" name="list_indinfo[0].trueName"/>
+	           		<input class="utinid" name="utinaccountinfoID" style="display: none;">
+	           	</td>
 	          	<td>证件类型<span style="color:red">*</span></td>
 				<td>
 					<select class="form-control">
@@ -74,7 +102,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</select>
 				</td>
 				<td>证件号码<span style="color:red">*</span></td>
-				<td><input type="text"  class="form-control" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)"/></td>
+				<td>
+					<input type="text"  class="form-control" id="idnumber" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)" placeholder="请输入证件号码 "/>
+				</td>
           </tr>
           <tr>
 	           <td>单位名称<span style="color:red">*</span></td>
@@ -121,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<td><input type="text" class="form-control utinFoundDate"  required="required" name="list_indinfo[0].familyAddress"/></td>
 				<td>家庭月收入<span style="color:red">*</span></td>
 				<td class="input-group">
-					<input type="text" class="form-control" name="list_indinfo[0].familyMonthIncome"/> 
+					<input type="number" min="1000" max="999999" class="form-control" name="list_indinfo[0].familyMonthIncome"/> 
 					<span class="input-group-addon">元</span>
 				</td>
 				<td>学历<span style="color:red">*</span></td>
@@ -161,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </tr>
            <tr>
            		<td>员工基数<span style="color:red">*</span></td>
-           		<td><input type='text'  class='form-control' required='required' name="list_indaccountinfo[0].indDepositRadices" onblur="MonthDep(this)"/></td>
+           		<td><input type="number" min="1000" max="999999"  class='form-control' required='required' name="list_indaccountinfo[0].indDepositRadices" onblur="MonthDep(this)"/></td>
 				<td>单位缴存比例<span style="color:red">*</span></td>
 				<td class="input-group"><input class="form-control utinDepositRatio" readonly="readonly"/> <span class="input-group-addon">%</span></td>
 				<td>个人缴存比例<span style="color:red">*</span></td>
@@ -180,7 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            		<td>员工状态<span style="color:red">*</span></td>
 				<td><span class="form-control"/>正常</span></td>
 				<td>电子邮箱<span style="color:red">*</span></td>
-				<td><input min="0" max="1"  class="form-control" required="required" name="emails" /></td>
+				<td><input class="form-control" required="required" name="emails" /></td>
 				<td>邮政编码<span style="color:red">*</span></td>
 				<td><input class="form-control" required="required" name="youb"/></td>
           </tr>
@@ -249,32 +279,48 @@ function MonthDep(obj){
 }
 function idNum(obj){
 	//获取输入身份证号码 
-	var idNum = obj.value; 
-	if(idNum != null && idNum != ''){
-	//获取出生日期 
-	var birthday = idNum.substring(6, 10) + "-" + idNum.substring(10, 12) + "-" + idNum.substring(12, 14); 
-	$(".birthday").val(birthday);
-	//获取性别 
-	if (parseInt(idNum.substr(16, 1)) % 2 == 1) { 
-	 $(".sex").val("男");//男 
-	} else { 
-	 $(".sex").val("女");//女 
-	} 
-	//获取年龄 
-	var myDate = new Date(); 
-	var month = myDate.getMonth() + 1; 
-	var day = myDate.getDate();
-	
-	var age = myDate.getFullYear() - idNum.substring(6, 10) - 1; 
-	if (idNum.substring(10, 12) < month || idNum.substring(10, 12) == month && idNum.substring(12, 14) <= day) { 
-	age++; 
+	var idNum = obj.value;
+	//员工是不是已经存在
+	 $.ajax({
+			 url:"getOneIndaf.action",
+			 type:"post",
+			 data:{"list_indinfo[0].idnumber":idNum},
+			 dataType:"json",
+			 success:function(data){
+				 if(data){
+					iiii(idNum);
+				}else{
+					obj.value = "";
+					obj.placeholder = "该用户已经存在,您可以通知他账户转移";
+				}
+			 }
+		 });
 	}
-	//年龄 age
-	$(".age").val(age);
-}
-文章标
+
+function iiii(idNum){
+	if(idNum != null && idNum != ''){
+			//获取出生日期 
+			var birthday = idNum.substring(6, 10) + "-" + idNum.substring(10, 12) + "-" + idNum.substring(12, 14); 
+			$(".birthday").val(birthday);
+			//获取性别 
+			if (parseInt(idNum.substr(16, 1)) % 2 == 1) { 
+			 $(".sex").val("男");//男 
+			} else { 
+			 $(".sex").val("女");//女 
+			} 
+			//获取年龄 
+			var myDate = new Date(); 
+			var month = myDate.getMonth() + 1; 
+			var day = myDate.getDate();
+			var age = myDate.getFullYear() - idNum.substring(6, 10) - 1; 
+			if (idNum.substring(10, 12) < month || idNum.substring(10, 12) == month && idNum.substring(12, 14) <= day) { 
+				age++; 
+			}
+			//年龄 age
+			$(".age").val(age);
+		}
 }
 </script>
-
+ <script type="text/javascript" src="JS/zhengze.js"></script>
 </html>
 
