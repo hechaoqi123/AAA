@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
      <h2>提前还款详情页：</h2>
       <form action="submit_check_return.action" method="post">
-      <input name="id" value="${before.id}"/>
+      <input name="id" value="${before.id}" style="display:none"/>
       <ol>
         <li>办理提前还款须携带:贷款合同、最后一期的银行还款回单、本人身份证。</li>
         <li>申请人当前并没有处于逾期还款的状态中；</li>

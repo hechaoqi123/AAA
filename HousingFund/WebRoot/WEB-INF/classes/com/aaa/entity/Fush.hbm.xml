@@ -10,7 +10,7 @@
             <column name="id" />
             <generator class="native" />
         </id>
-        <many-to-one name="borrowmoneyagreement" class="com.aaa.entity.Borrowmoneyagreement" lazy="false" fetch="join">
+        <many-to-one name="borrowmoneyagreement" class="com.aaa.entity.Borrowmoneyagreement" lazy="false" >
             <column name="borrId" not-null="true" />
         </many-to-one>
         <property name="iphone" type="java.lang.String">
@@ -22,7 +22,7 @@
         <property name="status" type="java.lang.String">
             <column name="status" />
         </property>
-        <set name="logs" inverse="true">
+        <set name="logs" inverse="true" fetch="join" cascade="delete">
             <key>
                 <column name="fushId" />
             </key>

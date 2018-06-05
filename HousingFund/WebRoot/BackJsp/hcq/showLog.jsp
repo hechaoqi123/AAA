@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'showLog.jsp' starting page</title>
+    <title>冲还贷日志</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
            <td colspan="11">
-             <div style="height:500px;">
+             <div style="height:500px;overflow: auto">
                 <table >
                   <c:forEach items="${list}" var="item">
                        <tr>

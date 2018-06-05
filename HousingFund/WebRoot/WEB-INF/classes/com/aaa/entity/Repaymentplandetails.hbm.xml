@@ -10,7 +10,7 @@
             <column name="RepaymentPlanDetailsiID" />
             <generator class="native" />
         </id>
-        <many-to-one name="overduerepayment" class="com.aaa.entity.Overduerepayment" fetch="join">
+        <many-to-one name="overduerepayment" class="com.aaa.entity.Overduerepayment" cascade="all" fetch="join">
             <column name="OverdueRepaymentID" />
         </many-to-one>
         <many-to-one name="borrowmoneyagreement" class="com.aaa.entity.Borrowmoneyagreement" fetch="join">

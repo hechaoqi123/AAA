@@ -212,5 +212,26 @@ public class LoanApplicationBizImpl  implements LoanApplicationBiz {
 	        break;
 		}
    }
+    //条件查询
+	@Override
+	public Loanapplication getOne(Loanapplication model) {
+		      model.setStatus(null);
+		     List<Loanapplication> list=LoanDao.findByExample(model);
+		     //通过ID倒序排列
+		     System.out.println("申请书"+list.size());
+		       if(list.size()>1){
+		    	   for(int j=0;j<list.size();j++){
+				        for(int i=0;i<list.size()-1-j;i++){
+				        	if(list.get(i).getLoanApplicationId()<list.get(i+1).getLoanApplicationId()){
+				        		 Loanapplication min=list.get(i);
+				        		 Loanapplication max=list.get(i+1);
+				        		list.set(i, max);
+				        		list.set(i+1, min);
+				        	}
+				         }
+				        }
+		       }
+		return list.get(0);
+	}
     
 }

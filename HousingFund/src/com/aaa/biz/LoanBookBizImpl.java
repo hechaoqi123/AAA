@@ -31,8 +31,6 @@ public class LoanBookBizImpl implements LoanBookBiz {
 	   if(app.getCoborrower()!=null){
 		   accountId2=app.getCoborrower().getCoborrowerAccount();
 	   }
-	   System.out.println("个人账户IdaccountId"+accountId);
-	   System.out.println("个人账户IdaccountId"+accountId2);
 		Criterion[] criterions={Restrictions.or(Restrictions.eq("loanAccount", accountId), Restrictions.eq("loanAccount", accountId2))};
 		return loanDao.findByCriteria(criterions, Order.desc("loanBookId"));
 	}

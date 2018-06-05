@@ -144,7 +144,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  html+="<td>"+data[i].currentReturnedInterest+"</td>" ;
                  html+="<td>"+data[i].overduePrincipalAndInte+"</td>" ;
                  html+="<td>"+data[i].amountOfRepayRecei+"</td>" ;
-                 html+="<td>"+data[i].repaymentStatus+"</td>" ;
+                    if(data[i].repaymentStatus=="已还"){
+                     html+="<td style='color:#5ea6eb'>"+data[i].repaymentStatus+"</td>" ;
+                    }else{
+                     html+="<td  style='color:red'>"+data[i].repaymentStatus+"</td>" ;
+                    }
                   if(data[i].repaymentsReceived==null){
                    html+="<td></td>" ;
                    html+="<td></td>" ;

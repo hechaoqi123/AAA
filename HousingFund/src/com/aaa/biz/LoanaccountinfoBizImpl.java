@@ -72,8 +72,6 @@ public class LoanaccountinfoBizImpl implements LoanaccountinfoBiz {
 public Collateralinfo getColl(int loanId) {
 	     Criterion[] criterions={Restrictions.eq("remarks",String.valueOf(loanId))};
 	     Collateralinfo c=dao.findByCriteria(criterions, null).get(0).getCollateralinfo();
-	     System.out.println(c);
-	     System.out.println("ww"+c.getPawnValueEsti());
 	return dao.findByCriteria(criterions, null).get(0).getCollateralinfo();
 }
   //获取担保人信息

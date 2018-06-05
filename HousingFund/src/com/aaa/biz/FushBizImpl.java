@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import com.aaa.entity.Borrowmoneyagreement;
 import com.aaa.entity.Fush;
 import com.aaa.entity.Indaccountinfo;
 import com.aaa.entity.Log;
+import com.aaa.entity.PageEntity;
 import com.aaa.entity.Repaymentplandetails;
 @Service
 @Transactional
@@ -53,11 +56,11 @@ public class FushBizImpl implements FushBiz {
 		 SimpleDateFormat fmt=new SimpleDateFormat("yyyy/MM/dd");
 		try {
 		    List<Fush> list=getAll();
-		     System.out.println("冲贷数量:"+list.size());
 		     for (Fush fush : list) {
 		    	 
 		    	 if(fush.getStatus().equals("正常")){
 		    //取出还款记录
+		    		 System.out.println(fush);
 		    	  Repaymentplandetails repay = borrBiz.getRepay(fush.getBorrowmoneyagreement());
 		        if(repay==null){//未查询到未还款记录
 		        	  System.out.println("异常还款");
@@ -104,6 +107,7 @@ public class FushBizImpl implements FushBiz {
 		        	  log.setRiqi(fmt.format(new Date()));
 		        	  log.setStatus("失败");
 		        	  log.setRemark("余额不足。");
+		        	  fush.setStatus("冻结");
 		        	    //记录日志
 		        	  logBiz.add(log);
 		          }
@@ -114,6 +118,26 @@ public class FushBizImpl implements FushBiz {
 			e.printStackTrace();
 		}
 		
+	}
+	//分页查询
+	@Override
+	public PageEntity getPart(PageEntity entity, Criterion criterion) {
+		return dao.findByPage(entity, Order.asc("id"), criterion);
+	}
+	//获取个人冲贷信息
+	@Override
+	public Fush getOne(Integer id) {
+		return dao.getOne(id);
+	}
+	//修改状态
+	@Override
+	public void update(int id, String status) {
+		dao.getOne(id).setStatus(status);
+	}
+	//删除记录
+	@Override
+	public void remove(int id) {
+		dao.delect(dao.getOne(id));
 	}
 	
 

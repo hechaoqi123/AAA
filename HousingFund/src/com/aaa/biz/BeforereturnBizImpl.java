@@ -60,7 +60,7 @@ public class BeforereturnBizImpl implements BeforereturnBiz {
 			   Set<Repaymentplandetails> set = borr.getRepaymentplandetailses();
 			   List list=new ArrayList();
 			   for (Repaymentplandetails repay : set) {
-					if(repay.getRepaymentStatus().equals("未还")){
+					if(repay.getRepaymentStatus().equals("未还")||repay.getRepaymentStatus().equals("逾期未还")){
 						list.add(repay);
 					}
 				}
@@ -107,6 +107,7 @@ public class BeforereturnBizImpl implements BeforereturnBiz {
 			    instance.setCurrentReturnedInterest(before.getMoney()*10000*(borr.getBorrowerFixedYear()-count)/12*borr.getBorrowerAnnualRate()/100);
 			    instance.setRepaymentsReceived(instance.getCurrentReturnedCorpus()+instance.getCurrentReturnedInterest());//实收金额
 			    instance.setAmountOfRepayRecei(instance.getRepaymentsReceived());//应还金额
+			    instance.setRepaymentStatus("提前还款");
 			    instance.setRepaymentDate(new Date());//还款日期
 				set.add(instance);
 		   }else{
