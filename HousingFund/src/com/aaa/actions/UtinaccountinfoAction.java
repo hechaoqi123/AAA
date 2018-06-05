@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -34,6 +35,27 @@ public class UtinaccountinfoAction extends BaseAction<Utinaccountinfo> {
 		getOut().print(json_one_utinaccountinfo);
 		return null;
 	}
+	//修改跳转
+	@Action(value = "getUtinSup", results = {@Result(name = "getUtinSup",location = "/BackJsp/LDL/updateUnit.jsp")})
+	public String getUtinSup(){
+		Utinaccountinfo oneUtin = utinaccountinfoBiz.getOneUtin(utinaccountinfo);
+		String idnum = oneUtin.getUnitinfo().getOperatorIdnumber();
+		String emils =idnum.substring(5, 10)+"dds@qq.com";
+		String youB =idnum.substring(0, 6);
+		String zuzhiJG ="AA"+idnum.substring(5, 9);
+		getRequestMap().putIfAbsent("oneUtin", oneUtin);
+		getRequestMap().putIfAbsent("emils", emils);
+		getRequestMap().putIfAbsent("youB", youB);
+		getRequestMap().putIfAbsent("zuzhiJG", zuzhiJG);
+		return "getUtinSup";
+	}
+	//修改实现
+	@Action(value = "updateUtin", results = {@Result(name = "updateUtin",location = "/BackJsp/LDL/success.jsp")})
+	public String updateUtin(){
+		System.out.println(utinaccountinfo.getUtinAccountId());
+		System.out.println(utinaccountinfo.getUnitinfo().getUtinName());
+		return "updateUtin";
+	}
 	//审批
 	@Action("update_utinAccount")
 	public String update_utinAccount(){
@@ -62,9 +84,6 @@ public class UtinaccountinfoAction extends BaseAction<Utinaccountinfo> {
 		this.utinaccountinfo = utinaccountinfo;
 	}
 	
-	
-	
-
 
 	
 	

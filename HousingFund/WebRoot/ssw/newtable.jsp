@@ -218,7 +218,6 @@ function subs(a,b,c,d){
 	}) 
 	}
 	function notsub(a){
-	 alert(a); 
 	$.ajax({
 	 url:"not_con.action",
 	 type:"post",

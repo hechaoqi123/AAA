@@ -262,7 +262,6 @@ dian=dian+1;
   
   //汇缴详情
   function ss(obj,dian,what){
-     alert();
    $("#add").html("");
   if(what==1){ //上一页
   

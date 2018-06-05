@@ -487,8 +487,6 @@ $("#xiayibu").show();
 	var causeOfDeath=$("#causeOfDeath").val();//死亡原因
 	var onep=parseFloat(withdrawalAmount).toFixed(2);
 	var twop=parseFloat(Mymoney).toFixed(2);
-	alert(onep);
-	alert(twop);
 	if(eval(onep)>eval(twop)){
 	alert("金额错误");
 	}else{

@@ -575,7 +575,6 @@ dian=dian+1;
 	
 	if(eval(utinyue)>eval(summoney)){
 	var sps=parseFloat(obj).toFixed(2)*1 + parseFloat(utinyue).toFixed(2)*1;
-	alert(sps);
 	$("#jhqian").val(sps);
 	}else{
 	var sps=parseFloat(obj).toFixed(2)*1 +parseFloat(utinyue).toFixed(2)*1 -parseFloat(summoney).toFixed(2)*1;
