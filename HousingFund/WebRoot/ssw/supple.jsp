@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr class="onetr">
       <td>补缴金额<span class="biaoji">*</span></td>
-      <td><input  class="utinsupmoney"/></td>
+      <td><input  class="utinsupmoney" /></td>
       <td>补缴人数<span class="biaoji">*</span></td>
       <td><input  class="supSumple"/></td>
     </tr>

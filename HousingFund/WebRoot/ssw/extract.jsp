@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   body{
   font-family:宋体;
   }
-  #forms td{
+ /*  #forms td{
   border:0px solid black;
   width:150px;
   height:45px;
@@ -37,8 +37,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   width:200px;
   height:35px;
-  }
+  } */
   
+  input{
+  text-align: center;
+  }
+  select{
+  text-align: center;
+  }
+ option{
+  text-align: center;
+  }
   #tab{
   margin-top:100px;
   border-collapse:collapse;
@@ -48,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     height:50px;
     border-collapse:collapse;
     }
-    .tabtd{
+    /* .tabtd{
     width:150px;
     }
     
@@ -57,10 +66,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     }
     .tabid input{
     width:250px;
-    }
+    } */
     .sp{
     color:red;
     }
+   /*  }
     #reasonNo{
     width:200px;
     height:40px;
@@ -104,16 +114,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  }
 	  #mx{
 	  height:30px;
-	  }
-	  #mx:HOVER {
+	  } */
+	  /* #mx:HOVER {
 	 background-color: #cbe1ee;
-      }
-      #mxtab td{
+      } */
+     /*  #mxtab td{
       width:150px;
       height:20px;
-      }
+      } */
       
-     
+   #tabtwotwo{
+   width:700px;
+   border:1px solid #DDDDDD;
+   border-collapse: collapse;
+   margin-left:200px;
+   } 
+    #tabtwotwo td{
+    width:150px;
+    height:50px;
+    border:1px solid #DDDDDD;
+    text-align: center;
+    } 
+      .tto{
+    width:200px;
+    height:50px;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    border-bottom:0px solid #DDDDDD;
+    text-align: center;
+    } 
+    #shaddress,#puText{
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    border-bottom:0px solid black;
+    width:600px;
+    height:50px;
+    }
+    
+    #pumoney, #puAddress{
+    
+    width:180px;
+    height:50px;
+    }
+    #recnum{
+    width:350px;height:50px;
+    }
+    #ffgg{
+    border-bottom: 1px solid black;
+    border-left: 0px;
+    border-top: 0px;
+    border-right: 0px;
+    }
+    
+    
   </style>
 
 </head>
@@ -151,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <tr>
     <td>姓名<span class="sp">*</span></td> <td><input name="m.extractdetails.extractionandapproval.workersName" id="workersName" readonly="readonly" /></td>  
      <td>证件号码<span class="sp">*</span></td> <td><input name="m.extractdetails.extractionandapproval.exidnum" id="idcard" onblur="money()"/></td>  
-     <td>证件类型<span class="sp">*</span></td><td><input  name="m.extractdetails.extractionandapproval.exdoctype" id="exdoctype"/></td>
+     <td>证件类型<span class="sp">*</span></td><td><input  value="身份证" readonly="readonly" name="m.extractdetails.extractionandapproval.exdoctype" id="exdoctype"/></td>
   </tr>
   <tr>
     <td>单位账户<span class="sp">*</span></td><td><input  name="m.extractdetails.extractionandapproval.exunitnum" id="exunitnum" readonly="readonly"/></td> 
@@ -162,9 +217,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
  
   <tr>
-     <td>个人账户状态<span class="sp">*</span></td><td><select  name="m.extractdetails.extractionandapproval.indaccstatus"style="width:200px;height:30px;">
-     <option value="正常" >正常</option><option value="封存">封存</option></select></td>
-     <td>性别<span class="sp">*</span></td><td><input  name="m.extractdetails.extractionandapproval.exsex"style="width:200px;height:30px;" id="exsex"/>
+     <td>个人账户状态<span class="sp">*</span></td><td>
+     <input  name="m.extractdetails.extractionandapproval.indaccstatus" id="indaccstatus" readonly="readonly"/>
+    </td>
+     <td>性别<span class="sp">*</span></td><td><input  name="m.extractdetails.extractionandapproval.exsex" id="exsex" readonly="readonly"/>
     </td>
      <td>年龄<span class="sp">*</span></td><td><input   name="m.extractdetails.extractionandapproval.exage" id="exage"/></td>
   </tr>
@@ -187,13 +243,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <td>提取金额<span class="sp">*</span> </td><td><input name="m.extractdetails.extractionandapproval.withdrawalAmount" id="withdrawalAmount"/></td>
      </tr>
   </table>
-   <center><a  style="font-size:20px;" id="xiayibu">下一步</a></center> 
-    <center> <table id="tabtwotwo" style="display:none;" ></center> 
-
-  </table>
-<center><a id='shangyiye' style="display:none;font-size:20px;">上一步</a></center> 
-  </form>
  
+   <table id="testone" style="display:none; margin-left:200px;" class="table"></table>
+   
+     <div id="tabtwotwo" style="display:none;">
+
+  </div>
+  
+  </form>
+<center><div style="margin-top:50px;margin-left:-250px;"><a id='shangyiye' style="display:none;font-size:20px;">上一步</a></div> 
+</center> 
+   <center><a  style="font-size:20px;" id="xiayibu">下一步</a></center>
 
  
 
@@ -208,6 +268,7 @@ $(this).hide();
 $("#sqone").hide();
 $("#sqtwo").show();
 $("#tabtwotwo").show();
+$("#testone").show();
 $("#shangyiye").show();
 })
 
@@ -216,6 +277,7 @@ $("#addse tr").show();
 $(this).hide();
 $("#sqone").show();
 $("#sqtwo").hide();
+$("#testone").hide();
 $("#tabtwotwo").hide();
 $("#xiayibu").show();
 })
@@ -243,7 +305,7 @@ $("#xiayibu").show();
     
    
   
-    $("#tabtwotwo").append(tab);
+    $("#testone").append(tab);
   
   
     }
@@ -254,39 +316,61 @@ $("#xiayibu").show();
 	
 	var optionvalue=value.options[value.selectedIndex];  
 	$(".addtr").html("");
+	$("#tabtwotwo").html("");
 	$(".addtr").hide();
+	
 	if(optionvalue.value>0&&optionvalue.value<5){
+	var tp="<table>";
+	tp+="<tr><td colspan='4'>购房合同信息</td></tr>";
+	 tp+="<tr>";
+	 tp+="<td>购房人姓名<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.hbname' id='hbname' class='tto'/></td>";
+	 tp+="<td>身份证号<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.shidnum' id='shidnum' class='tto'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td>售房单位<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.shutin' id='shunit' class='tto'/></td>";
+	 tp+="<td>售房联系电话<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.shphone' id='shphone' class='tto'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td>售房地址<span class='sp'>*</span></td><td colspan='3'><input name='m.materialtype.purinfo.shaddress' id='shaddress'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td>房屋每平价<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.pumoney' id='pumoney'/><span style='font-size:15px;'>㎡</span></td>";
+	 tp+="<td>房屋面积<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.puAddress' id='puAddress'/><span style='font-size:20px;'>㎡</span></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 //tp+="<td>房屋现状<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.houcs' id='houcs' class='tto'/></td>";
+ tp+="<td>房屋现状<span class='sp'>*</span></td><td><select name='m.materialtype.purinfo.houcs' id='houcs' class='tto'>";
+      tp+="<option value='已住' checked='checked'>已住</option><option  value='未住'>未住</option>";
+      tp+="</select></td>";
+	 tp+="<td>房屋总价<span class='sp'>*</span></td><td><input name='m.materialtype.purinfo.puType' id='puType'  class='tto'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td>购房合同编号<span class='sp'>*</span></td><td colspan='3'><input name='m.materialtype.purinfo.puText' id='puText'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td>所购住房坐落<span class='sp'>*</span></td><td colspan='3'><span style='font-size:10px;'>请按购房合同或房屋所有权证或不动产权证上的地址填写</span><input name='m.materialtype.purinfo.recnum' id='recnum'/></td>";
+	 tp+="</tr>";
+	 tp+="<tr>";
+	 tp+="<td colspan='4'><span style='color:black;'>个人住房信息核查授权、承诺书</span></td>";
+	 tp+="</tr>";
+	 tp+="</table>";
+	 tp+="<div style='width:700px;height:350px;border:0px solid black;'>";
+	 tp+=" <p><br/><br/>&nbsp;&nbsp;本人因申请提取住房公积金，现授权北京住房公积金管理中心（以下简称管理中心）通";
+	 tp+="过北京市住房<br/>&nbsp;&nbsp;和城乡建设委员会、北京市规划和国土资源管理委员会、北京市经济和信息化委员会等部门核查本人<br/>&nbsp;&nbsp;提交的提取材料及相关信息；授权管理中心通过中国人民银行金融信用信息基础数据库查询本人<br/>&nbsp;&nbsp;的个人信用信息，同意管理中心对此次提交的提取材料及相关信息进行现场核实。<br/></p>";
+	 tp+="<p>&nbsp;&nbsp;本人郑重承诺：本人如实填写的上述各项信息及提交材料真实有效。若承诺失实，本人愿意承担以下后果：<br/>";
+	 tp+="&nbsp;&nbsp;1.终止提取行为，并在规定期限内退还所提取金额；<br/>";
+	 tp+="&nbsp;&nbsp;2.将违规行为通报所在单位并对外公布；<br/>";
+	 tp+="&nbsp;&nbsp;3.将违规信息计入住房公积金个人不良信息库和国家有关征信系统；<br/>";
+	 tp+="&nbsp;&nbsp;4.自违规发现之日起三年内不予办理住房公积金提取、不予受理住房公积金贷款申请；<br/>";
+	 tp+="&nbsp;&nbsp;5.涉嫌构成犯罪的，移送司法机关处理。<br/>";
+	 tp+="&nbsp;&nbsp;我已认真阅读上述内容，同意授权并遵守上述承诺。<br/>";
+	 tp+="<div style='margin-left:400px;margin-top:40px;'>申请人签字<input id='ffgg'/></span></div>";
+	 tp+="</div>";
+	 tp+="<button style='margin-left:300px;'onclick='submits()'>提交</button>";
 	
 	
-	
-	var tab="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>购房人姓名<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.hbname' id='hbname'/></td>";
-	 tab+="<td class='tabtd'>身份证号<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.shidnum' id='shidnum'/></td>";
-	 tab+="</tr>"
-	 tab+="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>售房单位<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.shunit' id='shunit'/></td>";
-	 tab+="<td class='tabtd'>售房地址<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.shaddress' id='shaddress'/></td>";
-	 tab+="</tr>"
-	 tab+="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>售房联系电话<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.shphone' id='shphone'/></td>";
-	 tab+="</tr>"
-	 tab+="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>房屋单价<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.pumoney' id='pumoney'/></td>"; 
-	 tab+="<td class='tabtd'>房屋面积<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.puAddress' id='puAddress'/></td>";
-	 tab+="</tr>";
-	 tab+="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>房屋现状<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.houcs' id='houcs'/></td>";
-	 tab+="<td class='tabtd'>房屋总价<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.puType' id='puType'/></td>";
-	 tab+="</tr>";
-	 tab+="<tr class='addtr'>";
-	 tab+="<td class='tabtd'>购房合同编号<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.purinfo.puText' id='puText'/></td>";
-	 tab+="</tr>"
-	 tab+="<tr class='addtr'>";
-	 tab+="<td id='subsss'><input type='button' value='申请提交' onclick='submits()'/>";
-	 tab+="</td>";
-     tab+="</tr>";
 	}else if(optionvalue.value==5){
-	var tab="<tr class='addtr'>";
+	var tab="<table><tr class='addtr'>";
 	 tab+="<td class='tabtd'>姓名<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.retireti.myName' id='myName'/></td>";
 	 tab+="<td class='tabtd'>单位名称<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.retireti.utinName' id='utinName'/></td>";
 	 tab+="</tr>";
@@ -295,11 +379,11 @@ $("#xiayibu").show();
 	 tab+="</tr>";
 	 tab+="<tr class='addtr'>";
 	 tab+="<td id='subss'><input type='button' value='申请提交' onclick='submits()'/></td>";
-	 tab+="</tr>";
+	 tab+="</tr></table>";
 	 
 
 	}else if(optionvalue.value==6){
-	var tab="<tr class='addtr'>";
+	var tab="<table><tr class='addtr'>";
 	 tab+="<td class='tabtd'>姓名<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.proofofdeath.myName' id='proname'/></td>";
 	 tab+="<td class='tabtd'>身份证号<span class='sp'>*</span></td><td class='tabid'><input name='m.materialtype.proofofdeath.idno' id='idno'/></td>";
 	 tab+="</tr>";
@@ -309,12 +393,12 @@ $("#xiayibu").show();
 	 tab+="</tr>";
 	 tab+="<tr class='addtr'>";
 	 tab+="<td id='subs'><input type='button' value='申请提交' onclick='submits()'/></td>";
-	 tab+="</tr>";
+	 tab+="</tr></table>";
 	}else{
 	alert("不可为空");
 	}
 	 
-	 $("#tabtwotwo").append(tab); 
+	 $("#tabtwotwo").append(tp); 
 	
 	}
 	function money(){
@@ -342,6 +426,8 @@ $("#xiayibu").show();
 	$("#MyAccount").val(data[0].indAccountId);
 	$("#exunitnum").val(data[0].utinaccountId);
 	$("#exunitname").val(data[0].utinname);
+	$("#exsex").val(data[0].sex);
+	$("#indaccstatus").val(data[0].indStatus);
 	
 	}
 	
@@ -387,6 +473,7 @@ $("#xiayibu").show();
 	var puAddress=$("#puAddress").val();//房屋面积
 	var pumoney=$("#pumoney").val();//房屋单价
 	var puText=$("#puText").val();//购房合同编号
+	var ffgg=$("#ffgg").val();
 	
 	
 	var myName=$("#myName").val();//离休姓名
@@ -410,8 +497,8 @@ $("#xiayibu").show();
 	workersName!=""&&idcard!=""&&payee!=""&&Mymoney!=""&&bankOfDeposit!=""
 	&&collectionAccount!=""&&withdrawalAmount!=""&&reasonNo!=0)
 	&&(
-	(shaddress!=""&&shunit!=""&&shidnum!=""&&hbname!=""&&recnum!=""&&houcs!=""&&shphone!=""&&puType!=""&&
-	puAddress!=""&&pumoney!=""&&puText!="")
+	(ffgg!=""&&shaddress!=""&&shunit!=""&&shidnum!=""&&hbname!=""&&recnum!=""&&houcs!=""&&shphone!=""&&puType!=""&&
+	puAddress!=""&&pumoney!=""&&puText!=""&&hbname==ffgg)
 	||(myName!=""&&utinName!=""&&reasForRe!="")
 	||(proname!=""&&idno!=""&&placeOfDomicile!=""&&causeOfDeath!=""))){
 	$("#forms").submit();

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aaa.dao.ExAndAppDao;
 import com.aaa.entity.Extractionandapproval;
 import com.aaa.entity.Materialproof;
+import com.aaa.entity.TeachaerPageEntity;
 
 @Service
 
@@ -26,8 +27,8 @@ public class ExAndAppBizImpl implements ExAndAppBiz {
 		return 0;
 	}
 	
-	public List sele_ex(){
-		return dao.sele_ex();
+	public TeachaerPageEntity sele_ex(TeachaerPageEntity page){
+		return dao.sele_ex(page);
 	}
 	
 	public List sele_contract(int appid){
@@ -43,5 +44,10 @@ public class ExAndAppBizImpl implements ExAndAppBiz {
 	public int yes_con(int appid,int indid,double money,String apptime){
 		
 		return dao.yes_con(appid, indid, money, apptime);
+	}
+	
+	public List sele_EAA(int appid){
+		
+		return dao.sele_EAA(appid);
 	}
 }

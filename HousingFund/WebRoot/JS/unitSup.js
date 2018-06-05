@@ -19,7 +19,7 @@ function getUtinaccountinfo(){
 		   	    		  		"<td>"+data[i].utinSealPeople+"</td>"+
 		   	    		  		"<td>"+data[i].utinProvRema+"</td>"+
 		   	    		  		"<td>"+data[i].accountStatus+"</td>"+
-		   	    		  		"<td><a class='btn btn-primary' href='getUtinSup.action?utinaccountinfo.utinAccountId="+data[i].utinAccountId+"'>修改信息</a>&nbsp;</td>"+
+		   	    		  		"<td><a class='btn btn-primary' href='getEmp.action?utinaccountinfoID="+data[i].utinAccountId+"'>点击进入</a>&nbsp;</td>"+
 		      		  		"</tr>";
 		      		  $("#tab").append(tr);
 	      		  }

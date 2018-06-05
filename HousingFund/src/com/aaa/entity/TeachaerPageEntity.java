@@ -5,7 +5,7 @@ import java.util.List;
 //分页实体类
 public class TeachaerPageEntity {
 
-	private int pageSize=3; //每页条数 先给默认值
+	private int pageSize=2; //每页条数 先给默认值
 	private int currPage=1;//当前页 先给默认值
     private int allPage;//总页数
     private int allRows;//总条数

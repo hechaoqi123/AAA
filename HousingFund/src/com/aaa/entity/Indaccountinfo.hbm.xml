@@ -10,7 +10,7 @@
             <column name="IndAccountID" />
             <generator class="native" />
         </id>
-        <many-to-one name="utinaccountinfo" class="com.aaa.entity.Utinaccountinfo" fetch="join" lazy="false">
+        <many-to-one name="utinaccountinfo" class="com.aaa.entity.Utinaccountinfo" fetch="join">
             <column name="UtinAccountID" />
         </many-to-one>
         <many-to-one name="indinfo" class="com.aaa.entity.Indinfo" fetch="join">

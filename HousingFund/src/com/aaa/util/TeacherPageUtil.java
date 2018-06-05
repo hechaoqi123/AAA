@@ -27,14 +27,14 @@ public class TeacherPageUtil {
 					SQLException {
 				// TODO Auto-generated method stub
 			
-				System.out.println(11);
+			
 				Query q=session.createQuery(sql);
 				// 0=(1-1)*5
 				// 5=(2-1)*5
 				q.setFirstResult((page.getCurrPage()-1)*page.getPageSize());
 				//Ã¿Ò³ÌõÊý
 				q.setMaxResults(page.getPageSize());
-				System.out.println(22);
+				
 				return q.list();
 			}
 		});

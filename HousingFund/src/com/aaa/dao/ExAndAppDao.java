@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.aaa.entity.Extractionandapproval;
 import com.aaa.entity.Materialproof;
+import com.aaa.entity.TeachaerPageEntity;
 
 public interface ExAndAppDao {
 
@@ -11,7 +12,10 @@ public interface ExAndAppDao {
 	public abstract int Save_ExAndApp(Materialproof m,int reasonNo);
 	
 	//查询未审批
-	public List sele_ex();
+	public TeachaerPageEntity sele_ex(TeachaerPageEntity page);
+	//查询审批表信息
+	public List sele_EAA(int appid);
+	//查询合同信息
 	public List sele_contract(int appid);
 
 	//审批不通过

@@ -33,10 +33,5 @@ public class UtinaccountinfoBizImpl implements UtinaccountinfoBiz{
 	@Override
 	public List getFuzzy(Utinaccountinfo utinaccountinfo) {
 		return utinaccountinfoDao.getFuzzy(utinaccountinfo);
-	}
-	@Override
-	public Utinaccountinfo getOneUtin(Utinaccountinfo utinaccountinfo) {
-		Utinaccountinfo one = utinaccountinfoDao.getOne(utinaccountinfo.getUtinAccountId());
-		return one;
 	};
 }

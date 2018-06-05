@@ -69,6 +69,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
     </table>
   </body>
-<script type="text/javascript" src="JS/unitSup.js"></script>
+<script type="text/javascript" src="JS/baseAlter.js"></script>
 </html>
 

@@ -15,6 +15,4 @@ public interface UtinaccountinfoBiz {
 	public int update_utinAccount(Integer utinAccountId, String accountStatus);
 	//公司的模糊查询
 	public List getFuzzy(Utinaccountinfo utinaccountinfo);
-	//查询一个单位修改信息
-	public Utinaccountinfo getOneUtin(Utinaccountinfo utinaccountinfo);
 }

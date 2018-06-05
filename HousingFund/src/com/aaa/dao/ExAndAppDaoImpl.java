@@ -19,7 +19,8 @@ import com.aaa.entity.Indaccountinfo;
 import com.aaa.entity.Materialproof;
 import com.aaa.entity.Materialtype;
 import com.aaa.entity.Mpfacentrestat;
-
+import com.aaa.entity.TeachaerPageEntity;
+import com.aaa.util.TeacherPageUtil;
 import com.alibaba.fastjson.JSON;
 
 @Repository
@@ -27,6 +28,8 @@ public class ExAndAppDaoImpl implements ExAndAppDao {
 
 	@Resource
 	private HibernateTemplate ht;
+	@Resource
+	private TeacherPageUtil  util;
 	@Override
 	public int Save_ExAndApp(Materialproof m,int reasonNo){
 		/*Date d=new Date();
@@ -53,15 +56,26 @@ public class ExAndAppDaoImpl implements ExAndAppDao {
 		return 0;
 	}
 	//查询未审批
-	public List sele_ex(){
+	public TeachaerPageEntity sele_ex(TeachaerPageEntity page){
 		
+		String sql="select new map(e.approvalNumberId as approvalNumberId,e.indaccountinfo.indAccountId as IndAccountID,e.applicationtime as applicationtime,e.workersName as workersName,e.bankOfDeposit as bankOfDeposit,e.payee as payee,e.collectionAccount as collectionAccount,e.approvalStatus as approvalStatus,e.withdrawalAmount as withdrawalAmount) from Extractionandapproval e where e.approvalStatus='未审批'";
 		
-			List list=ht.find("select new map(e.approvalNumberId as approvalNumberId,e.indaccountinfo.indAccountId as IndAccountID,e.applicationtime as applicationtime,e.workersName as workersName,e.bankOfDeposit as bankOfDeposit,e.payee as payee,e.collectionAccount as collectionAccount,e.approvalStatus as approvalStatus,e.withdrawalAmount as withdrawalAmount) from Extractionandapproval e where e.approvalStatus='未审批'");
 			
+		TeachaerPageEntity t=util.getPage(sql, page);
 		
 	
-		return list;
+		return t;
 	}
+	//查询审批表信息
+		public List sele_EAA(int appid){
+			String sql="select new map(e.approvalNumberId as approvalNumberId,e.indaccountinfo.indAccountId as IndAccountID,DATE_FORMAT(e.applicationtime,'%Y-%m-%d') as applicationtime,e.workersName as workersName,e.bankOfDeposit as bankOfDeposit,e.payee as payee,e.collectionAccount as collectionAccount,e.approvalStatus as approvalStatus,e.withdrawalAmount as withdrawalAmount,"
+					+ "e.exunitnum as exunitnum,e.exunitname as exunitname,e.exdoctype as exdoctype,"
+					+ "e.exidnum as exidnum,e.indaccstatus as indaccstatus,e.exsex as exsex,"
+					+ "e.exage as exage,e.exmodel as exmodel,e.exphone as exphone) from Extractionandapproval e where e.approvalNumberId='"+appid+"' ";
+			List list=ht.find(sql);
+			return list;
+			
+		}
 	//查询合同信息
 	public List sele_contract(int appid){
 		
@@ -87,14 +101,14 @@ public class ExAndAppDaoImpl implements ExAndAppDao {
 		    Integer piId=(Integer) map.get("piId");//购房信息
 		    Integer deid=(Integer) map.get("deathCertificateId");//死亡证明
 		    Integer retireId=(Integer) map.get("retireId");//离职退休
-		    System.out.println(piId);
+		   /* System.out.println(piId);
 		    System.out.println(deid);
-		    System.out.println(retireId);
+		    System.out.println(retireId);*/
 		 if(piId!=null){
 			List plist= ht.find("select new map(piId as piId,p.puType as puType," +
 					"p.puAddress as puAddress,p.pumoney as pumoney,p.puText as puText," +
 					"p.shphone as shphone,p.shaddress as shaddress,p.shutin as shutin," +
-					"p.shidnum as shidnum,p.hbname as hbname,p.houcs as houcs) from Purinfo p where p.piId="+piId+"");
+					"p.shidnum as shidnum,p.hbname as hbname,p.houcs as houcs,p.recnum as recnum) from Purinfo p where p.piId="+piId+"");
                return plist;
                
 		 }else if(deid!=null){

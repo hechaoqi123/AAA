@@ -20,7 +20,7 @@ public class Extractionandapproval implements java.io.Serializable {
 	private String bankOfDeposit;
 	private String payee;
 	private String collectionAccount;
-	private String approvalStatus;
+	private String approvalStatus;//
 	private Date approvalTime;
 	private Double withdrawalAmount;
 	private String exunitnum;

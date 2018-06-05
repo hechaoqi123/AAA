@@ -35,6 +35,7 @@ public class ExAndAppAction extends BaseAction<Indinfo>{
 	private Float money;
 	private String apptime;
 	
+	private TeachaerPageEntity page;
 	/*//购房信息
 	private Purinfo pur;
 	//离休信息
@@ -45,16 +46,21 @@ public class ExAndAppAction extends BaseAction<Indinfo>{
 	@Action(value="save_exapp",results={@Result(name="su",location="/ssw/success.jsp")})
 	public String save_ExAndApp(){
 		
+		System.out.println(m.getExtractdetails().getExtractionandapproval().getWorkersName());
 		biz.Save_ExAndApp(m,reasonNo);
 		return "su";
 	}
 
+	//(提取)未审批查询
 	@Action("sele_ex")
 	public String sele_ex() throws IOException{
-		
-		List list=biz.sele_ex();
-		System.out.println(list);
-		String json=JSON.toJSONString(list);
+		if(page==null){
+			page=new TeachaerPageEntity();
+			
+		}
+		TeachaerPageEntity t=biz.sele_ex(page);
+		System.out.println(t);
+		String json=JSON.toJSONString(t);
 		
 		System.out.println(json);
 		
@@ -63,20 +69,30 @@ public class ExAndAppAction extends BaseAction<Indinfo>{
 		return null;
 	}
 	
-	@Action("sele_contract")
+	@Action(value="sele_contract",results={@Result(name="tiao",location="/ssw/newtable.jsp")})
 	public String sele_contract() throws IOException{
-		List list=biz.sele_contract(appid);
-		System.out.println(list);
+		System.out.println(appid);
+	    List list1=biz.sele_EAA(appid);
+		List list2=biz.sele_contract(appid);
+		
+		//list1.get(6).toString();
+		list1.addAll(list2);
+		System.out.println(list2);
+		System.out.println(list1);
+		System.out.println(list1.size());
+		getRequestMap().put("list", list1);
+		/*System.out.println(list);
 		String json=JSON.toJSONString(list);
-		System.out.println(json);
-		getOut().print(json);
-		return null;
+		System.out.println(json);*/
+		//getOut().print(json);
+		return "tiao";
 	}
 	
 	@Action("not_con")
 	public String updata_con_not(){
 		
 		biz.not_con(appid);
+		getOut().print(true);
 		return null;
 	}
 	@Action(value="yes_con")
@@ -86,7 +102,7 @@ public class ExAndAppAction extends BaseAction<Indinfo>{
 		System.out.println("3："+money);
 		System.out.println("4："+apptime);
 		biz.yes_con(appid, indid, money, apptime);
-		
+		getOut().print(true);
 		return null;
 	}
 	
@@ -143,6 +159,14 @@ public class ExAndAppAction extends BaseAction<Indinfo>{
 
 	public void setApptime(String apptime) {
 		this.apptime = apptime;
+	}
+
+	public TeachaerPageEntity getPage() {
+		return page;
+	}
+
+	public void setPage(TeachaerPageEntity page) {
+		this.page = page;
 	}
 
 	

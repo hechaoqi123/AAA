@@ -1,6 +1,5 @@
 package com.aaa.biz;
 
-import java.io.File;
 import java.util.List;
 
 import com.aaa.entity.Indaccountinfo;
@@ -34,16 +33,8 @@ public interface IndaccountinfoBiz {
 		public void return_loan(Indaccountinfo entity,Float money2);
 		//判断个人账户与身份证号是否匹配
 		public List fingByExample(Indaccountinfo entity);
+		
 		//修改所有信息
-		public int updateEmpInfo(Indaccountinfo indaccountinfo, Indinfo indinfo, Integer utinaccountinfoID);
-		//冻结
-		public int frozenEmp(Indaccountinfo indaccountinfo);
-		//将文件传入dao返回处理的结果  插入成功或者失败
-		public List saveFileIndaccountinfo(File file) throws Exception;
-		//条件查询一个信息
-		public List getOneIndaf(Indinfo indinfo);
-		//员工转移获取一个用户
-		public List UtinegetOneEmp(Indaccountinfo indaccountinfo);
-		//账户转移
-		public void utine(int indId,int unitId);
+				public int updateEmpInfo(Indaccountinfo indaccountinfo, Indinfo indinfo, Integer utinaccountinfoID);
+				public int delEmp(Indaccountinfo indaccountinfo);
 }

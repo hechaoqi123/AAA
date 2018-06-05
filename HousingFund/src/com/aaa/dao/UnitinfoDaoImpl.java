@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.aaa.entity.Unitinfo;
 @Repository
-public class UnitinfoDaoImpl extends BaseDaoImpl<Unitinfo> implements UnitinfoDao {
+public class UnitinfoDaoImpl implements UnitinfoDao {
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
 	@Override

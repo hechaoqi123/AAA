@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <option>是</option>
        <option>否</option>
        </select></td>
-       <td>代理人</td><td><input/></td>
+       <td>申请人</td><td><input/></td>
      </tr>
     <!--  <tr>
         <td>业务证明</td><td><input /></td>
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
     </div>
     <div style="width:698px;height:50px;">
-    <div style="margin-left:400px;">代理人签字<input id="FluPayprove"/></span></div>
+    <div style="margin-left:400px;">申请人签字<input id="FluPayprove"/></span></div>
     </div> 
     
        

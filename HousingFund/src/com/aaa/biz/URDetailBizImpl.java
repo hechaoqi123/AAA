@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aaa.dao.URDetailDao;
+import com.aaa.entity.TeachaerPageEntity;
 
 @Service
 @Transactional
@@ -18,8 +19,8 @@ public class URDetailBizImpl implements URDetailBiz {
 	@Resource
 	private URDetailDao dao;
 	
-	public List sele_Detail(int id){
-	return dao.sele_Detail(id);
+	public TeachaerPageEntity sele_Detail(int id,TeachaerPageEntity page){
+	return dao.sele_Detail(id, page);
 	}
 	
 	public List sele_rd(int id){
@@ -31,5 +32,13 @@ public class URDetailBizImpl implements URDetailBiz {
 		
 		return dao.se_exre(id);
 	}
-	
+	public TeachaerPageEntity sele_allex(TeachaerPageEntity page){
+		
+		return dao.sele_allex(page);
+	}
+	//查询idnum全部提取
+	public List sele_idnum(String idnum){
+		
+		return dao.sele_idnum(idnum);
+	}
 }

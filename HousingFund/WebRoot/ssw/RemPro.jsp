@@ -18,10 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
-	<link rel="stylesheet" href="bootstrap/bootstrap.min.css" type="text/css"></link>
+	<link rel="stylesheet" href="<%=basePath %>bootstrap/bootstrap.min.css" type="text/css"></link>
 	<script type="text/javascript" src="bootstrap/jquery.js"></script>
-	<script type="text/javascript" src="bootstrap/jquery.min.js"></script>
-    <script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=basePath %>bootstrap/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=basePath %>bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath %>JS/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="<%=basePath %>JS/My97DatePicker/WdatePicker.js"></script>
 
@@ -67,7 +67,7 @@ color:blue;
   border:1px solid black;
    border-collapse:collapse;
   }
- #tabtwo td,th{
+ #tabtwo td{
  width:192px;height:25px;
  border:1px solid black;	
 
@@ -76,7 +76,7 @@ color:blue;
  border:1px solid black;
    border-collapse:collapse;
  }
- .jstab td,th{
+ .jstab td{
   width:192px;
   height:25px;
   font-size:15px;
@@ -94,7 +94,7 @@ color:blue;
    border:1px solid black;
    border-collapse:collapse;
   }
-  #tabthree td,th{
+  #tabthree td{
   border:1px solid black;
    font-size:15px;
    width:150px;
@@ -118,23 +118,10 @@ color:blue;
   #whatthefuck{
   border-collapse:collapse;
   }
-  #whatthefuck td,th{
+  #whatthefuck td{
   width:200px;
   height:20px;
   border:1px solid black;
-  }
-  #tabtwo *{
-     text-align:center;
-  }
-  #cq td,th{
-     height:30px;
-     line-height:30px;
-  }
-  #cq input{
-     width:170px;
-  }
-  #cq *{
-    text-align:center;
   }
 </style>
 
@@ -235,6 +222,12 @@ dian=dian+1;
       trs+="<td><button onclick='sousuo("+data.list[dl].utinAccountId+")'>汇缴</button></td>";
       trs+="</tr>";
    } 
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
+   }else{
    if(data.currPage==1){
    
    }else{
@@ -245,6 +238,7 @@ dian=dian+1;
    
    }else{
    trs+="<tr><td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
    }
    trs+="</table>";
    $("#tab").append(trs);
@@ -277,7 +271,7 @@ dian=dian+1;
    dataType:"json",
    data:{"what.currPage":dian,"UtinId":$("#utinid").val()},
    success:function(data){
-    var trs;
+    var trs="";
     trs+="<table class='table'>";
    trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";
    trs+="<td>经办人姓名</td><td>单位状态</td><td>操作</td></tr>";
@@ -292,6 +286,12 @@ dian=dian+1;
       trs+="<td><button onclick='sousuo("+data.list[dl].utinAccountId+")'>汇缴</button></td>";
       trs+="</tr>";
    } 
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
+   }else{
     if(data.currPage==1){
    
    }else{
@@ -301,6 +301,7 @@ dian=dian+1;
    
    }else{
    trs+="<tr><td><a onclick='idsousuo("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
    }
    trs+="</table>";
    $("#tab").append(trs);
@@ -329,7 +330,7 @@ dian=dian+1;
    dataType:"json",
    data:{"what.currPage":dian,"utinname":$("#utinname").val()},
    success:function(data){
-    var trs;
+    var trs="";
     trs+="<table class='table'>";
    trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";
    trs+="<td>经办人姓名</td><td>单位状态</td><td>操作</td></tr>";
@@ -344,6 +345,12 @@ dian=dian+1;
       trs+="<td><button onclick='sousuo("+data.list[dl].utinAccountId+")'>汇缴</button></td>";
       trs+="</tr>";
    } 
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
+   }else{
     if(data.currPage==1){
    
    }else{
@@ -353,6 +360,7 @@ dian=dian+1;
    
    }else{
    trs+="<tr><td><a onclick='namesousuo("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
    }
    trs+="</table>";
    $("#tab").append(trs);
@@ -418,7 +426,7 @@ dian=dian+1;
 		    tab+="<td>实交金额</td><td><input  readonly='readonly' id='sjmoney'/></td>";
 		    tab+="</tr>";
 		    tab+="<tr>";
-		    tab+="<td>汇缴起始年月<span style='color:red'>*</span></td><td><input id='oridate' onblur='dblur(this.value)' class='Wdate' onclick='times()' /></td>";
+		    tab+="<td>汇缴起始年月</td><td><input id='oridate' onblur='dblur(this.value)' class='Wdate' onclick='times()' /></td>";
 
 												
 		    tab+="<td>汇缴最终年月</td><td><input id='finaldate' value='"+data[1].times.substring(0,7)+"' readonly='readonly'/></td>";
@@ -428,8 +436,8 @@ dian=dian+1;
 		    
 		    tab+="</table>";
 		    tab+="<div style='border:0px solid green;width:100%px;height:300px; overflow:auto'>";
-		    tab+="<table id='tabtwo'><tr><th>员工姓名 </th><th>身份证号 </th><th>缴存基数</th><th>单位缴存比例</th><th>个人缴存比例</th><th>个人应缴金额 </th><th>应缴总金额</th></tr></table>";
-		    tab+=" <table class='jstab' id='cq'>";
+		    tab+="<table id='tabtwo'><tr><td>员工姓名 </td><td>身份证号 </td><td>缴存基数</td><td>单位缴存比例</td><td>个人缴存比例</td><td>个人应缴金额 </td><td>应缴总金额</td></tr></table>";
+		    tab+=" <table class='jstab'>";
 		  
 		    for(var i=0;i<data[1].indAccount.length;i++){
 			     tab+="<tr>";
@@ -457,13 +465,13 @@ dian=dian+1;
              tab+="</table>";
              tab+="</div>";
              tab+="<table id='tabthree'>";
-             tab+="<tr><td>缴存方式</td><td><input value='均缴' readonly='readonly' style='text-align:center;background-color:white;'/></td>";
+             tab+="<tr><td>缴存方式</td><td><input value='均缴' readonly='readonly' style=' background-color:white;'/></td>";
                tab+="<td>缴后账户余额</td>";
 		    tab+="<td><input   readonly='readonly' id='jhqian'/></td>"; 
 		    
              tab+="<td>实收金额<span style='color:red;font-size:20px;line-height: 20px;'>*</span></td><td><input id='smoney' style='background-color:white;' onblur='beginmoney(this.value)'/></td>";
              tab+="<td><a  data-toggle='modal' data-target='#myModal' onclick='URsele()'>汇缴清册</a></td>";
-             tab+="<td>制单人</td><td><input  id='adminname'value='管理员'  style='text-align:center;' readonly='readonly'/></td>";
+             tab+="<td>制单人</td><td><input  id='adminname'value='管理员'  readonly='readonly'/></td>";
              tab+="</tr>";
              
              tab+="</table>";
@@ -523,7 +531,7 @@ dian=dian+1;
 	 $("#remonth").val(m+1); 
 	
 	//本次应缴金额
-	 $("#summoney").val(Math.round((zongzhi*(m+1))));
+	 $("#summoney").val(zongzhi*(m+1));
 	
 	
 	//个人应缴金额
@@ -587,7 +595,7 @@ dian=dian+1;
 	var sjmoney=parseFloat($("#sjmoney").val()).toFixed(2);//实缴
 	var smoney=parseFloat($("#smoney").val()).toFixed(2);//实收
 	if(smoney*1<sjmoney*1){
-    alert("余额不足。");
+    alert("金额不对等");
 	
 	} else if($("#oridate").val()==""){
 	alert("不能为空");
@@ -642,6 +650,7 @@ dian=dian+1;
 	 /* window.location.href="ssw/RemPro.jsp"; */
 	}
 	   
+	   //汇缴纪录 目前失效
 	   function URsele(){
 	   var zhi=$(".utinAccountId").val();
 	   

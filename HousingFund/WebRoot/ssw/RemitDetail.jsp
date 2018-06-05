@@ -19,8 +19,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
-  <script type="text/javascript" src="JS/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" href="<%=basePath %>bootstrap/bootstrap.min.css" type="text/css"></link>
+  <script type="text/javascript" src="<%=basePath%>JS/jquery-1.10.2.min.js"></script>
   <style>
   
   body{
@@ -33,7 +33,7 @@ font-family:宋体;
   #add td{
   width:200px;
   height:30px;
-  border:1px solid black;
+  border:0px solid black;
   }
  /*  #onetab{
    border-collapse:collapse;
@@ -51,8 +51,9 @@ font-family:宋体;
     <table style="border:0px solid red;height:50px;font-size: 20px;" class="">
        <tr>
         <td>单位编号:</td>
-         <td><input id="utinid" style="width:300px;height:35px;font-size:30px;"/></td>
-         <td><input type="button" value="搜索" style="height:35px;width:100px;" onclick="ss()"/></td>
+         <td><input id="utinid" style="width:300px;height:35px;font-size:30px;"onkeyup="idsousuo(1,0)"/></td>
+        <td>单位名称</td>
+         <td><input id="utinname" style="width:300px;height:35px;font-size:20px;" onkeyup="namesousuo(1,0)"/></td>
          
        </tr>
     </table>
@@ -63,43 +64,267 @@ font-family:宋体;
   </body>
 </html>
 <script>
+$(function(){
  
-  function ss(){
-   var s=$("#utinid").val();
-   $("#add").html("");
-   if(s==""){
-   alert("不能为空");
+ jiazai(1,0);
+ });
+ 
+// 加载页面是执行
+function jiazai(dian,what){
+ $("#add").html("");
+if(what==1){
+	if(dian-1==0){
+	dian=1;
+	}else{
+	dian=dian-1;
+	}
+
+}else if(what==2){
+
+dian=dian+1;
+}
+
+
+ 
+  $.ajax({
+   url:"sele_utin.action",
+   type:"post",
+   dataType:"json",
+   data:{"what.currPage":dian},
+   success:function(data){
+ 
+  var trs="";
+   trs+="<table class='table'>";
+   trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";
+   trs+="<td>经办人姓名</td><td>单位状态</td><td>操作</td></tr>";
+   for(var dl=0;dl<data.list.length;dl++){
+      trs+="<tr>";
+      trs+="<td>"+data.list[dl].utinAccountId+"</td>";
+      trs+="<td>"+data.list[dl].utinName+"</td>";
+      trs+="<td>"+data.list[dl].utinAddress+"</td>";
+      trs+="<td>"+data.list[dl].corpRepr+"</td>";
+      trs+="<td>"+data.list[dl].operatorName+"</td>";
+      trs+="<td>"+data.list[dl].accountStatus+"</td>";
+      trs+="<td><button onclick='ss("+data.list[dl].utinAccountId+",1,0)'>汇缴详情</button></td>";
+      trs+="</tr>";
+   } 
+   //一起显示
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
    }else{
+   //显示上一页
+   if(data.currPage==1){
+   
+   }else{
+   trs+="<tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td></tr>";
+   }
+   //显示下一页
+   if(data.currPage+1>data.allPage){
+   
+   }else{
+   trs+="<tr><td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
+   }
+   trs+="</table>";
+   $("#add").append(trs);
+   }
+   
+  })
+ }
+ 
+ 
+ //单位id模糊查询
+  function idsousuo(dian,what){
+   $("#add").html("");
+   $("#utinname").val("")
+  if($("#utinid").val()==""&&$("#utinname").val()==""){
+  jiazai(dian,what);
+  }
+  if(what==1){ //上一页
+  
+	if(dian-1==0){
+	dian=1;
+	}else{
+	dian=dian-1;
+	}
+
+}else if(what==2){//下一页
+
+dian=dian+1;
+}
+  $.ajax({
+   url:"sele_mohuid.action",
+   type:"post",
+   dataType:"json",
+   data:{"what.currPage":dian,"UtinId":$("#utinid").val()},
+   success:function(data){
+    var trs="";
+    trs+="<table class='table'>";
+   trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";
+   trs+="<td>经办人姓名</td><td>单位状态</td><td>操作</td></tr>";
+   for(var dl=0;dl<data.list.length;dl++){
+      trs+="<tr>";
+      trs+="<td>"+data.list[dl].utinAccountId+"</td>";
+      trs+="<td>"+data.list[dl].utinName+"</td>";
+      trs+="<td>"+data.list[dl].utinAddress+"</td>";
+      trs+="<td>"+data.list[dl].corpRepr+"</td>";
+      trs+="<td>"+data.list[dl].operatorName+"</td>";
+      trs+="<td>"+data.list[dl].accountStatus+"</td>";
+      trs+="<td><button onclick='ss("+data.list[dl].utinAccountId+")'>汇缴详情</button></td>";
+      trs+="</tr>";
+   } 
+   
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
+   }else{
+    if(data.currPage==1){
+   
+   }else{
+   trs+="<tr><td><a onclick='idsousuo("+data.currPage+",1)'>上一页</a><td></tr>";
+   }
+   if(data.currPage+1>data.allPage){
+   
+   }else{
+   trs+="<tr><td><a onclick='idsousuo("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
+   }
+   trs+="</table>";
+   $("#add").append(trs);
+   }
+  })
+  }
+
+ //单位名称模糊查询
+  function namesousuo(dian,what){
+   $("#add").html("");
+  $("#utinid").val("");
+  if(what==1){ //上一页
+  
+	if(dian-1==0){
+	dian=1;
+	}else{
+	dian=dian-1;
+	}
+
+}else if(what==2){//下一页
+
+dian=dian+1;
+}
+  $.ajax({
+   url:"sele_mohuname.action",
+   type:"post",
+   dataType:"json",
+   data:{"what.currPage":dian,"utinname":$("#utinname").val()},
+   success:function(data){
+    var trs="";
+    trs+="<table class='table'>";
+   trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";
+   trs+="<td>经办人姓名</td><td>单位状态</td><td>操作</td></tr>";
+   for(var dl=0;dl<data.list.length;dl++){
+      trs+="<tr>";
+      trs+="<td>"+data.list[dl].utinAccountId+"</td>";
+      trs+="<td>"+data.list[dl].utinName+"</td>";
+      trs+="<td>"+data.list[dl].utinAddress+"</td>";
+      trs+="<td>"+data.list[dl].corpRepr+"</td>";
+      trs+="<td>"+data.list[dl].operatorName+"</td>";
+      trs+="<td>"+data.list[dl].accountStatus+"</td>";
+      trs+="<td><button onclick='ss("+data.list[dl].utinAccountId+")'>汇缴详情</button></td>";
+      trs+="</tr>";
+   } 
+   if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    trs+="<center><tr><td><a onclick='jiazai("+data.currPage+",1)'>上一页</a><td>";
+    trs+="<td><a onclick='jiazai("+data.currPage+",2)'>下一页</a></td>";
+    trs+="</tr></center>";
+   }else{
+    if(data.currPage==1){
+   
+   }else{
+   trs+="<tr><td><a onclick='namesousuo("+data.currPage+",1)'>上一页</a></td></tr>";
+   }
+   if(data.currPage+1>data.allPage){
+   
+   }else{
+   trs+="<tr><td><a onclick='namesousuo("+data.currPage+",2)'>下一页</a></td></tr>";
+   }
+   }
+   trs+="</table>";
+   $("#add").append(trs);
+   }
+  })
+  }
+  
+  //汇缴详情
+  function ss(obj,dian,what){
+     alert();
+   $("#add").html("");
+  if(what==1){ //上一页
+  
+	if(dian-1==0){
+	dian=1;
+	}else{
+	dian=dian-1;
+	}
+
+}else if(what==2){//下一页
+
+dian=dian+1;
+}
    $.ajax({
      url:"sele_urd.action",
      type:"post",
-     data:{"utlnid":s},
+     data:{"page.currPage":dian,"utlnid":obj},
      dataType:"json",
      success:function(data){
      if(data==false){
      alert("无此账户汇缴纪录信息");
      }else{
       var tab="<table id='what' class='table'>";
-         tab+="<tr>";
-         tab+="<td>单位名称</td><td>汇缴金额</td><td>汇缴人数</td><td>汇缴时间</td>";
+         tab+="<tr style='background-color:#BFDCEC'>";
+         tab+="<td>单位编号</td><td>单位名称</td><td>汇缴金额</td><td>汇缴人数</td><td>汇缴时间</td>";
          tab+="<td>起始日期</td><td>最终日期</td><td>汇缴月数</td><td>制单人</td>";
           tab+="</tr>";
-      for(var i=0;i<data.length;i++){
+      for(var i=0;i<data.list.length;i++){
         tab+="<tr>";
-        tab+="<td>"+data[i].utinName+"</td>";
-        tab+="<td>"+data[i].payinSumMoney+"</td>";
-        tab+="<td>"+data[i].depositPeople+"</td>";
-        tab+="<td>"+data[i].depositDate+"</td>";
-        tab+="<td>"+data[i].oridate+"</td>";
-        tab+="<td>"+data[i].finaldate+"</td>";
-        tab+="<td>"+data[i].remonth+"</td>";
-        tab+="<td>"+data[i].adminname+"</td>";
+        tab+="<td>"+data.list[i].utinAccountId+"</td>";
+        tab+="<td>"+data.list[i].utinName+"</td>";
+        tab+="<td>"+data.list[i].payinSumMoney+"</td>";
+        tab+="<td>"+data.list[i].depositPeople+"</td>";
+        tab+="<td>"+data.list[i].depositDate+"</td>";
+        tab+="<td>"+data.list[i].oridate+"</td>";
+        tab+="<td>"+data.list[i].finaldate+"</td>";
+        tab+="<td>"+data.list[i].remonth+"</td>";
+        tab+="<td>"+data.list[i].adminname+"</td>";
         tab+="</tr>";
       }
+      //上下页判断
+      if(data.currPage!=1&&data.currPage+1<=data.allPage){
+ 
+    tab+="<center><tr><td><a onclick='ss("+data.list[0].utinAccountId+","+data.currPage+",1)'>上一页</a><td>";
+    tab+="<td><a onclick='ss("+data.list[0].utinAccountId+","+data.currPage+",2)'>下一页</a></td>";
+    tab+="</tr></center>";
+   }else{
+    if(data.currPage==1){
+   
+   }else{
+   tab+="<tr><td><a onclick='ss("+data.list[0].utinAccountId+","+data.currPage+",1)'>上一页</a></td></tr>";
+   }
+   if(data.currPage+1>data.allPage){
+   
+   }else{
+   tab+="<tr><td><a onclick='ss("+data.list[0].utinAccountId+","+data.currPage+",2)'>下一页</a></td></tr>";
+   }
+   }
      tab+="</table>";
      $("#add").append(tab);
      }
      }
    })
-  }}
+  }
 </script>

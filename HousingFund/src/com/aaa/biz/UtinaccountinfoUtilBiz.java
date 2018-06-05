@@ -26,5 +26,4 @@ public interface UtinaccountinfoUtilBiz {
 				public TeachaerPageEntity sele_mohuid(TeachaerPageEntity page,int ids);
 				//单位名称模糊查询
 				public TeachaerPageEntity sele_mohuname(TeachaerPageEntity page,String utinname);
-				
 }

@@ -57,45 +57,6 @@
 		 }
 		
 	 });
-	 $("#FormsaveIndaccountinfo").validate({
-		 rules:{
-			 "list_indinfo[0].trueName":{
-				 required: true,
-				 utinName:true
-			 },
-			 "list_indinfo[0].idnumber":{
-				required: true,
-				idNumTest:true
-			 },
-			 "list_indinfo[0].phoneNumber":{
-				 phoneTest:true
-			 },
-			 "list_indaccountinfo[0].bankSaAccount":{
-				 required: true,
-				 creditcard:true
-			 },
-			 "list_indinfo[0].familyAddress":{
-				 required: true,
-				 utinName:true
-			 },
-			 "emails" :{
-				 required: true,
-				 email:true
-			 },
-			 "youb" :{
-				 required: true,
-				 minlength:6,
-				 maxlength:6,
-				 digits:true
-			 }
-		 },
-	 message:{
-		 "list_indaccountinfo[0].bankSaAccount":{
-			 creditcard:" 必须输入合法的信用卡号。"
-		 },
-	 }
-		 
-	 });
 	 //验证公司姓名
 	 $.validator.addMethod("utinName", function(value){
          var postcode = /^[\u4E00-\u9FA5A-Za-z0-9]+$/;
@@ -121,12 +82,9 @@
 		 var postcode = /^^[A-Za-z0-9]+$/;
 		 return postcode.test(value);
 	 }, $.validator.format("由数字和26个英文字母组成"));
-	 //银行卡号验证
-	 $.validator.addMethod("YinhkTest", function(value){
-		 var postcode = /^([1-9]{1})(\d{14}|\d{18})$/;
-		 return postcode.test(value);
-	 }, $.validator.format("请输入正确的银行卡号"));
  });
+
+
 
 var utinNameBoolent = false;
 
