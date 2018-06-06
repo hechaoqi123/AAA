@@ -13,10 +13,12 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.stereotype.Controller;
 
+import com.aaa.biz.UtinBiz;
 import com.aaa.biz.UtinaccountinfoUtilBiz;
 import com.aaa.entity.Flupay;
 import com.aaa.entity.Indaccountinfo;
 import com.aaa.entity.Indinfo;
+import com.aaa.entity.PageEntitys;
 import com.aaa.entity.TeachaerPageEntity;
 import com.aaa.entity.Utinaccountinfo;
 import com.alibaba.fastjson.JSON;
@@ -28,11 +30,21 @@ public class UtinAction extends BaseAction<Indinfo> {
 	@Resource
 	private UtinaccountinfoUtilBiz biz;
 	
+	
+	@Resource
+    private UtinBiz utinBiz;
+    
+    
+    
 	private Utinaccountinfo utin;
 	private Integer UtinId;
 	private String utinname;
 	private TeachaerPageEntity what;
 	private Flupay fu;
+	
+
+
+	
 	
 	//ª„Ω…∞Ï¿Ì≤È—Ø
 	@Action("UtinMoney")
@@ -121,7 +133,6 @@ public class UtinAction extends BaseAction<Indinfo> {
 		List list=biz.UtinInfoSele(UtinId);
 		 if(list.size()>0){
 			 String json=JSON.toJSONString(list);
-			  System.out.println(json);
 			 getOut().print(json);		 
 		 }else{
 			 
@@ -138,6 +149,9 @@ public class UtinAction extends BaseAction<Indinfo> {
 		return null;
 	}
 
+	
+	
+	
 	public Integer getUtinId() {
 		return UtinId;
 	}
@@ -172,6 +186,5 @@ public class UtinAction extends BaseAction<Indinfo> {
 
 
 
-	
 	
 }

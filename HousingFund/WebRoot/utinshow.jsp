@@ -149,7 +149,7 @@ border:1px solid #000;
   <div id="zhong">
  <div id="lunboleft" style="width:785px;height:250px;border:0px solid #000;margin-left:400px;padding-top:72px;">
   <%
-    String ss=request.getParameter("ut");
+    String ss=new String(request.getParameter("ut").getBytes("ISO-8859-1"),"UTF-8");
   %>
  
   <input type="hidden" value="<%=ss%>" id="login">
@@ -157,7 +157,6 @@ border:1px solid #000;
       <h4 style="margin-top:50px;">本单位住房公积金</h4>
          <tr>
             <td>单位编号</td>
-            <td>单位账号:</td>
             <td>单位名称</td>
             <td>单位缴存比例:</td>
             <td>单位总人数:</td>
@@ -207,16 +206,14 @@ $(function(){
       var zhi=$("#login").val();
           $.ajax({
              url:"query3.action",
-             type:"get",
-             data:{"utinNumber":zhi},
+             type:"post",
+             data:{"utinName":zhi},
              dataType:"json",
              success:function(data){
-             
              //每次记载之前先清空当前页面的数据
                  $("#myTab").html('');
                     var tr="<tr class='trinfo'>";
                    tr+="<td class='uid'>"+data.utinAccountId+"</td>";
-                   tr+="<td>"+data.utinNumber+"</td>";
                    tr+="<td>"+data.utinName+"</td>";
                    tr+="<td>"+data.utinDepositRatio+"%"+"</td>";
                    tr+="<td>"+data.utinSumPeople+"</td>";

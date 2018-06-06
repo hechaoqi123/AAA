@@ -72,7 +72,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<form action="saveFileIndaccountinfo.action" method="post" enctype="multipart/form-data">
 	  	<table class="table">
 	  		<tr class="form-group">
-	  			<td width="140px"><span style="color: red">多添加请选择文档</span></td>
+	  			<td width="140px">
+		  			<span style="color: red">多添加请选择文档</span>
+		  			<input class="utinid" name="utinaccountinfoID" style="display: none;">
+	  			</td>
 	  		 	<td width="200px"><input type="file" name="myFile" required="required"></td>
 	  			<td><input type="submit" value="提交"></td>
 	  		</tr>

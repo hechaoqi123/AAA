@@ -107,8 +107,8 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 			return 0;
 		}
 		@Override
-		public List saveFileIndaccountinfo(File file) throws Exception {
-			return dao.saveFileIndaccountinfo(file);
+		public List saveFileIndaccountinfo(File file, Integer utinaccountinfoID) throws Exception {
+			return dao.saveFileIndaccountinfo(file, utinaccountinfoID);
 		}
 		@Override
 		public List getOneIndaf(Indinfo indinfo) {

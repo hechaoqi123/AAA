@@ -23,16 +23,20 @@ public class LoanAction extends BaseAction<Loanapplication>{
     private LoanBiz loanBiz;
 	//JOSN×Ö·û´®
 	private String jsonArr;
+	
+	
 	@Action(value="query4")
 	public String query4(){
+		System.out.println(")))))))))))))))))))))))))))))))");
+		System.out.println(getModel().getBorrowerIdnumber());
 		Loanapplication lon=loanBiz.getFive(getModel().getBorrowerIdnumber());
 		lon.setPurchasecontract(null);
 		lon.setCoborrower(null);
 		lon.setUseoffunds(null);
 		lon.setGuaranteemode(null);
 		lon.setLoanfinals(null);
-		     String jsonStr=JSON.toJSONString(lon);
-		    getOut().print(jsonStr);
+		String jsonStr=JSON.toJSONString(lon);
+	    getOut().print(jsonStr);
 		return null;
 		
 	}

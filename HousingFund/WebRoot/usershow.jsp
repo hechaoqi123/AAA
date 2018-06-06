@@ -207,6 +207,7 @@ var aaa;
              data:{"loginAccount":zhi},
              dataType:"json",
              success:function(data){
+          
            		var aaa=data;
              //每次记载之前先清空当前页面的数据
                  $("#myTab").html('');

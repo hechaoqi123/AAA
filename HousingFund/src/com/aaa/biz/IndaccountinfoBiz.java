@@ -39,7 +39,7 @@ public interface IndaccountinfoBiz {
 		//冻结
 		public int frozenEmp(Indaccountinfo indaccountinfo);
 		//将文件传入dao返回处理的结果  插入成功或者失败
-		public List saveFileIndaccountinfo(File file) throws Exception;
+		public List saveFileIndaccountinfo(File file, Integer utinaccountinfoID) throws Exception;
 		//条件查询一个信息
 		public List getOneIndaf(Indinfo indinfo);
 		//员工转移获取一个用户
