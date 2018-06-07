@@ -49,7 +49,8 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	public List ind_MyMoney(String idnum){
 	   String sql="select new map(ic.presentSumRem as presentSumRem,ic.indAccountId as indAccountId," +
 	   		"ic.trueName as trueName,ic.utinaccountinfo.utinName as utinname," +
-	   		"ic.utinaccountinfo.utinAccountId as utinaccountId) from Indaccountinfo ic where ic.idnumber="+idnum+"";
+	   		"ic.utinaccountinfo.utinAccountId as utinaccountId,"
+	   		+ "ic.indinfo.sex as sex,ic.indStatus as indStatus) from Indaccountinfo ic where ic.idnumber="+idnum+"";
 		List list=hibernateTemplate.find(sql);
 		return list;
 	}
