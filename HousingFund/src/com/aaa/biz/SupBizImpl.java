@@ -46,4 +46,9 @@ public class SupBizImpl implements SupBiz {
 	public List bjse(int a){
 		return dao.bjse(a);
 	}
+	//根据idnum查询此单位是否存在此idnum
+		public List sele_supidnum(int a,String idnum){
+			
+			return dao.sele_supidnum(a, idnum);
+		}
 }

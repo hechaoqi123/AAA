@@ -34,6 +34,9 @@ public class SupAction extends BaseAction<Indinfo>{
 	
 	private int indid;
 	
+    private String idnum;
+
+	//添加补缴
 	@Action("inse_sup")
 	public String inse_sup() throws IOException{
 	/*	System.out.println(11);
@@ -41,7 +44,7 @@ public class SupAction extends BaseAction<Indinfo>{
 		System.out.println(utinAccountID);
 		
 		System.out.println(jsons);*/
-		System.out.println(11);
+		
 		List sz=new ArrayList();
 		
 		Utinaccountinfo ut=biz.sele_u(utinAccountID);
@@ -54,6 +57,7 @@ public class SupAction extends BaseAction<Indinfo>{
 			
 			//查询是否有此账号
 			for (UtilSup sup : list) {
+				System.out.println(sup.getIndAccountID());
 				Indaccountinfo i= biz.sele_i(sup.getIndAccountID());
 				System.out.println(i);
 				if(i!=null){
@@ -96,6 +100,18 @@ public class SupAction extends BaseAction<Indinfo>{
 		return null;
 	}
 	
+	//根据身份证号查询
+	@Action("sele_supidnum")
+	public String sele_idnum(){
+		List list=biz.sele_supidnum(indid, idnum);
+		
+			String json=JSON.toJSONString(list);
+			System.out.println(json);
+			getOut().print(json);
+		
+		return null;
+	}
+	
 	
 	public String getJsons() {
 		return jsons;
@@ -127,6 +143,14 @@ public class SupAction extends BaseAction<Indinfo>{
 
 	public void setIndid(int indid) {
 		this.indid = indid;
+	}
+
+	public String getIdnum() {
+		return idnum;
+	}
+
+	public void setIdnum(String idnum) {
+		this.idnum = idnum;
 	}
 	
 	

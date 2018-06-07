@@ -204,8 +204,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table id="addse"  class="table">
    <tr>
-    <td>姓名<span class="sp">*</span></td> <td><input name="m.extractdetails.extractionandapproval.workersName" id="workersName" readonly="readonly" /></td>  
      <td>证件号码<span class="sp">*</span></td> <td><input name="m.extractdetails.extractionandapproval.exidnum" id="idcard" onblur="money()"/></td>  
+    <td>姓名<span class="sp">*</span></td> <td><input name="m.extractdetails.extractionandapproval.workersName" id="workersName" readonly="readonly" /></td>  
      <td>证件类型<span class="sp">*</span></td><td><input  value="身份证" readonly="readonly" name="m.extractdetails.extractionandapproval.exdoctype" id="exdoctype"/></td>
   </tr>
   <tr>

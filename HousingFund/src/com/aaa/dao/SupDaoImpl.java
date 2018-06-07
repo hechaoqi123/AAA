@@ -94,4 +94,12 @@ SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 		List list=ht.find("select new map(supMoney as supMoney,supMonth as supMonth,supDate as supDate) from Supdetailed s where s.indaccountinfo.indAccountId="+a+"");
 		return list;
 	}
+	
+	//根据idnum查询此单位是否存在此idnum
+		public List sele_supidnum(int a,String idnum){
+			String sql="select new map(ind.indAccountId as indAccountId) from Indaccountinfo ind where ind.utinaccountinfo.utinAccountId="+a+" and"
+					+ " ind.idnumber="+idnum+"";
+			List list=ht.find(sql);
+			return list;
+		}
 }
