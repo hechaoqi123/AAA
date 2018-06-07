@@ -104,8 +104,9 @@ public class BeforereturnBizImpl implements BeforereturnBiz {
 			    Repaymentplandetails instance=new Repaymentplandetails(); 
 			    instance.setCurrentPeriod(0);
 			    instance.setCurrentReturnedCorpus(Float.valueOf(before.getMoney()*10000));
-			    instance.setCurrentReturnedInterest(before.getMoney()*10000*(borr.getBorrowerFixedYear()-count)/12*borr.getBorrowerAnnualRate()/100);
-			    instance.setRepaymentsReceived(instance.getCurrentReturnedCorpus()+instance.getCurrentReturnedInterest());//实收金额
+			    //部分提前还款不计算利息
+			    //instance.setCurrentReturnedInterest(before.getMoney()*10000*(borr.getBorrowerFixedYear()-count)/12*borr.getBorrowerAnnualRate()/100);
+			    instance.setRepaymentsReceived(instance.getCurrentReturnedCorpus());//实收金额
 			    instance.setAmountOfRepayRecei(instance.getRepaymentsReceived());//应还金额
 			    instance.setRepaymentStatus("提前还款");
 			    instance.setRepaymentDate(new Date());//还款日期

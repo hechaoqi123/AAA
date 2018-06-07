@@ -29,13 +29,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          line-height:40px;
          text-align:center;
        }
-
+       .check{
+          width:20px;
+          height:20px;
+       }
       </style>
   </head>
   
   <body>
-  
+          
         <h2>冲贷日志记录</h2>
+        <input type="radio" class="check" name="a" checked="true" value="all"/>全部
+        <input type="radio" class="check" name="a" value="success"/>成功
+        <input type="radio" class="check" name="a" value="loser"/>失败
       <table border="1" bordercolor="#999" style="border-collapse: collapse;">
         <tr>
           <td>日志记录编号</td>
@@ -55,7 +61,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <div style="height:500px;overflow: auto">
                 <table >
                   <c:forEach items="${list}" var="item">
-                       <tr>
+                      <c:if test="${item.status eq '成功'}">
+			               <tr class="success">
+			          </c:if>
+                      <c:if test="${item.status eq '失败'}">
+			               <tr class="loser">
+			          </c:if>
 			          <td>${item.id }</td>
 			          <td>${item.fush.borrowmoneyagreement.borrowMoneyAgreementId}</td>
 			          <td style="padding-left:30px;">${item.fush.borrowmoneyagreement.borrowerName}</td>
@@ -87,3 +98,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   </body>
 </html>
+<script type="text/javascript" src="JS/jquery-1.8.3.min.js"></script>
+<script>
+      $(".check").click(
+          function(){
+	           if($(this).val()=="all"){
+	              $(".loser").css("display","block")
+	              $(".success").css("display","block")
+	              
+	           }
+	           if($(this).val()=="loser"){
+	              $(".success").css("display","none")
+	              $(".loser").css("display","block")
+	           }
+	           if($(this).val()=="success"){
+	             $(".success").css("display","block")
+	             $(".loser").css("display","none")
+	           }
+	           
+          }      
+      )
+</script>

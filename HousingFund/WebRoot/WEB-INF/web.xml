@@ -16,9 +16,17 @@
   <filter-name>struts2</filter-name>
   <url-pattern>/*</url-pattern>
  </filter-mapping>
-
+  <!-- 配置登陆过滤器  -->
+<!--     <filter>
+       <filter-name>login</filter-name>
+       <filter-class>com.aaa.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+       <filter-name>login</filter-name>
+       <url-pattern>/BackJsp/*</url-pattern>
+    </filter-mapping> -->
  <welcome-file-list>
-  <welcome-file>BackJsp/login.jsp</welcome-file>
+  <welcome-file>HomePage.jsp</welcome-file>
  </welcome-file-list>
  <login-config>
   <auth-method>BASIC</auth-method>

@@ -3,6 +3,8 @@ package com.aaa.actions;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -37,11 +39,22 @@ public class UsersAction extends BaseAction<Users> {
 			Map map= getRequestMap();
 			map.put("list_users", list_users);
 			map.put("list_Powers", list_Powers);
+			HttpSession session=getSession();
+			session.setAttribute("user",list_users.get(0));
 			return "users_login.action";
 		}else{
+			Map map= getRequestMap();
+			map.put("error", "用户名或密码错误！");
 			return "users_login.action null";
 		}
 	};
+	//注销
+	@Action(value="cancel",results={@Result(name="success",type="redirect",location="/BackJsp/login.jsp")})
+	public String cancel(){
+		HttpSession session=getSession();
+		session.removeAttribute("user");
+		return SUCCESS;
+	}
 	//查询全部员工
 	@Action("get_UsersAll")
 	public String get_UsersAll(){
