@@ -233,9 +233,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
 <script type="text/javascript" src="JS/AddRole.js"></script>
 <script>
-var href = decodeURI(subStr(window.location.href).ids);
+//var href = decodeURI(subStr(window.location.href).ids);
 $(function(){
-	get_one_Utinaccountinfo(href);
+	get_one_Utinaccountinfo(${param.id});
 	//utinSumPeopleTest ();
 });
 //解析路径 把路径分离数组
@@ -256,6 +256,7 @@ function get_one_Utinaccountinfo(obj){
 		 type:"post",
 		 dataType:"json",
 		 success:function(data){
+		    alert(data);
 			 $(".utinid").val(obj);
 			 $(".utinName").html(data[0].utinName);
 			 $(".utinNames").html(data[0].utinName);

@@ -79,12 +79,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div><!-- /.row -->
 				<table class="table">
 					<tr>
-						<td colspan="5">已经存在的员工请通知他们到公积金中心进行账户转移</td>
+						<td colspan="5" style="color:#5ea6eb">成功添加人员如下：</td>
 					</tr>
-					<c:forEach items="${list_Indaccountinfo[0] }" var="Indaccountinfo">
+					<c:forEach items="${list_Indaccountinfo[1] }" var="Indaccountinfo">
 							<tr>
 								<td>${Indaccountinfo.indAccountId }</td>
-								<td>${Indaccountinfo.trueName }</td>
+								<td style="color:#5ea6eb"><b>${Indaccountinfo.trueName }</b></td>
 								<td>${Indaccountinfo.idnumber }</td>
 								<td>${Indaccountinfo.utinaccountinfo.unitinfo.utinName }</td>
 								<td>${Indaccountinfo.utinaccountinfo.utinAccountId }</td>
@@ -93,12 +93,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 				<table class="table">
 					<tr>
-						<td colspan="5">成功添加</td>
+						<td colspan="5" style="color:red">添加失败人员如下：（身份证号已被占用，请携带本人身份证原件到公积金中心办理账户转移业务）</td>
 					</tr>
-					<c:forEach items="${list_Indaccountinfo[1] }" var="Indaccountinfo">
+					<c:forEach items="${list_Indaccountinfo[0] }" var="Indaccountinfo">
 							<tr>
 								<td>${Indaccountinfo.indAccountId }</td>
-								<td>${Indaccountinfo.trueName }</td>
+								<td style="color:red"><b>${Indaccountinfo.trueName}</b></td>
 								<td>${Indaccountinfo.idnumber }</td>
 								<td>${Indaccountinfo.utinaccountinfo.unitinfo.utinName }</td>
 								<td>${Indaccountinfo.utinaccountinfo.utinAccountId }</td>

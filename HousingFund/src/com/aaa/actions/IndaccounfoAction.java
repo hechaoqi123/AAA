@@ -35,7 +35,7 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 	public String saveFileIndaccountinfo() throws Exception{
 		List<List<Indaccountinfo>> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile, utinaccountinfoID);
 		Object str = list_Indaccountinfo.get(0);
-		if(str.equals("errorFile")){
+		if(str.equals("errorFile")){//文件格式不对
 			Map requestMap = getRequestMap();
 			requestMap.put("list_Indaccountinfo", null);
 		}else{

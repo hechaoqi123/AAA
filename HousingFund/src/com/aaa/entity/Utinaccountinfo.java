@@ -6,16 +6,16 @@ import java.util.Set;
 /**
  * Utinaccountinfo entity. @author MyEclipse Persistence Tools
  */
-
+  /**单位账户表**/
 public class Utinaccountinfo implements java.io.Serializable {
 
 	// Fields
 
 	private Integer utinAccountId;
-	private Unitinfo unitinfo;
-	private String accountStatus;
-	private Double utinDepositRatio;
-	private Integer utinSumPeople;
+	private Unitinfo unitinfo;  //单位信息
+	private String accountStatus; //账户状态
+	private Double utinDepositRatio;//单位缴存比例
+	private Integer utinSumPeople;//单位总人数
 	private Integer utinDepositPeople;
 	private Integer utinSealPeople;
 	private Double utinProvRema;
