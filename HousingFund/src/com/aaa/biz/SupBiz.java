@@ -18,4 +18,7 @@ public interface SupBiz {
 	public int inser_sd(UtilSup u,int id);
 	
 	public List bjse(int a);
+	
+	//根据idnum查询此单位是否存在此idnum
+		public List sele_supidnum(int a,String idnum);
 }

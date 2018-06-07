@@ -75,8 +75,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  font-size:20px;
  }
 </style>
-<link rel="stylesheet" href="bootstrap/bootstrap.min.css" type="text/css"></link>
-  <script type="text/javascript" src="JS/jquery-1.10.2.min.js"></script></head>
+<link rel="stylesheet" href="<%=basePath%>bootstrap/bootstrap.min.css" type="text/css"></link>
+  <script type="text/javascript" src="<%=basePath%>JS/jquery-1.10.2.min.js"></script></head>
   
   <body>
    <table id="onetab" class="table">
@@ -87,15 +87,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr class="onetr">
       <td>单位编号<span class="biaoji">*</span></td>
-      <td><input  class="utinAccountID"/></td>
+      <td><input  class="utinAccountID" onblur="utinid(this.value)"/><span id="idspan" style="color:red;font-size:10px;"></span></td>
       <td>单位名称<span class="biaoji">*</span></td>
-      <td><input class="utinNmae"/></td>
+      <td><input class="utinNmae" readonly="readonly"/></td>
     </tr>
     <tr class="onetr">
       <td>补缴金额<span class="biaoji">*</span></td>
       <td><input  class="utinsupmoney" /></td>
       <td>补缴人数<span class="biaoji">*</span></td>
-      <td><input  class="supSumple"/></td>
+      <td><input  class="supSumple" readonly="readonly"/></td>
     </tr>
     <tr class="onetr">
       <td>支票号码<span class="biaoji">*</span></td>
@@ -103,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr class="onetr">
     <td>补缴原因<span class="biaoji">*</span></td>
-      <td colspan="3" id="bjyy"><input class="supCause"/></td>
+      <td colspan="3" id="bjyy" ><input class="supCause"/></td>
     </tr>
    </table>
    
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td colspan="6"><center>住房公积金补缴清册</center></td>
        </tr>
     <tr class="twotr">
-      <td>职工编号</td>
+      <td>身份证号</td>
       <td>职工姓名</td>
       <td>月补缴基数</td>
       <td>缴存比例</td>
@@ -121,11 +121,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td>操作</td>
     </tr>
    </table>
-   <button onclick="add()" id="addba">添加</button><button onclick="summoney()" id="tf">计算总金额</button>
-   <button onclick="sub()" id="sub">提交</button>
+   <center style="margin-top: 50px;">
+   <button onclick="add()" id="addba" style="width:100px;height:30px;font-size:15px;margin-left: -200px;background-color: #acd18e;color:black;">添加信息</button> 
+   <button onclick="summoney()" id="tf" style="width:150px;height:30px;font-size:15px;margin-left: 200px;background-color: #438eb9;color:black;">计算总金额</button>
+  </center>
+  <center> <button onclick="sub()" id="sub" style="width:100px;height:30px;font-size:20px;background-color: #929390;color:white;">提交</button>
+   </center>
+   <span style="display:none" id="diaoyong"></span>
   </body>
 </html>
 <script>
+function utinid(obj){
+$(".utinNmae").val("");
+if(obj==""){
+$("#twotab").hide();
+$("#tf").hide();
+
+}else{
+
+$("#twotab").show();
+$.ajax({
+  url:"sele_utinid.action",
+  type:"post",
+  data:{"uuid":obj},
+  dataType:"json",
+  success:function(data){
+  if(data!=""){
+  $("#idspan").html("");
+  $(".utinNmae").val(data[0].utinName);
+  }else{
+  $("#idspan").html("无此单位");
+  }
+  }
+})
+}
+
+
+}
+
+function idnum(obj){
+var utinAccountID=$(".utinAccountID").val();
+  var idnumber=$(".idnumber"+obj+"").val();
+ 
+  $.ajax({
+    url:"sele_supidnum.action",
+    type:"post",
+    data:{"indid":utinAccountID,"idnum":idnumber},
+    dataType:"json",
+    success:function(data){
+    
+    if(data!=""){
+    $(".indacid"+obj).val(data[0].indAccountId);
+   
+    $(".pan"+obj+"").html("");
+    }else{
+    $(".indacid"+obj).val("");
+    $(".pan"+obj+"").html("此单位没有此人");
+    }
+    }
+  })
+}
 		$(function(){
 		
 		$("#tf").hide();
@@ -134,9 +189,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var s=1;
 		 function add(){
 		 //var what=$("tr").is(".addtr");
-		   $("#tf").show();
+		 
+		 if($(".utinAccountID").val()==""){
+		 alert("单位账号不允许为空！");
+		 }else{
+		      $("#tf").show();
 		      var tr="<tr class='addtr'>";
-		      tr+="<td><input class='indAccountID"+s+"'/></td>";
+tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s+"' style='font-size:10px;color:red;'></span></td>";
+		     tr+="<td style='display:none'><input style='display:none' class='indacid"+s+"' /></td>";
 		     tr+="<td><input  class='employeeName"+s+"'/></td>";
 		     tr+="<td><input class='supRadices"+s+"' onblur='supblur("+s+")'/></td>";
 		     tr+="<td><select class='indDepositRatio"+s+"' onchange='onech("+s+")'>";
@@ -161,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    tr+="</tr>";
 		    s++;
 		    $("#twotab").append(tr);
-		 
+		 }
 		 }
 		 function supblur(obj){
 		 var s1=$(".supRadices"+obj).val();
@@ -186,20 +246,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function jisu(a){
 		
-		var indAccountID=$(".indAccountID"+a).val();
+		var idnumber=$(".idnumber"+a).val();
 		var employeeName=$(".employeeName"+a).val();
 		var supRadices=$(".supRadices"+a).val();
 		var indDepositRatio=$(".indDepositRatio"+a).val();
 		var supMonth=$(".supMonth"+a).val();
 		
-		if(indAccountID!=""&&employeeName!=""&&supRadices!=""&&indDepositRatio!=0&&supMonth!=0){
+		if(idnumber!=""&&employeeName!=""&&supRadices!=""&&indDepositRatio!=0&&supMonth!=0){
 		var supRadices=parseFloat($(".supRadices"+a).val()).toFixed(2);//基数
 		
 		var indDepositRatio=parseFloat($(".indDepositRatio"+a).val()).toFixed(2);
 		var s=parseFloat(supRadices*indDepositRatio*supMonth)*2;
 		$(".supMoney"+a).val(s.toFixed(2));
 		}else{
-		alert("不能为空");
+		
 		}
 		
 		
@@ -207,6 +267,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		function summoney(){
+		
 		var zhi=0;
 		var list=new Array();
 		
@@ -231,13 +292,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 tr+="<td><input value='"+zhi.toFixed(2)+"'  readonly='readonly' id='zongmoney'/></td>";
 		 tr+="</tr>";
 		 $("#twotab").append(tr);
+		 $(".supSumple").val(s-1);
+		 $("#tf").hide();
 		 $("#sub").show();
 		}
 		
 		}
 		
 		function sub(){
-		 var utinAccountID=$(".utinAccountID").val();//单位编号
+		//alert((".pla").text());
+		$("#diaoyong").html("");
+		for(var a=1;a<s;a++){
+		
+		var pan=$(".pan"+a).html();
+		$("#diaoyong").append(pan);
+		}
+		
+		
+		
+		if($("#diaoyong").html()==""){
+		
+		var utinAccountID=$(".utinAccountID").val();//单位编号
 		 var utinNmae=$(".utinNmae").val();//单位名称
 		 var utinsupmoney=$(".utinsupmoney").val();//补缴金额
 		 var supSumple=$(".supSumple").val();//补缴人数
@@ -247,9 +322,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 if(utinAccountID!=""&&utinNmae!=""&&utinsupmoney!=""&&supSumple!=""&&chequeID!=""&&
 		 supCause!=""&&zongmoney!=""&&zongmoney!=""){
 		
-		 var one=$(".utinsupmoney").val();
-		var two=$("#zongmoney").val();
-		if(one==""||one<two){
+		 var one=parseFloat($(".utinsupmoney").val()).toFixed(2);
+		var two=parseFloat($("#zongmoney").val()).toFixed(2);
+		
+		if(one==""||eval(one)<eval(two)){
 		 alert("缴存金额不足");
 		}else{
 		 
@@ -265,14 +341,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 var u=1;
 		  $(".addtr").each(function(){
 		  
-		  var indAccountID= $(this).find(".indAccountID"+u).val();
+		  var indacid= $(this).find(".indacid"+u).val();
+		  alert(indacid);
 		  var employeeName= $(this).find(".employeeName"+u).val();
 		  var supRadices= $(this).find(".supRadices"+u).val();
 		  var indDepositRatio= $(this).find(".indDepositRatio"+u).val();
 		  var supMonth= $(this).find(".supMonth"+u).val();
 		  var supMoney= $(this).find(".supMoney"+u).val();
 		  var jsonstr={
-		  "indAccountID":indAccountID,"employeeName":employeeName,
+		  "indAccountId":indacid,"employeeName":employeeName,
 		  "supRadices":supRadices,"indDepositRatio":indDepositRatio,
 		  "supMonth":supMonth,"supMoney":supMoney
 		  };
@@ -298,7 +375,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   alert("补缴成功");
 		   window.location.href="<%=basePath%>ssw/supple.jsp";
 		   }
-		   }
+		   
+		   } 
+		   
 		 })
 		} 
 		 }else{
@@ -306,6 +385,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		alert("信息不完整");
 		
 		 }
+		
+		
+		
+		}else{
+		alert("信息错误不能提交");
+		}
+		 
 		
 		}
 </script>

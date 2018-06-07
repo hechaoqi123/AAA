@@ -6,8 +6,8 @@ import com.aaa.entity.*;
 
 
 public interface UtinaccountinfoUtilBiz {
-
-	
+	//查询此单位是否存在
+	public List sele_utinid(int id);
 	//sele
 	public List selefu();
 	//add save

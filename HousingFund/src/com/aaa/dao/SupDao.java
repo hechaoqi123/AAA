@@ -22,4 +22,6 @@ public interface SupDao {
 	
 	//查询补缴纪录
 	public List bjse(int a);
+	//根据idnum查询此单位是否存在此idnum
+	public List sele_supidnum(int a,String idnum);
 }
