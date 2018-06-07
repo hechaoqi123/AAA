@@ -238,7 +238,7 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	 	try {
 	 		sheet=wk.getSheet(0);
 	 		 //获取第一张Sheet表 
-	        //拿到公司账户编号
+	        //拿到公司账户编号/***只获取了一次单位账户的ID。。。！！！***/
 	        utinaccountinfo.setUtinAccountId(Integer.parseInt(sheet.getCell(8, 1).getContents()));
 	        //获取总行数
 	        int rowNum=sheet.getRows();

@@ -130,7 +130,8 @@
 				<value>com/aaa/entity/Flupay.hbm.xml</value>
 				<value>com/aaa/entity/Beforereturn.hbm.xml</value>
 				<value>com/aaa/entity/Fush.hbm.xml</value>
-				<value>com/aaa/entity/Log.hbm.xml</value></list>
+				<value>com/aaa/entity/Log.hbm.xml</value>
+                </list>
 		</property></bean>
 	<!-- 配置HibernateTemplate -->
         <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">

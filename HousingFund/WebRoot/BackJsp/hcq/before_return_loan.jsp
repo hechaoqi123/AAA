@@ -175,11 +175,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $("input[name='returnType']").click(function(){
        if($(this).val()=="部分还款"){
               var html="";
-			     html+="  提前还款金额（万元）:<span style='color:red'>*</span><input required='true' name='money'/>";
+			     html+="  提前还款金额（万元）:<span style='color:red'>*</span><input id='bfbj' required='true' name='money'/>";
 			     $("#tr").html(html);
        }else{
         $("#tr").html("  未还利息:<input type='text' name='afterlixi' value='0' id='mm'/>元");
-          $("#mm").val(parseInt(money))
+        
+          $("#mm").val(parseInt(money));
        }
      })
  
