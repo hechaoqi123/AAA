@@ -293,7 +293,6 @@ $("#you").css("display","none");
   
  function querylist(){
        var zh=$("#zh").val();
-       
        if(zh==""){
        alert("请输入账号密码");
        return flase;
@@ -304,17 +303,6 @@ $("#you").css("display","none");
              data:{"loginAccount":zh},
              dataType:"json",
              success:function(data){
-                 /* //每次记载之前先清空当前页面的数据
-             $("#myTab").html('');
-                 for(var i=0;i<data.list.length;i++){
-                   var tr="<tr>";
-                   tr+="<td>"+data.list[i].sid+"</td>";
-                   tr+="<td>"+data.list[i].sname+"</td>";
-                   tr+="<td>"+data.list[i].cname+"</td>";
-                  
-                   tr+="</tr>"; 
-                   $("#myTab").append(tr);
-                   } */
                     window.location.href="usershow.jsp?lo="+zh;
                  },
                  error:function(date){
@@ -326,7 +314,6 @@ $("#you").css("display","none");
           }
  function querylistdw(){
        var zhi=$("#zhi").val();
-       
        if(zhi==""){
        alert("请输入账号密码");
        return flase;
@@ -334,21 +321,9 @@ $("#you").css("display","none");
     $.ajax({
              url:"query2.action",
              type:"post",
-             data:{"utinNumber":zhi},
+             data:{"utinName":zhi},
              dataType:"json",
              success:function(data){
-            
-                 /* //每次记载之前先清空当前页面的数据
-             $("#myTab").html('');
-                 for(var i=0;i<data.list.length;i++){
-                   var tr="<tr>";
-                   tr+="<td>"+data.list[i].sid+"</td>";
-                   tr+="<td>"+data.list[i].sname+"</td>";
-                   tr+="<td>"+data.list[i].cname+"</td>";
-                  
-                   tr+="</tr>"; 
-                   $("#myTab").append(tr);
-                   } */
                     window.location.href="utinshow.jsp?ut="+zhi;
                  },
                   error:function(date){

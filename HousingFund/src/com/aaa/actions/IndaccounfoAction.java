@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -32,9 +33,9 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 //添加excule
 	@Action(value="saveFileIndaccountinfo", results = {@Result(name = "saveFileIndaccountinfo", location = "/BackJsp/LDL/saveFileError.jsp")})
 	public String saveFileIndaccountinfo() throws Exception{
-		List<List<Indaccountinfo>> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile);
+		List<List<Indaccountinfo>> list_Indaccountinfo = indaccountinfoBiz.saveFileIndaccountinfo(myFile, utinaccountinfoID);
 		Object str = list_Indaccountinfo.get(0);
-		if(str.equals("errorFile")){
+		if(str.equals("errorFile")){//文件格式不对
 			Map requestMap = getRequestMap();
 			requestMap.put("list_Indaccountinfo", null);
 		}else{

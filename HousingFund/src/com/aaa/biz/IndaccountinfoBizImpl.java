@@ -107,8 +107,8 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 			return 0;
 		}
 		@Override
-		public List saveFileIndaccountinfo(File file) throws Exception {
-			return dao.saveFileIndaccountinfo(file);
+		public List saveFileIndaccountinfo(File file, Integer utinaccountinfoID) throws Exception {
+			return dao.saveFileIndaccountinfo(file, utinaccountinfoID);
 		}
 		@Override
 		public List getOneIndaf(Indinfo indinfo) {
@@ -121,7 +121,21 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 		//账户转移
 		@Override
 		public void utine(int indId, int unitId) {
-			dao.getOne(indId).setUtinaccountinfo(uDao.getOne(unitId));
+			 
+			Indaccountinfo ind = dao.getOne(indId);
+			  //原单位单位总人数减一
+			ind.getUtinaccountinfo().setUtinSumPeople(ind.getUtinaccountinfo().getUtinSumPeople()-1);
+			   //原单位封存人数减一
+			ind.getUtinaccountinfo().setUtinSealPeople(ind.getUtinaccountinfo().getUtinSealPeople()-1);
+			   //恢复个人账户状态   
+			ind.setIndStatus("正常");;
+			   //新单位
+		    Utinaccountinfo unit = uDao.getOne(unitId);
+			     //新单位总人数加一缴存人数加一
+			    unit.setUtinSumPeople(unit.getUtinSumPeople()+1);
+			    unit.setUtinDepositPeople(unit.getUtinDepositPeople()+1);
+			 //更换单位   
+			ind.setUtinaccountinfo(unit);
 		}
 
 }

@@ -9,6 +9,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import com.aaa.entity.PageEntity;
+import com.aaa.entity.PageEntitys;
 @Component
 public class PageUtil{   //@Scope("singleton")默认单例：通过Spring进行获取的是同一个实例
 	@Autowired
@@ -61,6 +62,6 @@ public class PageUtil{   //@Scope("singleton")默认单例：通过Spring进行获取的是同
     	  pageEntity.setList(list.subList((CurrentPage-1)*maxResults,CurrentPage*maxResults));
 		return pageEntity;
     }
-     
+
     
 }

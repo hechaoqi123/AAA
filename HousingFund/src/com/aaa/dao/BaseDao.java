@@ -1,5 +1,6 @@
 package com.aaa.dao;
 
+import java.io.File;
 import java.util.List;
 
 import org.hibernate.criterion.Criterion;

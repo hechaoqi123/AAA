@@ -62,4 +62,9 @@ public class UtinaccountinfoUtilBizImpl implements UtinaccountinfoUtilBiz {
 				
 				return dao.sele_mohuname(page, utinname);
 			}
+			//查询此单位是否存在
+			public List sele_utinid(int id){
+				
+				return dao.sele_utinid(id);
+			}
 }

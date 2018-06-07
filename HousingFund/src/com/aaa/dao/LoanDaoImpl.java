@@ -20,27 +20,25 @@ public class LoanDaoImpl extends BaseDaoImpl<Loanapplication> implements LoanDao
 	
 	@Override
 	public Loanapplication getFive(String BorrowerIdnumber) {
-		Loanapplication t=new Loanapplication();
-		
+		/*Loanapplication t=new Loanapplication();
 		t.setBorrowerIdnumber(BorrowerIdnumber);
-		  List<Loanapplication> list=findByExample(t);
-		 
-		  if(list.size()==0){
+		List<Loanapplication> list=findByExample(t);*/
+		String hql = "from Loanapplication l where l.borrowerIdnumber = '"+BorrowerIdnumber+"'";
+		List<Loanapplication> find = hibernateTemplate.find(hql);
+		  if(find.size()==0){
                return null;			  
 		  }
-		 return list.get(0);
+		 return find.get(0);
 
 	}
 	
 	public Loanapplication getSix(String BorrowerIdnumber) {
-		Loanapplication t=new Loanapplication();
-		t.setBorrowerIdnumber(BorrowerIdnumber);
-		  List<Loanapplication> list=findByExample(t);
-		  
-		  if(list.size()==0){
+		String hql = "from Loanapplication l where l.borrowerIdnumber = '"+BorrowerIdnumber+"'";
+		List<Loanapplication> find = hibernateTemplate.find(hql);
+		  if(find.size()==0){
                return null;			  
 		  }
-		 return list.get(0);
+		 return find.get(0);
 
 	}
 }

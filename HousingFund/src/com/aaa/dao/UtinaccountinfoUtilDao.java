@@ -7,7 +7,8 @@ import com.aaa.entity.*;
 
 public interface UtinaccountinfoUtilDao {
 
-	
+	//查询此单位是否存在
+	public List sele_utinid(int id);
 	//添加或者修改
 	public int upinse(Flupay fu);
 		

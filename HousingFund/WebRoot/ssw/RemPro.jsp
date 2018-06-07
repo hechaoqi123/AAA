@@ -206,7 +206,7 @@ dian=dian+1;
    dataType:"json",
    data:{"what.currPage":dian},
    success:function(data){
-      alert(data)
+     
   var trs="";
    trs+="<table class='table'>";
    trs+="<tr style='background-color:#BFDCEC'><td>单位账户</td><td>单位名称</td><td>单位地址</td><td>法人代表</td>";

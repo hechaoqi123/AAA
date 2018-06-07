@@ -10,7 +10,7 @@
             <column name="UtinAccountID" />
             <generator class="native" />
         </id>
-        <many-to-one name="unitinfo" class="com.aaa.entity.Unitinfo" fetch="join">
+        <many-to-one name="unitinfo" class="com.aaa.entity.Unitinfo" fetch="join" >
             <column name="UtinID" />
         </many-to-one>
         <property name="accountStatus" type="java.lang.String">

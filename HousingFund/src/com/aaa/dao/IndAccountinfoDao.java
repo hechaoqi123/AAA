@@ -30,9 +30,10 @@ public interface IndAccountinfoDao extends BaseDao<Indaccountinfo>{
 		//冻结
 		public int frozenEmp(Indaccountinfo indaccountinfo);
 		//文件增加员工
-		public List saveFileIndaccountinfo(File file) throws Exception;
+		public List saveFileIndaccountinfo(File file, Integer utinaccountinfoID) throws Exception;
 		//条件查询一个信息
 		public List getOneIndaf(Indinfo indinfo);
 		//员工转移获取一个用户
 		public List UtinegetOneEmp(Indaccountinfo indaccountinfo);
+
 }

@@ -13,13 +13,19 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.stereotype.Controller;
 
+
+
 import com.aaa.biz.UtinaccountinfoUtilBiz;
 import com.aaa.entity.Flupay;
-import com.aaa.entity.Indaccountinfo;
+
 import com.aaa.entity.Indinfo;
+
 import com.aaa.entity.TeachaerPageEntity;
 import com.aaa.entity.Utinaccountinfo;
 import com.alibaba.fastjson.JSON;
+
+
+
 
 @ParentPackage("struts-default")
 @Controller
@@ -34,10 +40,11 @@ public class UtinAction extends BaseAction<Indinfo> {
 	private TeachaerPageEntity what;
 	private Flupay fu;
 	
+	private int uuid;
 	//ª„Ω…∞Ï¿Ì≤È—Ø
 	@Action("UtinMoney")
 	public String SeleUtinMoney() throws IOException{
-		System.out.println(111);
+	
 		try {
 			  Date date = new Date();
 			   SimpleDateFormat ft =new SimpleDateFormat("yyyy-MM-dd");
@@ -138,6 +145,20 @@ public class UtinAction extends BaseAction<Indinfo> {
 		return null;
 	}
 
+	@Action("sele_utinid")
+	public String sele_utinid(){
+		
+		List list=biz.sele_utinid(uuid);
+		String  json=JSON.toJSONString(list);
+		System.out.println(json);
+		getOut().print(json);
+		return null;
+	}
+	
+	
+	
+	
+	
 	public Integer getUtinId() {
 		return UtinId;
 	}
@@ -170,8 +191,16 @@ public class UtinAction extends BaseAction<Indinfo> {
 		this.fu = fu;
 	}
 
+	public int getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
+	}
 
 
-	
+
+
 	
 }

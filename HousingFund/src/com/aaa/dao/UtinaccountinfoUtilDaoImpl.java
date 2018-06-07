@@ -30,15 +30,7 @@ public class UtinaccountinfoUtilDaoImpl implements UtinaccountinfoUtilDao {
 	}
 	public List<Utinaccountinfo> ss(int id){
 		
-		try {
-			List<Utinaccountinfo> list=ht.find(
-				" from Utinaccountinfo  where UtinAccountID="+id+" and accountStatus='正常'");
-
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		
 		List<Utinaccountinfo> list=ht.find(
 				"from Utinaccountinfo  where UtinAccountID="+id+" and accountStatus='正常'");
 	return list;
@@ -238,5 +230,17 @@ public class UtinaccountinfoUtilDaoImpl implements UtinaccountinfoUtilDao {
 					ht.save(ud);
 					return 0;
 				}
+				
+				//查询此单位是否存在
+				
+				public List sele_utinid(int id){
+					
+					String sql="select new map(utinAccountId as utinAccountId,utinName as utinName) from Utinaccountinfo where utinAccountId="+id+"";
+					
+               
+					List list=ht.find(sql);
+					return list;
+				}
+				}
    
-}
+

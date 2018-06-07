@@ -49,42 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="green">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="background-color: #438EB9;">
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"  ></i>
-								<span class="badge badge-success">1</span>
 							</a>
-
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="ace-icon fa fa-envelope-o"></i>
-									1条未读信息
-								</li>
-
-								<li class="dropdown-content">
-									<ul class="dropdown-menu dropdown-navbar">
-										<li>
-											<a href="#">
-												<img src="../assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-												<span class="msg-body">
-													<span class="msg-title">
-														<span class="blue">B2C:</span>
-													</span>
-
-													<span class="msg-time">
-														<i class="ace-icon fa fa-clock-o"></i>
-														<span>2019-12-15 18:00:00</span>
-													</span>
-												</span>
-											</a>
-										</li>
-									</ul>
-								</li>
-
-								<li class="dropdown-footer">
-									<a href="inbox.html">
-										查看全部消息
-										<i class="ace-icon fa fa-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
 						</li>
 
 						<!-- #section:basics/navbar.user_menu -->
@@ -92,38 +57,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<span class="user-info">
 									当前用户
-									<c:forEach items="${list_users }" var="users">
-										${users.uname }
-									</c:forEach>
+										${user.uname }
 								</span>
-								<i class="ace-icon fa fa-caret-down"></i>
 							</a>
 							<span id="demo"></span>
 
-							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="ace-icon fa fa-cog"></i>
-										系统设置
-									</a>
-								</li>
-
-								<li>
-									<a href="profile.html">
-										<i class="ace-icon fa fa-user"></i>
-										个人信息设置
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									<a href="#" onclick="quit_login()">
-										<i class="ace-icon fa fa-power-off"></i>
-										退出
-									</a>
-								</li>
-							</ul>
+				
+				
 						</li>
 						<!-- /section:basics/navbar.user_menu -->
 					</ul>
@@ -396,6 +336,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</li>
 								</c:if>
 							</c:forEach>
+							
+							
+									<li class="">
+									<a href="cancel.action"  id="cancel" class="test">
+									    注销登陆
+									</a>
+									<b class="arrow"></b>
+									</li>
 						</ul>
 					</li>
 				</ul><!-- /.nav-list -->
@@ -422,6 +370,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="../assets/js/ace.min.js"></script>
 		<script type="text/javascript" src="../bootstrap/jquery.jclock.js"></script>
 	    <script type="text/javascript">
+	    $("#cancel").click(function(){
+	        if(confirm("是否退出？")){
+	           return true;
+	        }else{
+	          return false;
+	        }
+	    })
 	    	$(function(){
 	    		//创造时间
 				$('#demo').jclock({withDate:true, withWeek:true});

@@ -213,6 +213,7 @@ function subs(a,b,c,d){
 	 data:{"appid":a,"indid":b,"money":c,"apptime":d},
 	 dataType:"json",
 	 success:function(data){
+	 alert("审批成功");
 		 window.location.href="<%=basePath%>ssw/examine.jsp";
 	 }
 	}) 
@@ -224,6 +225,7 @@ function subs(a,b,c,d){
 	 data:{"appid":a},
 	 dataType:"json",
 	 success:function(data){
+	 alert("审批成功");
 		 window.location.href="<%=basePath%>ssw/examine.jsp";
 	 }
 	}) 

@@ -55,12 +55,12 @@
 		  <!--  	 <prop key="hibernate.hbm2ddl.auto">正向工程
 		   	  update
 		   	 </prop> -->
-		   <!--  <prop key="hibernate.show_sql">  
+	<!-- 	     <prop key="hibernate.show_sql">  
 		   		true
 		   	</prop> 
 		   	<prop key="hibernate.format_sql"> 
 		   		true
-		   	</prop>   -->
+		   	</prop>   --> 
 		   </props>
 		</property>
 		
@@ -130,7 +130,8 @@
 				<value>com/aaa/entity/Flupay.hbm.xml</value>
 				<value>com/aaa/entity/Beforereturn.hbm.xml</value>
 				<value>com/aaa/entity/Fush.hbm.xml</value>
-				<value>com/aaa/entity/Log.hbm.xml</value></list>
+				<value>com/aaa/entity/Log.hbm.xml</value>
+                </list>
 		</property></bean>
 	<!-- 配置HibernateTemplate -->
         <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
