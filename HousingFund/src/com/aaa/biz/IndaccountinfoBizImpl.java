@@ -21,7 +21,7 @@ import com.aaa.util.JSON;
 @Service
 @Transactional
 public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
-
+   
 	@Resource
 	private IndAccountinfoDao dao;
 	@Autowired

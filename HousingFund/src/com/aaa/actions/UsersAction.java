@@ -87,9 +87,13 @@ public class UsersAction extends BaseAction<Users> {
 	//ÐÞ¸Ä
 	@Action("update_users")
 	public String update_users(){
-		Role role = new Role();
-		role.setRid(urid);
-		usersBiz.update_Users(users, role);
+		try {
+			Role role = new Role();
+			role.setRid(urid);
+			usersBiz.update_Users(users, role);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

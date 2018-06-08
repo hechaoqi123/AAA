@@ -59,7 +59,7 @@ public class UsersDaoImpl implements UsersDao{
 	@Override
 	public int update_Users(Users users, Role role) {
 		Role roleImpl = hibernateTemplate.get(Role.class, role.getRid());
-		users.setRole(role);
+		users.setRole(roleImpl);
 		hibernateTemplate.update(users);
 		return 0;
 	}
