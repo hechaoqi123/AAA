@@ -373,8 +373,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 'indAccountId':$("#ddd").val()
             },
             success:function(data){
-               alert("ww"+data)
-               alert(data=="true")
                if(data=="true"){
                  result=true;
                }else{

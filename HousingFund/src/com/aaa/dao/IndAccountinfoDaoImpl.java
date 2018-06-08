@@ -223,10 +223,12 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	 */
 	@Override
 	public List saveFileIndaccountinfo(File file, Integer utinaccountinfoID) throws Exception {
-	 	List<Indinfo> list_indinfos = new ArrayList<Indinfo>();
+	 	//个人信息
+		List<Indinfo> list_indinfos = new ArrayList<Indinfo>();
+		//个人账户
 	 	List<Indaccountinfo> list_indaccountinfo = new ArrayList<Indaccountinfo>();
 	 	List<Indaccountinfo> list_indaccountinfos = new ArrayList<Indaccountinfo>();
-		//导入已存在的Excel文件，获得只读的工作薄对象
+		//导入Excel文件，获得只读的工作薄对象
 	 	FileInputStream fis = new FileInputStream(file);
 	 	Workbook wk=Workbook.getWorkbook(fis);
 	 	Sheet sheet = null;
@@ -235,14 +237,11 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 	 		 //获取第一张Sheet表 
 	        //获取总行数
 	        int rowNum=sheet.getRows();
-	        //从数据行开始迭代每一行
+	        //从数据行开始遍历每一行
 	        for(int i=1;i<rowNum;i++){
 	        	Indaccountinfo indaccountinfo=new Indaccountinfo();        
 	        	Indinfo indinfo = new Indinfo();
-				//getCell(column,row)，表示取得指定列指定行的单元格（Cell）
-				//getContents()获取单元格的内容，返回字符串数据。适用于字符型数据的单元格
 				//使用实体类封装单元格数据
-	        	
 	        	//个人信息
 				indinfo.setTrueName(sheet.getCell(0, i).getContents());
 				indinfo.setFixedPhone(sheet.getCell(2, i).getContents());
@@ -252,38 +251,19 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 				indinfo.setFamilyAddress(sheet.getCell(6, i).getContents());
 				indinfo.setFamilyMonthIncome(Integer.parseInt(sheet.getCell(7, i).getContents()));
 				indinfo.setDuties(sheet.getCell(9, i).getContents());
-				
-				
-				
 				//个人账户信息
 				indaccountinfo.setIndDepositRadices(Float.valueOf(sheet.getCell(10, i).getContents()));
 				indaccountinfo.setBankSaAccount(sheet.getCell(12, i).getContents());
 				indaccountinfo.setBankOpenAccount(sheet.getCell(13, i).getContents());
 				indaccountinfo.setTrueName(sheet.getCell(0, i).getContents());
 				indaccountinfo.setIdnumber(sheet.getCell(4, i).getContents());
-	            //判断单元格的类型，单元格主要类型LABEL、NUMBER、DATE                    
-//			            if(sheet.getCell(2,i).getType==CellType.NUMBER){
-				//转化为数值型单元格
-			/*	NumberCell numCell=(NumberCell)sheet.getCell(2,i);
-				//NumberCell的getValue()方法取得单元格的数值型数据
-				info.setRscore(numCell.getValue());*/
 				String hql = "From Indaccountinfo where idnumber ='"+sheet.getCell(4, i).getContents()+"'";//查询存在该员工是否存在
 				List<Indaccountinfo> find = hibernateTemplate.find(hql);
+				  //员工账户已存在
 				if(find.size()>0){
-					if(list_indaccountinfos.size()==0){
-						list_indaccountinfos.add(find.get(0));
-					}else{
-						//创建一个临时的List存放对象 在遍历结束以后加入集合
-						List<Indaccountinfo> listTemporary = new ArrayList<Indaccountinfo>();
-						for (Indaccountinfo indaccountinfo2 : list_indaccountinfos) {
-							//检查list中是否已经存在该对象
-							if(!(indaccountinfo2.getIndAccountId().equals(find.get(0).getIndAccountId()))){
-								listTemporary.add(find.get(0));
-							}
-						}
-						list_indaccountinfos.add(listTemporary.get(0));
-					}
-					
+					    Indaccountinfo error=find.get(0);//未添加成功的人员姓名
+						error.setTrueName(sheet.getCell(0, i).getContents());
+						list_indaccountinfos.add(error);
 				}else{
 					int indid = saveIndaccountinfo(indinfo, indaccountinfo, utinaccountinfoID);
 					Indaccountinfo indaccountinfoObject = hibernateTemplate.get(Indaccountinfo.class, indid);

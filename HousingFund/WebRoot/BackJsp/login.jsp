@@ -127,9 +127,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div><!-- /.row -->
 			</div><!-- /.main-content -->
 		</div><!-- /.main-container -->
-
 		<!-- basic scripts -->
-
+        <div style="display:none;" id="error">${error}</div>
 		<!--[if !IE]> -->
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
@@ -145,9 +144,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-
+          
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+		$(function(){
+		  
+		 if($("#error").html()!=""){
+		      alert( $("#error").html())
+		      }
+		})
 			jQuery(function($) {
 			 $(document).on('click', '.toolbar a[data-target]', function(e) {
 				e.preventDefault();
