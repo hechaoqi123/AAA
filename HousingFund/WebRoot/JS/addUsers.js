@@ -52,7 +52,7 @@ function addsubmit(){
 	    	  }
 	      },
 	      error:function(){
-	    	  alert(122);
+	    	  alert("异常操作！");
 	      }
 	     });
    		}
@@ -132,6 +132,7 @@ function addsubmit(){
 	   });
 	   function update_users(){
 			var myForm = $("#myFormUpdate").serialize();
+			alert(myForm)
 		   $.ajax({
 			   url:"update_users.action",
 			   data:myForm,

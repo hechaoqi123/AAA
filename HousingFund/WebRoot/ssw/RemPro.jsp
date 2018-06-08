@@ -161,8 +161,7 @@ color:blue;
      <div id="tab" style="border:0px solid black;height:600px;width:100%"> </div>
     
    
-   
-    
+   <span id="UserName" style="display:none;"> ${user.uname}</span>
 
                                 
 	 	 							     
@@ -170,8 +169,6 @@ color:blue;
   </body>
 </html>
 <script>
-   
-   
  var  zongzhi;
  var onelist=new Array();
  var twolist=new Array();
@@ -179,7 +176,6 @@ color:blue;
  
  //
  $(function(){
- 
  jiazai(1,0);
  });
  
@@ -199,7 +195,6 @@ dian=dian+1;
 }
 
 
- 
   $.ajax({
    url:"sele_utin.action",
    type:"post",
@@ -471,7 +466,7 @@ dian=dian+1;
 		    
              tab+="<td>实收金额<span style='color:red;font-size:20px;line-height: 20px;'>*</span></td><td><input id='smoney' style='background-color:white;' onblur='beginmoney(this.value)'/></td>";
              tab+="<td><a  data-toggle='modal' data-target='#myModal' onclick='URsele()'>汇缴清册</a></td>";
-             tab+="<td>制单人</td><td><input  id='adminname'value='管理员'  readonly='readonly'/></td>";
+             tab+="<td>制单人</td><td><input  id='adminname'value='"+$("#UserName").html()+"'  readonly='readonly'/></td>";
              tab+="</tr>";
              
              tab+="</table>";
