@@ -196,7 +196,7 @@ $.ajax({
 		  "fu.utinaccountinfo.utinAccountId":utinid},
 		  success:function(data){
 		  if(data==1){
-		  alert("SUCCESS");
+		  //alert("SUCCESS");
 		  window.href.location="HousingFund/ssw/timer.jsp";
 		  }
 		  }

@@ -41,6 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  height:50px;
  border:1px solid black;
  }
+ 
  #teshu input{
  width:500px;
  }
@@ -70,15 +71,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  width:165px;
  height:30px;
  } */
+ 
+ .onettdd td{
+ width:0px;
+ height:50px;
+ border:0px solid black;
+ }
+ .twotr td{
+ width:150px;
+ height:50px;
+ border-left:0px solid black;
+ border-right:0px solid black;
+ border-bottom:1px solid black;
+ border-top:1px solid black;
+ text-align: center;
+ }
  .biaoji{
  color:red;
  font-size:20px;
  }
+ #twotab input{
+ text-align: center;
+ }
+  .addtr td{
+  height:50px;
+  }.addtr td input{
+  height:45px;
+  }
 </style>
 <link rel="stylesheet" href="<%=basePath%>bootstrap/bootstrap.min.css" type="text/css"></link>
-  <script type="text/javascript" src="<%=basePath%>JS/jquery-1.10.2.min.js"></script></head>
+  <%-- <script type="text/javascript" src="<%=basePath%>JS/jquery-1.10.2.min.js"></script>  --%>
+  
+  <script type="text/javascript" src="<%=basePath%>JS/jquery-3.3.1.min.js"></script>
+  
+  </head>
+  
   
   <body>
+  
+  <!-- action="add_sup.action" method="post" enctype="multipart/form-data" -->
+   <form id="fdata" enctype="multipart/form-data">
+	  	<table class="table">
+	  		<tr class="form-group">
+	  			<td width="140px">
+		  			
+		  			<!-- <input class="utinid" name="utinaccountinfoID" style="display: none;"> -->
+	  			</td>
+	  		 	<td width="200px"><input type="file"  name="files" id="fileif" required="required"></td>
+	  			<td><input type="button" value="提交" id="filesub"></td>
+	  		</tr>
+	  	</table>
+  	</form>
+  
+  
+  
+  
+  
    <table id="onetab" class="table">
    
     <tr class="onettd">
@@ -93,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr class="onetr">
       <td>补缴金额<span class="biaoji">*</span></td>
-      <td><input  class="utinsupmoney" /></td>
+      <td><input  class="utinsupmoney" readonly="readonly"/></td>
       <td>补缴人数<span class="biaoji">*</span></td>
       <td><input  class="supSumple" readonly="readonly"/></td>
     </tr>
@@ -107,59 +155,139 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
    </table>
    
+  
+   
+   
+   
+   
+   
    <table id="twotab" class="table">
-         <tr class="onettd">
-      <td colspan="6"><center>住房公积金补缴清册</center></td>
-       </tr>
-    <tr class="twotr">
-      <td>身份证号</td>
-      <td>职工姓名</td>
-      <td>月补缴基数</td>
-      <td>缴存比例</td>
-      <td>补缴月份</td>
-      <td>应缴总金额</td>
-      <td>操作</td>
-    </tr>
+         
+    
    </table>
    <center style="margin-top: 50px;" >
-   <button onclick="add()" id="addba" style="width:100px;height:30px;font-size:15px;margin-left: -200px;background-color: #acd18e;color:black;">添加信息</button> 
-   <button onclick="summoney()" id="tf" style="width:150px;height:30px;font-size:15px;margin-left: 200px;background-color: #438eb9;color:black;">计算总金额</button>
+   <button onclick="add()" id="addba" style="width:100px;height:30px;font-size:15px;margin-left: -200px;background-color: #acd18e;color:black;display:none;">确认信息</button> 
+   <button onclick="summoney()" id="tf" style="width:150px;height:30px;font-size:15px;margin-left: 200px;background-color: #438eb9;color:black;display:none;">计算总金额</button>
   </center>
-  <center> <button onclick="sub()" id="sub" style="width:100px;height:30px;font-size:20px;background-color: #929390;color:white;">提交</button>
+  <center> <button onclick="sub()" id="sub" style="margin-left:-200px;;width:100px;height:30px;font-size:20px;background-color: #929390;color:white;display:none;">提交</button>
    </center>
    <span style="display:none"  id="diaoyong"></span>
  
   </body>
 </html>
 <script>
-function utinid(obj){
-$(".utinNmae").val("");
-if(obj==""){
-$("#twotab").hide();
-$("#tf").hide();
-
-}else{
-
-$("#twotab").show();
-$.ajax({
-  url:"sele_utinid.action",
-  type:"post",
-  data:{"uuid":obj},
-  dataType:"json",
-  success:function(data){
-  if(data!=""){
-  $("#idspan").html("");
-  $(".utinNmae").val(data[0].utinName);
-  }else{
-  $("#idspan").html("无此单位");
-  }
-  }
-})
-}
 
 
-}
+		$("#filesub").click(function(){
+		var fil=$("#fileif").val();
+		var utid=$(".utinAccountID").val();
+		
+		if(fil!=""&&utid!=""){
+		
+		$("#twotab").html("");
+		$("#addba").hide();
+		var formData=new FormData($("#fdata")[0]);
+		
+		 $.ajax({
+		   url:"add_sup.action",
+		   type:"post",
+		   dataType:"json",
+		   data:formData,
+		   contentType: false,
+		   processData: false,
+		   success:function(data){
+		    var tr="";
+		    
+		  tr+="<tr class='onettdd'>";
+        tr+="<td colspan='6'><center>住房公积金补缴清册</center></td>";
+        tr+="</tr>";
+        tr+="<tr class='twotr'>";
+        tr+="<td>身份证号</td>";
+        tr+="<td>职工姓名</td>";
+        tr+="<td>月补缴基数</td>";
+        tr+="<td>缴存比例</td>";
+        tr+="<td>补缴月份</td>";
+        tr+="<td>应缴总金额</td>";      
+        tr+="</tr>";
+		  var summon=0;
+		   for(var i=0;i<data.length;i++){
+		   var yimon=data[i].supRadices*data[i].indDepositRatio*data[i].supMonth;
+		     tr+="<tr class='addtr'>";
+             tr+="<td><input class='idnumber"+i+"' value='"+data[i].idnum+"' readonly='readonly'/></td>";
+		     tr+="<td style='display:none'><input style='display:none' class='indacid"+i+"' readonly='readonly'/></td>";
+		     tr+="<td><input class='employeeName"+i+"' value='"+data[i].employeeName+"' readonly='readonly'/></td>";
+		     tr+="<td><input class='supRadices"+i+"' value='"+data[i].supRadices+"' readonly='readonly'/></td>";
+		     tr+="<td><input class='indDepositRatio"+i+"'  value='"+data[i].indDepositRatio+"' readonly='readonly'/></td>";
+		     tr+="<td><input class='supMonth"+i+"' value='"+data[i].supMonth+"' readonly='readonly'/></td>";
+		     tr+="<td><input class='supMoney"+i+"' value='"+yimon+"' readonly='readonly'/></td>";
+		     tr+="</tr>";
+		    summon+=yimon;
+		  
+		  
+		   }
+		  
+		   //tr+="<center><button type='button'>确认信息</button></center>";
+	
+		   $("#twotab").append(tr);
+		   $("#addba").show();
+		   $(".utinsupmoney").val(summon)
+		   $(".supSumple").val(data.length);
+		   }
+		  })
+		
+		 
+		  
+		}else{
+		alert("单位编号和excel表格不能为空");
+		}
+		
+		
+		})
+		
+		
+		
+		
+		function utinid(obj){
+		
+		$(".utinNmae").val("");
+		if(obj==""){
+					$("#twotab").html("");
+					 $(".utinsupmoney").val("")
+				   $(".supSumple").val("");
+				   $("#addba").hide();
+					$("#tf").hide();
+					 $("#addba").hide();
+		     $("#sub").hide();
+		
+		}else{
+		 $(".utinsupmoney").val("")
+				   $(".supSumple").val("");
+				   $("#addba").hide();
+		$("#twotab").html("");
+		 $("#addba").hide();
+		     $("#sub").hide();
+		$.ajax({
+		  url:"sele_utinid.action",
+		  type:"post",
+		  data:{"uuid":obj},
+		  dataType:"json",
+		  success:function(data){
+		  if(data!=""){
+		     
+		   uRatio=data[0].utinDepositRatio;
+		  $("#idspan").html("");
+		  $(".utinNmae").val(data[0].utinName);
+		  }else{
+		  $("#idspan").html("无此单位");
+		  }
+		  }
+		})
+		}
+		
+		
+		}
 
+var uRatio;
 function idnum(obj){
 var utinAccountID=$(".utinAccountID").val();
   var idnumber=$(".idnumber"+obj+"").val();
@@ -171,9 +299,11 @@ var utinAccountID=$(".utinAccountID").val();
     dataType:"json",
     success:function(data){
     
+    
     if(data!=""){
+ 
     $(".indacid"+obj).val(data[0].indAccountId);
-   $(".employeeName"+obj).val(data[0].trueName);
+    $(".employeeName"+obj).val(data[0].trueName);
     $(".pan"+obj+"").html("");
     }else{
     $(".indacid"+obj).val("");
@@ -187,7 +317,52 @@ var utinAccountID=$(".utinAccountID").val();
 		$("#tf").hide();
 		$("#sub").hide();
 		})
-		var s=1;
+		
+		
+		
+		
+		function add(){
+		var json=new Array();
+		var u=0;
+		 $(".addtr").each(function(){
+		  var idnumber= $(this).find(".idnumber"+u).val();
+		  var jsonstr={ "idnum":idnumber};
+		  json.push(jsonstr);
+		  u++;
+		  }
+		  )
+		    $.ajax({
+		    url:"sele_supidnum.action",
+		    type:"post",
+		    data:{"jsons":JSON.stringify(json),"indid":$(".utinAccountID").val()},
+		    dataType:"json",
+		    success:function(data){
+		    
+		    for(var i=0;i<data.length;i++){
+		     
+		     if(data[i].indAccountId=="null"){
+		     
+		     $(".idnumber"+i).parent().parent().css("color","red");
+		     $(".idnumber"+i).parent().parent().css("background-color","#DBDBDB");
+		     $(".idnumber"+i).parent().parent().find("input").css("background-color","#DBDBDB");
+		     }else{
+		    
+		     $(".indacid"+i).val(data[i].indAccountId);
+		     
+		     $("#addba").hide();
+		     $("#sub").show();
+		     }
+		     
+		    }
+		    
+		    }
+		  })
+		}
+		
+		
+		
+		 /*
+		 var s=1;
 		 function add(){
 		 //var what=$("tr").is(".addtr");
 		 
@@ -200,7 +375,7 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		     tr+="<td style='display:none'><input style='display:none' class='indacid"+s+"' /></td>";
 		     tr+="<td><input  class='employeeName"+s+"' readonly='readonly'/></td>";
 		     tr+="<td><input class='supRadices"+s+"' onblur='supblur("+s+")'/></td>";
-		     tr+="<td><select class='indDepositRatio"+s+"' onchange='onech("+s+")'>";
+		      tr+="<td><select class='indDepositRatio"+s+"' onchange='onech("+s+")'>";
 		     tr+="<option value='0'>--请选择--</option>";
 		     tr+="<option value='0.05'>0.05</option>";
 		     tr+="<option value='0.06'>0.06</option>";
@@ -210,7 +385,8 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		     tr+="<option value='0.10'>0.10</option>";
 		     tr+="<option value='0.11'>0.11</option>";
 		     tr+="<option value='0.12'>0.12</option>";
-		     tr+="</select></td>";
+		     tr+="</select></td>"; 
+		     tr+="<td><input class='indDepositRatio"+s+"' value='"+uRatio+"' readonly='readonly'/></td>";
 		     tr+="<td><select class='supMonth"+s+"' onchange='twoch("+s+")'>";
 		      tr+=" <option value='0'>--请选择--</option>";
 		       tr+="<option value='1'>1</option>";
@@ -218,12 +394,12 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		       tr+="<option value='3'>3</option>";
 		     tr+="</select></td>";
 		      tr+="<td><input class='supMoney"+s+"' readonly='readonly'/></td>";
-		      tr+="<td><input type='button'value='计算' onclick='jisu("+s+")'/></td>";
+		      //tr+="<td><input type='button'value='计算' onclick='jisu("+s+")'/></td>";
 		    tr+="</tr>";
 		    s++;
 		    $("#twotab").append(tr);
 		 }
-		 }
+		 }*/
 		 function supblur(obj){
 		 var s1=$(".supRadices"+obj).val();
 		 var s2=$(".indDepositRatio"+obj).val();
@@ -302,18 +478,21 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		
 		function sub(){
 		//alert((".pla").text());
-		$("#diaoyong").html("");
-		for(var a=1;a<s;a++){
+		//$("#diaoyong").html("");
+		/* for(var a=1;a<s;a++){
 		
 		var pan=$(".pan"+a).html();
 		$("#diaoyong").append(pan);
-		}
+		} */
 		
 		
 		
-		if($("#diaoyong").html()==""){
+		/* if($("#diaoyong").html()==""){
+		}else{
+		alert("信息错误不能提交");
+		} */
 		
-		var utinAccountID=$(".utinAccountID").val();//单位编号
+		 var utinAccountID=$(".utinAccountID").val();//单位编号
 		 var utinNmae=$(".utinNmae").val();//单位名称
 		 var utinsupmoney=$(".utinsupmoney").val();//补缴金额
 		 var supSumple=$(".supSumple").val();//补缴人数
@@ -339,18 +518,18 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		 var chequeID=$(".chequeID").val();//支票号码
 		 var supCause=$(".supCause").val();//补缴原因
 		 var zongmoney=$(".zongmoney").val();//缴存总金额
-		 var u=1;
+		 var u=0;
 		  $(".addtr").each(function(){
 		  
 		  var indacid= $(this).find(".indacid"+u).val();
-		  alert(indacid);
+		  
 		  var employeeName= $(this).find(".employeeName"+u).val();
 		  var supRadices= $(this).find(".supRadices"+u).val();
 		  var indDepositRatio= $(this).find(".indDepositRatio"+u).val();
 		  var supMonth= $(this).find(".supMonth"+u).val();
 		  var supMoney= $(this).find(".supMoney"+u).val();
 		  var jsonstr={
-		  "indAccountId":indacid,"employeeName":employeeName,
+		  "indAccountID":indacid,"employeeName":employeeName,
 		  "supRadices":supRadices,"indDepositRatio":indDepositRatio,
 		  "supMonth":supMonth,"supMoney":supMoney
 		  };
@@ -362,9 +541,9 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		     url:"inse_sup.action",
 			 type:"post",
 			 dataType:"html",
-		    data:{"jsons":JSON.stringify(json),"utinAccountID":utinAccountID,
+		    data:{"jsons":JSON.stringify(json),"utinAccountID":utinAccountID,//单位id
 		   "u.utinNmae":utinNmae,"u.utinsupmoney":utinsupmoney,"u.supSumple":supSumple,
-		   "u.chequeID":chequeID,"u.supCause":supCause,"u.zongmoney":zongmoney
+		   "u.chequeId":chequeID,"u.supCause":supCause
 		   },
 		   success:function(data){
 		   if(data=="www"){
@@ -389,9 +568,7 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		
 		
 		
-		}else{
-		alert("信息错误不能提交");
-		}
+		
 		 
 		
 		}

@@ -501,7 +501,7 @@ dian=dian+1;
 	 WdatePicker({skin:'whyGreen',minDate:'%y-{%M-3}',readOnly:true, maxDate:'%y-%M'});
 	}
 	function tttt(){
-	alert();
+
 	WdatePicker({dateFmt:'yyyy-MM'});
 	}
 	
@@ -583,12 +583,19 @@ dian=dian+1;
 	
 		var utinyue=parseFloat($("#utinProvRema").val()).toFixed(2);//账户余额
 	var summoney=parseFloat($("#summoney").val()).toFixed(2);//本次应缴金额
+	//alert($("#utinProvRema").val());
+	//alert($("#summoney").val());
+	//if(eval(parseFloat(utinyue).toFixed(2))>eval(parseFloat(summoney).toFixed(2))){
+	if(utinyue>summoney){
 	
-	if(eval(utinyue)>eval(summoney)){
 	var sps=parseFloat(obj).toFixed(2)*1 + parseFloat(utinyue).toFixed(2)*1;
 	$("#jhqian").val(sps);
 	}else{
-	var sps=parseFloat(obj).toFixed(2)*1 +parseFloat(utinyue).toFixed(2)*1 -parseFloat(summoney).toFixed(2)*1;
+	
+	var sps=parseFloat(obj).toFixed(2)*1 +parseFloat(utinyue).toFixed(2)*1-parseFloat(summoney).toFixed(2)*1;
+	
+	//
+	//alert(sps);
 	$("#jhqian").val(sps);
 	}
 	

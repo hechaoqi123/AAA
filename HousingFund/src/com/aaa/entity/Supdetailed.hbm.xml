@@ -13,6 +13,9 @@
         <many-to-one name="utinsupapply" class="com.aaa.entity.Utinsupapply" fetch="select">
             <column name="ApplyID" />
         </many-to-one>
+        <many-to-one name="indaccountinfo" class="com.aaa.entity.Indaccountinfo" fetch="select">
+            <column name="IndAccountID" />
+        </many-to-one>
         <property name="employeeName" type="java.lang.String">
             <column name="EmployeeName" length="30" />
         </property>
@@ -27,6 +30,9 @@
         </property>
         <property name="supDate" type="java.lang.String">
             <column name="SupDate" length="50" />
+        </property>
+        <property name="indDepositRatio" type="java.lang.Float">
+            <column name="IndDepositRatio" precision="8" />
         </property>
     </class>
 </hibernate-mapping>

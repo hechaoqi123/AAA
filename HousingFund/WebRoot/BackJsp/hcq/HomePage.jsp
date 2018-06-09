@@ -300,7 +300,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('#demo').jclock({withDate:true, withWeek:true});
 			});
 			function quit_login(){
-				alert(1);
+				//alert(1);
 				if(confirm('是否要退出系統？'))window.top.location='login.jsp';
 			}
 	    </script>

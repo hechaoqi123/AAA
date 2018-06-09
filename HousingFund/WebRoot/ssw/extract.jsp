@@ -183,11 +183,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<div id="zhu"><span style="color:red;">注:公积金余额必须大于100才能够提取，需缴纳满3个月才能提取，否则无法提取。<br/>
+<<!-- div id="zhu"><span style="color:red;">注:公积金余额必须大于100才能够提取，需缴纳满3个月才能提取，否则无法提取。<br/>
   1、购买、建造、翻建、大修自住住房的:累计提取总额不应超过实际发生的住房支出;<br/>
   2、离休、退休的：提取全部本息余额<br/>
   3、完全丧失劳动能力，并与单位终止劳动关系的：提取全部本息余额<br/>
-  </span></div>
+  </span></div> -->
 
 <center>
  <p style="font-size:30px;color:#ADD1E9"id="sqone">申请人基本情况</p>

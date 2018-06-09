@@ -137,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		          html+="</tr>";
 		          html+="<tr>";
 			      html+="<td>"+new Date().toLocaleDateString()+"</td>";
-			       alert
+			       
 		          if(data[0].overduePrincipalAndInte>0){
 			          html+="<td>逾期还款</td>";
 		          }else{

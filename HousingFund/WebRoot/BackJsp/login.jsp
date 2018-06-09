@@ -150,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(function(){
 		  
 		 if($("#error").html()!=""){
-		      alert( $("#error").html())
+		      //alert( $("#error").html())
 		      }
 		})
 			jQuery(function($) {

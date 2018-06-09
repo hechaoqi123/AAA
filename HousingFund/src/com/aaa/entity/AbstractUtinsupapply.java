@@ -1,37 +1,37 @@
 package com.aaa.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * AbstractUtinsupapply entity provides the base persistence definition of the
  * Utinsupapply entity. @author MyEclipse Persistence Tools
  */
 
-// 单位补缴申请书
-public class Utinsupapply implements java.io.Serializable {
+public abstract class AbstractUtinsupapply implements java.io.Serializable {
 
 	// Fields
+
 	private Integer applyId;
-	private Utinaccountinfo utinaccountinfo;// 单位账户信息
-	private String applyUtin;// 单位名称
-	private String utinOperator;// 经办人
-	private String supCause;// 补缴原因
-	private String applyDate;// 申请时间
-	private Double utinsupmoney;// 补缴金额
-	private String utinNmae;// 单位名称
-	private String chequeId;// 支票号码
-	private Integer supSumple;// 补缴人数
+	private Utinaccountinfo utinaccountinfo;
+	private String applyUtin;
+	private String utinOperator;
+	private String supCause;
+	private String applyDate;
+	private Double utinsupmoney;
+	private String utinNmae;
+	private String chequeId;
+	private Integer supSumple;
 	private Set supdetaileds = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
-	public Utinsupapply() {
+	public AbstractUtinsupapply() {
 	}
 
 	/** full constructor */
-	public Utinsupapply(Utinaccountinfo utinaccountinfo, String applyUtin, String utinOperator, String supCause,
+	public AbstractUtinsupapply(Utinaccountinfo utinaccountinfo, String applyUtin, String utinOperator, String supCause,
 			String applyDate, Double utinsupmoney, String utinNmae, String chequeId, Integer supSumple,
 			Set supdetaileds) {
 		this.utinaccountinfo = utinaccountinfo;

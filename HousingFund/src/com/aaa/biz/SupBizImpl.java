@@ -1,5 +1,6 @@
 package com.aaa.biz;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aaa.dao.SupDao;
 import com.aaa.entity.Indaccountinfo;
+import com.aaa.entity.Supdetailed;
 import com.aaa.entity.UtilSup;
 import com.aaa.entity.Utinaccountinfo;
 import com.aaa.entity.Utinsupapply;
@@ -50,5 +52,10 @@ public class SupBizImpl implements SupBiz {
 		public List sele_supidnum(int a,String idnum){
 			
 			return dao.sele_supidnum(a, idnum);
+		}
+		//∂¡»°excel±Ì∏Ò
+		public List<Supdetailed> add_suo(File file)throws Exception{
+			
+		 return dao.add_suo(file);
 		}
 }
