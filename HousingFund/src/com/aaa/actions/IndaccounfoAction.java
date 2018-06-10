@@ -143,6 +143,17 @@ public class IndaccounfoAction extends BaseAction<Indaccountinfo> {
 			indaccountinfoBiz.utine(list_indinfo.get(0).getIndInfoId(),indaccountinfo.getIndAccountId());
 			return "empUtine";
 		}
+		//员工转移身份认证
+		@Action("check_ind")
+		public String check_ind(){
+			try {
+				boolean success=indaccountinfoBiz.check_ind(getModel().getIndinfo().getTrueName(),getModel().getIndinfo().getIdnumber());
+				getOut().print(success);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
 		
 	public Indinfo getIndinfo() {
 		return indinfo;

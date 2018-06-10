@@ -179,6 +179,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 		$("#filesub").click(function(){
+		
 		var fil=$("#fileif").val();
 		var utid=$(".utinAccountID").val();
 		
@@ -186,6 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		$("#twotab").html("");
 		$("#addba").hide();
+		$("#sub").hide();
 		var formData=new FormData($("#fdata")[0]);
 		
 		 $.ajax({
@@ -337,11 +339,11 @@ var utinAccountID=$(".utinAccountID").val();
 		    data:{"jsons":JSON.stringify(json),"indid":$(".utinAccountID").val()},
 		    dataType:"json",
 		    success:function(data){
-		    
+		   alert(data[0].indAccountId);
 		    for(var i=0;i<data.length;i++){
 		     
 		     if(data[i].indAccountId=="null"){
-		     
+		     $("#sub").hide();
 		     $(".idnumber"+i).parent().parent().css("color","red");
 		     $(".idnumber"+i).parent().parent().css("background-color","#DBDBDB");
 		     $(".idnumber"+i).parent().parent().find("input").css("background-color","#DBDBDB");

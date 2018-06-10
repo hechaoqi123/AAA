@@ -27,13 +27,13 @@ public class TimingTask {
 	 FushBiz fushBiz;
     //计算逾期
 	//@Scheduled(cron="0/50 * * * * ?")   //20秒扫描一次
-	//@Scheduled(cron="0 0 6 * * ? ")     //每天6点执行
+	@Scheduled(cron="0 0 6 * * ? ")     //每天6点执行
 	public void work(){
 		System.out.println("---开始计算逾期利息---");
 		repayBiz.task();
 	}
 	//@Scheduled(cron="0/50 * * * * ?")  //50秒扫描一次
-	//@Scheduled(cron="0 0 8 20 * ?")    //每月20号8点扫描
+	@Scheduled(cron="0 0 8 20 * ?")    //每月20号8点扫描
 	//冲贷还款
 	public void work2(){
 		System.out.println("---开始进行冲贷还款---");

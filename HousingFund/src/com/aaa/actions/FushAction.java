@@ -46,6 +46,13 @@ public class FushAction extends BaseAction<Fush>{
 	        map.put("list",logBiz.getAll());
 	   return SUCCESS;
    }
+ //待通知查询  
+   @Action(value="getAllLog2",results={@Result(name="success",location="/BackJsp/hcq/showLog2.jsp")})
+   public String getAllLog2(){
+	     Map map=(Map) ActionContext.getContext().get("request");
+	        map.put("list",logBiz.getAll());
+	   return SUCCESS;
+   }
 //分页查询
    @Action(value="getPart",results={@Result(name="success",location="/BackJsp/hcq/destroy_beforeLoan.jsp")})
    public String getPart(){
