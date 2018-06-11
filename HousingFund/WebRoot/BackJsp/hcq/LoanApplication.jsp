@@ -285,6 +285,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              $("#rate").val("2.75");
            }
      })
+      $("input[name=remarks]").change(function(){
+          if($(this).val()=="首套房"){
+             $("#monthCount").change();
+          }else if($(this).val()=="二套房"){
+              var d=Math.round((parseFloat($("#rate").val())*1000*1.1));
+              $("#rate").val(d/1000)
+          }
+       }) 
      //通过身份证号检索个人账户ID
      $("#idnumber").change(function(){
         $.ajax({

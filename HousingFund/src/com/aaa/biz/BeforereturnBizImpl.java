@@ -73,7 +73,7 @@ public class BeforereturnBizImpl implements BeforereturnBiz {
 			   re.setRepaymentsReceived(re.getCurrentReturnedCorpus()+re.getCurrentReturnedInterest());//实收金额
 			   re.setAmountOfRepayRecei(re.getRepaymentsReceived());//应还金额
 			   re.setRepaymentDate(new Date());//还款日期
-			   re.setRepaymentStatus("已提前还款");
+			   re.setRepaymentStatus("提前还款");
 			   set.add(re);
 			   repayDao.del();
 			   }else if(before.getReturnType().equals("部分还款")){

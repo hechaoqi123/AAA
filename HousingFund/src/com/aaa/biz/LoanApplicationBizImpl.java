@@ -73,30 +73,38 @@ public class LoanApplicationBizImpl  implements LoanApplicationBiz {
 		Coborrower cobor=loanEntity.getCoborrower();//共同借款人
 	    Indaccountinfo ind=indDao.getOne(Integer.valueOf(loanEntity.getIndAccount()));//个人账户
 		   Integer result=null;
-        int money=(int) (loanEntity.getPurchasecontract().getPurchasedhinfo().getSellingPrice()*0.7*10000);
+		   int money=0;//购房额度
+		      if(loanEntity.equals("首套房")){
+		          money=(int) (loanEntity.getPurchasecontract().getPurchasedhinfo().getSellingPrice()*0.7*10000);
+		      }else{
+		          money=(int) (loanEntity.getPurchasecontract().getPurchasedhinfo().getSellingPrice()*0.5*10000);
+		      }
+         System.out.println(money);
         if(cobor==null){
         	if(ind.getPresentSumRem()==null){//当额度为空时
         		ind.setPresentSumRem(0F);
         	}
 		    result=(int) (ind.getPresentSumRem()*20/10000);//可贷金额
-		      if(result>money){
-		    	  result=money;
-		      }
 		      if(result>50){
 		    	  result=50;
 		      }
+		      if(result>(money/10000)){
+		    	  result=(money/10000);
+		      }
+		      System.out.println(result);
 		   }else{//共同申请
 			 float result_1=ind.getPresentSumRem();
 			 ind=indDao.getOne(Integer.valueOf(cobor.getCoborrowerAccount()));//共同借款人账户
 			 float result_2=ind.getPresentSumRem();
 			 result=(int) ((result_1+result_2)*20/10000);//可贷金额
-			 if(result>money){
-		    	  result=money;
-		      }
 		      if(result>70){
 		    	  result=70;
 		      }
+			 if(result>(money/10000)){
+		    	  result=(money/10000);
+		      }
 		   }
+        System.out.println("最大额度为:"+result);
         return result;
 	}
  //申请通过OR驳回
