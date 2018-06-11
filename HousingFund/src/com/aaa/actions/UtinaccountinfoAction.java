@@ -43,10 +43,10 @@ public class UtinaccountinfoAction extends BaseAction<Utinaccountinfo> {
 		String emils =idnum.substring(5, 10)+"dds@qq.com";
 		String youB =idnum.substring(0, 6);
 		String zuzhiJG ="AA"+idnum.substring(5, 9);
-		getRequestMap().putIfAbsent("oneUtin", oneUtin);
-		getRequestMap().putIfAbsent("emils", emils);
-		getRequestMap().putIfAbsent("youB", youB);
-		getRequestMap().putIfAbsent("zuzhiJG", zuzhiJG);
+		getRequestMap().put("oneUtin", oneUtin);
+		getRequestMap().put("emils", emils);
+		getRequestMap().put("youB", youB);
+		getRequestMap().put("zuzhiJG", zuzhiJG);
 		return "getUtinSup";
 	}
 	//ÐÞ¸ÄÊµÏÖ

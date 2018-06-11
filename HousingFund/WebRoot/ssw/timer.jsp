@@ -207,7 +207,9 @@ $.ajax({
 		  success:function(data){
 		  if(data==1){
 		  alert("SUCCESS");
+
 		  window.location.href="<%=basePath%>/BackJsp/LDL/success.jsp";
+
 		  }
 		  }
 	})
@@ -215,7 +217,6 @@ $.ajax({
 	}else{
 	alert("信息错误");
 	}
-	
 	}
 
 </script>

@@ -16,7 +16,7 @@ public class Repaymentplandetails implements java.io.Serializable {
 	private Borrowmoneyagreement borrowmoneyagreement;//借款合同
 	private String modeOfRepaymentSelect;//还款方式
 	private Float currentReturnedCorpus;//当期本金
-	private Float currentReturnedInterest;//当期利息
+	private Float currentReturnedInterest=0F;//当期利息
 	private Float overduePrincipalAndInte=0F;//逾期罚息
 	private Integer currentPeriod;//当前期数
 	private Float amountOfRepayRecei;//应还金额
