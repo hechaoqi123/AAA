@@ -113,10 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <form id="fdata" enctype="multipart/form-data">
 	  	<table class="table">
 	  		<tr class="form-group">
-	  			<td width="140px">
-		  			
-		  			<!-- <input class="utinid" name="utinaccountinfoID" style="display: none;"> -->
-	  			</td>
+	  			
 	  		 	<td width="200px"><input type="file"  name="files" id="fileif" required="required"></td>
 	  			<td><input type="button" value="提交" id="filesub"></td>
 	  		</tr>
@@ -177,6 +174,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </html>
 <script>
 
+$("#fileif").click(function(){
+$("#twotab").html("");
+		$("#addba").hide();
+		$("#sub").hide();
+})
 
 		$("#filesub").click(function(){
 		
@@ -339,7 +341,7 @@ var utinAccountID=$(".utinAccountID").val();
 		    data:{"jsons":JSON.stringify(json),"indid":$(".utinAccountID").val()},
 		    dataType:"json",
 		    success:function(data){
-		   alert(data[0].indAccountId);
+		   
 		    for(var i=0;i<data.length;i++){
 		     
 		     if(data[i].indAccountId=="null"){
@@ -555,7 +557,7 @@ tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s
 		    alert("员工编号错误,请仔细确认");
 		   }else{
 		   alert("补缴成功");
-		   window.location.href="<%=basePath%>ssw/supple.jsp";
+		   window.location.href="<%=basePath%>/BackJsp/LDL/success.jsp";
 		   }
 		   
 		   } 
