@@ -507,7 +507,8 @@ dian=dian+1;
 	}
 	
 	function dblur(obj){
-	
+	$("#jhqian").val("");
+	$("#smoney").val("");
 	//var ones=new Date(obj);
 	var twos=$("#finaldate").val();
 	//日期转换
@@ -566,11 +567,11 @@ dian=dian+1;
 	var summoney=parseFloat($("#summoney").val()).toFixed(2);//本次应缴金额
 	//var sjmon=parseFloat($("#sjmoney").val()).toFixed(2);
 	
+
+	if((utinyue*1)<(summoney*1)){
+	var sps=parseFloat(summoney).toFixed(2)*1-parseFloat(utinyue).toFixed(2)*1;
 	
-	if(eval(utinyue)<eval(summoney)){
-	var sps=parseFloat(summoney).toFixed(2)-parseFloat(utinyue).toFixed(2);
-	
-	$("#sjmoney").val(parseFloat(sps).toFixed(2));
+	$("#sjmoney").val(parseFloat(sps).toFixed(2)*1);
 	}else{
 	$("#sjmoney").val(parseFloat(0).toFixed(2));
 	}
@@ -589,7 +590,9 @@ dian=dian+1;
 	//if(eval(parseFloat(utinyue).toFixed(2))>eval(parseFloat(summoney).toFixed(2))){
 	if(utinyue>summoney){
 	
-	var sps=parseFloat(obj).toFixed(2)*1 + parseFloat(utinyue).toFixed(2)*1;
+	
+	var sps= parseFloat(utinyue).toFixed(2)*1-parseFloat(summoney).toFixed(2)*1 +parseFloat(obj).toFixed(2)*1;
+
 	$("#jhqian").val(sps);
 	}else{
 	

@@ -48,5 +48,9 @@ public interface UtinaccountinfoUtilDao {
 		//添加单位汇缴纪录
 		public int add_rd(int id,Double money);
 		
+		//查询此单位是否开启业务了并 查询单位法人代表
+		public List sele_fy(int id);
+		//查询此单位的 冲缴状态 是否
+		public List sele_uufy(int id);
 	
 }

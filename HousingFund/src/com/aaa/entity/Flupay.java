@@ -9,10 +9,10 @@ public class Flupay implements java.io.Serializable {
 	// Fields
 
 	private Integer fluPayid;
-	private Utinaccountinfo utinaccountinfo;
-	private String utinName;
-	private String fluPayprove;
-	private String ifelseFp;
+	private Utinaccountinfo utinaccountinfo;//单位编号
+	private String utinName;//单位名称 
+	private String fluPayprove;//冲缴证明
+	private String ifelseFp;//是否开启 是 否
 
 	// Constructors
 

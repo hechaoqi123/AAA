@@ -90,17 +90,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
  <table class="table">
       <tr>
-	    <td>单位账号</td><td><input id="utinid" onblur="yanz(this.value)"/>
+	    <td>单位账号</td><td><input style="text-align: center;" id="utinid" onblur="yanz(this.value)"/>
 	    <input id="pa" style="display:none"/>
 	    <span id="utinidspan" style="color:red;"></span></td>
-	     <td>单位名称</td> <td><input id="utinname"/></td>
+	     <td>单位名称</td> <td><input style="text-align: center;" id="utinname" readonly="readonly"/></td>
      </tr>
      <tr>
-       <td>是否已开启此业务</td><td><select style="width:170px;height:30px;">
-       <option>是</option>
-       <option>否</option>
-       </select></td>
-       <td>申请人</td><td><input/></td>
+       <td>是否已开启此业务</td><td><input style="width:170px;height:30px;text-align: center;" id="ifelseFp" readonly="readonly"/></td>
+       <td>法人代表</td><td><input style="text-align: center;"id="corpRepr" readonly="readonly"/></td>
      </tr>
     <!--  <tr>
         <td>业务证明</td><td><input /></td>
@@ -124,15 +121,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    <div style="margin-left:400px;"> 
    
-   业务功能<select style="width:200px;height:30px;" id="ifelseFP">
-       <option value="是">开启</option><option value="否">关闭</option>
-       </select></div>
+   业务功能<input style="width:200px;height:30px;text-align: center;" id="xz" readonly="readonly"/> </div>
+       
+     
   
   
        
     </div>
     <div style="width:698px;height:50px;">
-    <div style="margin-left:400px;">申请人签字<input id="FluPayprove"/></span></div>
+    <div style="margin-left:400px;">申请人签字<input id="FluPayprove" style="text-align:center; "/></span></div>
     </div> 
     
        
@@ -140,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
   </div>
-   <button onclick="sub()" style="margin-left:650px;margin-top: 40px;width:100px;">提交</button>
+   <button onclick="sub()" type="button"style="margin-left:650px;margin-top: 40px;width:100px;">提交</button>
      
      </div>
 	    
@@ -168,14 +165,27 @@ $.ajax({
   dataType:"json",
   data:{"UtinId":obj},
   success:function(data){
-  if(data!=false){
-  $("#utinidspan").html("");
- $("#pa").val(1);
-   $("#utinname").val(data[0].utinName);
-  }else{
- $("#pa").val(2);
+  
+  if(data.utinAccountId==0){
+    $("#pa").val(2);
    $("#utinidspan").html("");
-  $("#utinidspan").html("无此账户");
+   $("#utinidspan").html("无此账户");
+    $("#utinname").val("");
+   $("#ifelseFp").val("");
+   $("#corpRepr").val(""); 
+   $("#xz").val("");
+  }else{
+ 
+    $("#utinidspan").html("");
+  $("#pa").val(1);
+   $("#utinname").val(data.utinName);
+   $("#ifelseFp").val(data.ifelseFp.ifelseFp);
+   $("#corpRepr").val(data.corpRepr); 
+   if(data.ifelseFp.ifelseFp=="是"){
+   $("#xz").val("否");
+   }else{
+   $("#xz").val("是");
+   }
   }
   }
 })
@@ -185,10 +195,10 @@ $.ajax({
 	var utinid=$("#utinid").val();
 	var pa=$("#pa").val();
 	var utinname=$("#utinname").val();
-	var ifelseFP=$("#ifelseFP").val(); 
-	if(FluPayprove!=""&&utinid!=""&&pa!=2&&utinname!=""){
-	
-	  $.ajax({
+	var ifelseFP=$("#xz").val(); 
+	var corpRepr=$("#corpRepr").val();
+	if(FluPayprove!=""&&utinid!=""&&pa!=2&&utinname!=""&&FluPayprove==corpRepr){
+	 $.ajax({
 		  url:"upinse.action",
 		  type:"post",
 		  dataType:"json",
@@ -197,12 +207,13 @@ $.ajax({
 		  success:function(data){
 		  if(data==1){
 		  alert("SUCCESS");
-		  window.href.location="HousingFund/ssw/timer.jsp";
-		  }else{
-		  
+		  window.location.href="<%=basePath%>/BackJsp/LDL/success.jsp";
 		  }
 		  }
 	})
+	 
+	}else{
+	alert("信息错误");
 	}
 	
 	}

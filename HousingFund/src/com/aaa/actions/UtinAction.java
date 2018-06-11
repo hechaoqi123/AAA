@@ -125,15 +125,38 @@ public class UtinAction extends BaseAction<Indinfo> {
 	}
 	@Action("idsele")
 	public String seleid(){
-		List list=biz.UtinInfoSele(UtinId);
+		//List list=biz.UtinInfoSele(UtinId);
+		List list=biz.sele_fy(UtinId);//µ¥Î»
+		List list2=biz.sele_uufy(UtinId);//³å½É×´Ì¬
 		 if(list.size()>0){
-			 String json=JSON.toJSONString(list);
-			  System.out.println(json);
-			 getOut().print(json);		 
-		 }else{
 			 
-			 getOut().print(false);		 
+			 if(list2.size()>0){
+				 Map map1= (Map) list.get(0);
+				 Map map2=(Map) list2.get(0);
+				 map1.put("ifelseFp", map2);
+				 //list.add(list2);
+				// Map map1= (Map) list.get(0);
+				 String json=JSON.toJSONString(map1);
+				 System.out.println(json);
+				 getOut().print(json);	
+			 }else{
+				 
+					Map map= (Map) list.get(0);
+					Map map1=new HashMap();
+					map1.put("ifelseFp", "·ñ");
+					map.put("ifelseFp",map1);
+				 String json=JSON.toJSONString(map);
+				 System.out.println(json);
+				 getOut().print(json);	 
+			 }
+				 
+		 }else{
+			 Map map1=new HashMap();
+			 map1.put("utinAccountId","0");
+			 String json=JSON.toJSONString(map1);
+			 getOut().print(json);		 
 		 }
+		 
 		return null;
 	}
 	@Action("upinse")

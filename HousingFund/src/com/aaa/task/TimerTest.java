@@ -18,7 +18,8 @@ public class TimerTest {
 	@Resource
 	private  TimerBiz ti;
 	
-	//0/10 * * * * ? 10秒执行一次
+	//0 0 12 L * ? 每月月底12点执行
+	//0/10 * * * * ? 10秒 执行一次
 	// @Scheduled(cron = "0 0 12 * * ?") //0 0 12 * * ?  每天中午12点触发 
 	public  void ss(){
 		

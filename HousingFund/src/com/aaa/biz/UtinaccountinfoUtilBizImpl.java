@@ -67,4 +67,14 @@ public class UtinaccountinfoUtilBizImpl implements UtinaccountinfoUtilBiz {
 				
 				return dao.sele_utinid(id);
 			}
+			//查询此单位是否开启业务了并 查询单位法人代表
+			public List sele_fy(int id){
+				
+				return dao.sele_fy(id);
+			}
+			//查询此单位的 冲缴状态 是否
+			public List sele_uufy(int id){
+				
+				return dao.sele_uufy(id);
+			}
 }

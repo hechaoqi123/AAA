@@ -241,6 +241,27 @@ public class UtinaccountinfoUtilDaoImpl implements UtinaccountinfoUtilDao {
 					List list=ht.find(sql);
 					return list;
 				}
+				//查询此单位是否开启业务了并 查询单位法人代表
+				public List sele_fy(int id){
+					String sql="select new map(u.utinAccountId as utinAccountId,"
+							+ "u.unitinfo.utinName as utinName,"
+							+ "u.unitinfo.corpRepr as corpRepr)"
+							+ "from Utinaccountinfo u  where u.utinAccountId="+id+"";
+					List list=ht.find(sql);
+				
+						return list;
+					
+				}
+				//查询此单位的 冲缴状态 是否
+				public List sele_uufy(int id){
+					String sql="select new map(f.ifelseFp as ifelseFp)"
+							+ "from Flupay f where f.utinaccountinfo.utinAccountId="+id+"";
+					List list=ht.find(sql);
+					return list;
+				}
+				
+				
+				
 				}
    
 

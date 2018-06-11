@@ -26,4 +26,9 @@ public interface UtinaccountinfoUtilBiz {
 				public TeachaerPageEntity sele_mohuid(TeachaerPageEntity page,int ids);
 				//单位名称模糊查询
 				public TeachaerPageEntity sele_mohuname(TeachaerPageEntity page,String utinname);
+				
+				//查询此单位是否开启业务了并 查询单位法人代表
+				public List sele_fy(int id);
+				//查询此单位的 冲缴状态 是否
+				public List sele_uufy(int id);
 }
