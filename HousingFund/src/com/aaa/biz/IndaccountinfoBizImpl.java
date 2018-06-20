@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -136,6 +138,21 @@ public class IndaccountinfoBizImpl implements IndaccountinfoBiz {
 			    unit.setUtinDepositPeople(unit.getUtinDepositPeople()+1);
 			 //更换单位   
 			ind.setUtinaccountinfo(unit);
+		}
+		//身份认证
+		@Override
+		public boolean check_ind(String trueName, String idnumber) {
+			try {
+				Criterion[] criterions={Restrictions.and(Restrictions.eq("trueName", trueName), Restrictions.eq("idnumber", idnumber))};
+				  List list=dao.findByCriteria(criterions, null);
+				   if(list!=null&&list.size()>0){
+					   return true;
+				   }
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		   	return false;
 		}
 
 }

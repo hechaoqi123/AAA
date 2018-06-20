@@ -36,14 +36,11 @@ public class IndAccountinfoDaoImpl extends BaseDaoImpl<Indaccountinfo> implement
 		//inds.setPeMonthDep(rd.getPeMonthDep());//此处double类型被转为float
 		inds.setUsableRem(rd.getUsableRem()+rd.getPayinSumMoney());//同上
 		inds.setPresentSumRem( rd.getPresentSumRem()+rd.getPayinSumMoney());//同上
-		try {
-			hibernateTemplate.saveOrUpdate(inds);
+		
+			hibernateTemplate.update(inds);
 
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		hibernateTemplate.clear();
+		
+		
 		return 0;
 	}
 	public List ind_MyMoney(String idnum){

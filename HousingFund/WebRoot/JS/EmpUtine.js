@@ -31,6 +31,8 @@ function getFuzzyEmp(obj){
 				           	$("#tbs").append(tr);
 				}
 			}
+		},error:function(){
+            alert("异常操作！")			
 		}
 	});
 }
