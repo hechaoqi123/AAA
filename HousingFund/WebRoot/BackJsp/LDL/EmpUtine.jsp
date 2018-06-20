@@ -85,16 +85,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</h4>
 					</div>
 					<div class="modal-body">
-						<form action="empUtine.action" method="post" >
+						<form id="form" action="empUtine.action" method="post" >
 						    <table class="table">
 						    	<tr>
 						    		<td>用户姓名:</td>
 						    		<td>
-						    			<input type="text" class="form-control trueName" required/>
+						    			<input type="text" class="form-control trueName" id="nae" required/>
 						    			<input type="text" class="form-control indAccountId" name="list_indinfo[0].indInfoId" required style="display: none;"/>
 						    		</td>
 						    		<td>所在单位:</td>
 						    		<td><input type="text" class="form-control utinName" required /></td>
+						    	</tr>
+						    	<tr>
+						    		<td>身份证号:</td>
+						    		<td colspan="3">
+						    			<input type="text" id="idnumber" required/>
+						    		</td>
 						    	</tr>
 						    	<tr>
 						    		<td>转移至:</td>
@@ -114,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						    	<tbody id="myTbo">
 						    	</tbody>
 						    </table>
-						    <input type="submit" class="btn" value="提交" >
+						    <input type="submit"class="btn" value="提交" >
 					    </form>
 					</div>
 				</div><!-- /.modal-content -->
@@ -122,6 +128,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
   </body>
 <script type="text/javascript" src="JS/EmpUtine.js"></script>
-
+<script>
+  var result=false;
+  $("#form").submit(function(){
+        $.ajax({
+            url:'check_ind',
+            type:'post',
+            async:false,
+            data:{
+                'indinfo.trueName':$("#nae").val(),
+                'indinfo.idnumber':$("#idnumber").val(),
+            },
+            success:function(data){
+              
+              if(data=="true"){
+                result=true;
+              }else{
+                 alert("身份认证失败！");
+                 result=false;
+              }
+            }
+        })
+        return result;
+    }) 
+  
+</script>
 </html>
 
