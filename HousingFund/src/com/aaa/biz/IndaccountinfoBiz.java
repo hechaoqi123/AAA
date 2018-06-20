@@ -46,4 +46,6 @@ public interface IndaccountinfoBiz {
 		public List UtinegetOneEmp(Indaccountinfo indaccountinfo);
 		//账户转移
 		public void utine(int indId,int unitId);
+		//账户转移身份认证
+		public abstract boolean check_ind(String trueName, String idnumber);
 }

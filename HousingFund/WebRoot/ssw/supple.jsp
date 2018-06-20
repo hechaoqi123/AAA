@@ -121,13 +121,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td>操作</td>
     </tr>
    </table>
-   <center style="margin-top: 50px;">
+   <center style="margin-top: 50px;" >
    <button onclick="add()" id="addba" style="width:100px;height:30px;font-size:15px;margin-left: -200px;background-color: #acd18e;color:black;">添加信息</button> 
    <button onclick="summoney()" id="tf" style="width:150px;height:30px;font-size:15px;margin-left: 200px;background-color: #438eb9;color:black;">计算总金额</button>
   </center>
   <center> <button onclick="sub()" id="sub" style="width:100px;height:30px;font-size:20px;background-color: #929390;color:white;">提交</button>
    </center>
-   <span style="display:none" id="diaoyong"></span>
+   <span style="display:none"  id="diaoyong"></span>
+ 
   </body>
 </html>
 <script>
@@ -172,7 +173,7 @@ var utinAccountID=$(".utinAccountID").val();
     
     if(data!=""){
     $(".indacid"+obj).val(data[0].indAccountId);
-   
+   $(".employeeName"+obj).val(data[0].trueName);
     $(".pan"+obj+"").html("");
     }else{
     $(".indacid"+obj).val("");
@@ -197,7 +198,7 @@ var utinAccountID=$(".utinAccountID").val();
 		      var tr="<tr class='addtr'>";
 tr+="<td><input class='idnumber"+s+"' onblur='idnum("+s+")'/><span class='pan"+s+"' style='font-size:10px;color:red;'></span></td>";
 		     tr+="<td style='display:none'><input style='display:none' class='indacid"+s+"' /></td>";
-		     tr+="<td><input  class='employeeName"+s+"'/></td>";
+		     tr+="<td><input  class='employeeName"+s+"' readonly='readonly'/></td>";
 		     tr+="<td><input class='supRadices"+s+"' onblur='supblur("+s+")'/></td>";
 		     tr+="<td><select class='indDepositRatio"+s+"' onchange='onech("+s+")'>";
 		     tr+="<option value='0'>--请选择--</option>";

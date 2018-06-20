@@ -97,8 +97,8 @@ SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 	
 	//根据idnum查询此单位是否存在此idnum
 		public List sele_supidnum(int a,String idnum){
-			String sql="select new map(ind.indAccountId as indAccountId) from Indaccountinfo ind where ind.utinaccountinfo.utinAccountId="+a+" and"
-					+ " ind.idnumber="+idnum+"";
+			String sql="select new map(ind.indAccountId as indAccountId,ind.trueName as trueName) from Indaccountinfo ind where ind.utinaccountinfo.utinAccountId="+a+" and"
+					+ " ind.idnumber='"+idnum+"'";
 			List list=ht.find(sql);
 			return list;
 		}

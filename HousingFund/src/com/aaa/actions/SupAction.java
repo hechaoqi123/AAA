@@ -103,6 +103,7 @@ public class SupAction extends BaseAction<Indinfo>{
 	//根据身份证号查询
 	@Action("sele_supidnum")
 	public String sele_idnum(){
+		System.out.println(idnum);
 		List list=biz.sele_supidnum(indid, idnum);
 		
 			String json=JSON.toJSONString(list);
