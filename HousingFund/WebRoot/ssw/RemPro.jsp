@@ -421,7 +421,7 @@ dian=dian+1;
 		    tab+="<td>实交金额</td><td><input  readonly='readonly' id='sjmoney'/></td>";
 		    tab+="</tr>";
 		    tab+="<tr>";
-		    tab+="<td>汇缴起始年月</td><td><input id='oridate' onblur='dblur(this.value)' class='Wdate' onclick='times()' /></td>";
+		    tab+="<td>汇缴起始年月</td><td><input id='oridate'  onblur='dblur(this.value)' class='Wdate' onclick='times()'  onload='tttt()'/></td>";
 
 												
 		    tab+="<td>汇缴最终年月</td><td><input id='finaldate' value='"+data[1].times.substring(0,7)+"' readonly='readonly'/></td>";
@@ -477,6 +477,13 @@ dian=dian+1;
             tab+="</div>";
 		    $("#tab").append(tab);
 		     $("#utinid").val("");
+		     
+		     var dates=new Date();
+		     var year=dates.getFullYear();		
+		     var month=(dates.getMonth()+1>9)?dates.getMonth()+1:"0"+(dates.getMonth()+1);
+		     $("#oridate").val(year+"-"+month);
+		    var oridateval=$("#oridate").val();
+		    dblur(oridateval);
 		   }else{
 		   alert("无此账号");
 		    $("#tab").html("");
@@ -486,11 +493,16 @@ dian=dian+1;
 	   })  
 	 
 	}
-	
+	// 获取当天的年月日
+  
 	//onFocus='WdatePicker({maxDate:'%y-%M'})';
 	
 	function times(){
 	 WdatePicker({skin:'whyGreen',minDate:'%y-{%M-3}',readOnly:true, maxDate:'%y-%M'});
+	}
+	function tttt(){
+	alert();
+	WdatePicker({dateFmt:'yyyy-MM'});
 	}
 	
 	function dblur(obj){
@@ -526,24 +538,27 @@ dian=dian+1;
 	 $("#remonth").val(m+1); 
 	
 	//本次应缴金额
-	 $("#summoney").val(zongzhi*(m+1));
+	 $("#summoney").val(parseFloat(zongzhi*(m+1)).toFixed(2));
 	
 	
 	//个人应缴金额
+	var  index=0;
 	$(".onePayin").each(function(){
 	
-	var indexval=$(this).index();
-	
-	
-	$(this).val(onelist[indexval]*(m+1));
+	/* var indexval=$(this).index();
+	alert($(this).index());	 */
+	$(this).val(onelist[index]*(m+1));
+	index++;
 	
 	});
 	// $(".usableRem").val(umo*aps);
 	//应缴总金额
+	var payindex=0;
 	$(".PayinSumMoney").each(function(){
-	var indexval=$(this).index();
+	//var indexval=$(this).index();
 	
-	$(this).val(twolist[indexval]*(m+1));
+	$(this).val(twolist[payindex]*(m+1));
+	payindex++;
 	});
 	
 	var utinyue=parseFloat($("#utinProvRema").val()).toFixed(2);//账户余额
@@ -554,14 +569,15 @@ dian=dian+1;
 	if(eval(utinyue)<eval(summoney)){
 	var sps=parseFloat(summoney).toFixed(2)-parseFloat(utinyue).toFixed(2);
 	
-	$("#sjmoney").val(sps);
+	$("#sjmoney").val(parseFloat(sps).toFixed(2));
 	}else{
-	$("#sjmoney").val(0);
+	$("#sjmoney").val(parseFloat(0).toFixed(2));
 	}
 	
 	}
 	
 	}
+	
 	//实收
 	function beginmoney(obj){ //obj=实收
 	
