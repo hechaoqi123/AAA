@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body> 
     <h2>签订借贷合同</h2>
       请输入个人身份证号：<input type="text" id="id"/>   <button id="index">点击检索</button><br/><br/>
-      <form action="end_loan.action" method="post">
+      <form action="end_loan.action" method="post" style="padding-left:200px;">
       <input type="text" id="a" style="display:none" name="loanApplicationId" />
          <div style="border:1px solid #999;padding-left:20px;width:800px;">
           <table>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <th colspan="4" style="text-align:center;height:50px;"><span style="position: relative;left: -40px">借贷合同</span></th>
              </tr>
               <tr>
-               <td style="width:80px;padding-left:100px;">贷款种类：</td>
+               <td style="width:100px;padding-left:100px;">贷款种类：</td>
                <td id="td1" style="text-align:left;width:150px"></td>
                <td style="width:130px;padding-left:80px;">合同编号：</td>
                <td id="td2" style="text-align:left"></td>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <td id="td7" style="text-align:left"></td>
              </tr>
              <tr>
-               <td style="width:80px;padding-left:100px;">贷款期限：</td>
+               <td style="width:100px;padding-left:100px;">贷款期限：</td>
                <td id="tt" style="text-align:left;width:150px"></td>
                <td style="width:130px;padding-left:80px;">贷款银行：</td>
                <td id="td5" style="text-align:left"></td>

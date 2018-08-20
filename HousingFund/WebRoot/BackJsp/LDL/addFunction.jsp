@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head>
   
   <body>
-   <span style="color: red; font-size: 30;"> 非技术人员慎重操作</span><br/>
+   <span style="color: red; font-size: 30;"> 请添加已经存在的功能</span><br/>
    
      	<span class="btn btn-primary" data-toggle="modal" data-target="#addPowers">
 			添加权限功能

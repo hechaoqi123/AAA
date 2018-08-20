@@ -69,18 +69,21 @@ public class LoanApplicationBizImpl  implements LoanApplicationBiz {
 //计算最大额度
 	@Transactional(readOnly=true)
 	public Integer getLimit(Integer LoanapplicationId) {
+		System.out.println("-----开始计算最大额度-----");
 		Loanapplication loanEntity = LoanDao.getOne(LoanapplicationId);//获取申请书
 		Coborrower cobor=loanEntity.getCoborrower();//共同借款人
 	    Indaccountinfo ind=indDao.getOne(Integer.valueOf(loanEntity.getIndAccount()));//个人账户
 		   Integer result=null;
 		   int money=0;//购房额度
-		      if(loanEntity.equals("首套房")){
+		      if(loanEntity.getRemarks().equals("首套房")){
+		    	   System.out.println("类型:首套房");
 		          money=(int) (loanEntity.getPurchasecontract().getPurchasedhinfo().getSellingPrice()*0.7*10000);
 		      }else{
+		    	  System.out.println("类型:二套房");
 		          money=(int) (loanEntity.getPurchasecontract().getPurchasedhinfo().getSellingPrice()*0.5*10000);
 		      }
-         System.out.println(money);
         if(cobor==null){
+        	 System.out.println("贷款类型:个人贷款");
         	if(ind.getPresentSumRem()==null){//当额度为空时
         		ind.setPresentSumRem(0F);
         	}
@@ -91,8 +94,8 @@ public class LoanApplicationBizImpl  implements LoanApplicationBiz {
 		      if(result>(money/10000)){
 		    	  result=(money/10000);
 		      }
-		      System.out.println(result);
 		   }else{//共同申请
+			   System.out.println("贷款类型:共同贷款");
 			 float result_1=ind.getPresentSumRem();
 			 ind=indDao.getOne(Integer.valueOf(cobor.getCoborrowerAccount()));//共同借款人账户
 			 float result_2=ind.getPresentSumRem();

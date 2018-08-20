@@ -157,9 +157,7 @@ border:1px solid #000;
          <tr>
             <td>个人账号:</td>
             <td>姓名:</td>
-            <td>个人开户日期:</td>
             <td>余额:</td>
-            <td>月缴额:</td>
              <td>个人账户状态:</td>
               <td>开户银行名称:</td>
          </tr>
@@ -215,9 +213,9 @@ var aaa;
                    var tr="<tr>";
                    tr+="<td>"+aaa.loginAccount+"</td>";
                    tr+="<td>"+aaa.trueName+"</td>";
-                   tr+="<td>"+aaa.indOpenDate+"</td>";
+                  
                    tr+="<td>"+aaa.presentSumRem+"</td>";
-                   tr+="<td>"+aaa.peMonthDep+"</td>";
+                  
                    tr+="<td>"+aaa.indStatus+"</td>";
                    tr+="<td>"+aaa.bankOpenAccount+"</td>";
             

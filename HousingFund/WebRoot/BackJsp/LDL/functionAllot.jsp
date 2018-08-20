@@ -42,7 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <span style="color: red; font-size: 30;"> 非技术人员慎重操作</span>
 	<table class="table table-striped">
     	<tr>
     		<td>角色名称</td>
