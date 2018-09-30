@@ -24,6 +24,7 @@ import com.aaa.entity.Utinsupapply;
 import com.aaa.entity.idnumutil;
 import com.alibaba.fastjson.JSON;
 
+
 @ParentPackage("struts-default")
 @Controller
 public class SupAction extends BaseAction<Indinfo>{
@@ -63,11 +64,7 @@ public class SupAction extends BaseAction<Indinfo>{
 		
 		System.out.println(jsons);*/
 		
-		System.out.println(u.getUtinNmae());
-		System.out.println(u.getUtinsupmoney());
-		System.out.println(u.getSupSumple());
-		System.out.println(u.getChequeId());
-		System.out.println(u.getSupCause());
+	
 		List sz=new ArrayList();
 		
 		Utinaccountinfo ut=biz.sele_u(utinAccountID);
@@ -130,27 +127,36 @@ public class SupAction extends BaseAction<Indinfo>{
 	//根据身份证号查询
 	@Action("sele_supidnum")
 	public String sele_idnum(){
-		System.out.println(indid);
+	
+	
 	 	List<idnumutil> list=JSON.parseArray(jsons,idnumutil.class);
 	 	
 	 	List sumlist=new ArrayList();
 	 	int a=0;
 	 	for (idnumutil i : list) {
-	 		System.out.println(i.getIdnum());
-	 		Map map=(Map) biz.sele_supidnum(indid, i.getIdnum()).get(0);
-	 		if(map==null){
+	 		
+	 		List blist=biz.sele_supidnum(indid, i.getIdnum());
+	 		
+	 		if(blist.size()>0){
+	 			Map map=(Map) blist.get(0);
+	 			sumlist.add(a,map);
+		 		
+	 		}else{
 	 			Map m=new HashMap();
+	 		
 	 			m.put("indAccountId", "null");
 	 			sumlist.add(a,m);
-	 		}else{
-	 		sumlist.add(a,map);
+	 			
+	 			
 	 		}
+	 		
 	 		a++;
 		}
 		
-		
+	 	
+		    System.out.println(sumlist.size());
 			String json=JSON.toJSONString(sumlist);
-			System.out.println(json);
+			System.out.println("json:"+json);
 			getOut().print(json);
 		
 		return null;

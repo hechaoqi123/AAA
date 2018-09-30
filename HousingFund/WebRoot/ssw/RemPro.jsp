@@ -482,6 +482,7 @@ dian=dian+1;
 		     var year=dates.getFullYear();		
 		     var month=(dates.getMonth()+1>9)?dates.getMonth()+1:"0"+(dates.getMonth()+1);
 		     $("#oridate").val(year+"-"+month);
+		     
 		    var oridateval=$("#oridate").val();
 		    dblur(oridateval);
 		   }else{
