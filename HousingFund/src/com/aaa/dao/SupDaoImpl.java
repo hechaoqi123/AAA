@@ -1,6 +1,10 @@
 package com.aaa.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +18,9 @@ import com.aaa.entity.Supdetailed;
 import com.aaa.entity.UtilSup;
 import com.aaa.entity.Utinaccountinfo;
 import com.aaa.entity.Utinsupapply;
+
+import jxl.Sheet;
+import jxl.Workbook;
 
 @Repository
 public class SupDaoImpl implements SupDao {
@@ -37,31 +44,35 @@ public class SupDaoImpl implements SupDao {
 		return u;
 	}
 	
+	
 	@Override
 	public int inse_usa(Utinsupapply u,int a){
 		
-SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		String time=f.format(new Date());
-		System.out.println(time);
+		
 		Utinaccountinfo uc=ht.get(Utinaccountinfo.class, a);
+		
+		
 		u.setUtinaccountinfo(uc);
 		u.setApplyDate(time);
-		try {
-			ht.save(u);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+	   /* u.setChequeId(u.getChequeId());
+	    u.setUtinNmae(u.getUtinNmae());
+	    u.setUtinsupmoney(u.getUtinsupmoney());
+	    u.setSupSumple(u.getSupSumple());
+	    u.setSupCause(u.getSupCause());*/
+	    
 		ht.save(u);
 		
 		int hi=u.getApplyId();
-		System.out.println(hi);
+		
 		return hi;
 	}
 	
+	//add
 	public int inser_sd(UtilSup u,int id){
-SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
+     SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 		
 		String time=f.format(new Date());
 		//添加
@@ -100,6 +111,45 @@ SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd");
 			String sql="select new map(ind.indAccountId as indAccountId,ind.trueName as trueName) from Indaccountinfo ind where ind.utinaccountinfo.utinAccountId="+a+" and"
 					+ " ind.idnumber='"+idnum+"'";
 			List list=ht.find(sql);
+			
+			return list;
+		}
+		
+		//读取excel表格
+		public List<Supdetailed> add_suo(File file) throws Exception{
+			List<Supdetailed> list=new ArrayList();
+			
+			FileInputStream fis = new FileInputStream(file);
+		 	Workbook wk=Workbook.getWorkbook(fis);
+		 	
+			Sheet sheet = null;
+		 	 
+		 	 try {
+		 		 
+		 	
+		 		 sheet=wk.getSheet(0);
+			 	 int rowNum=sheet.getRows();
+			
+		 	for(int i=1;i<rowNum;i++){
+		 	
+		 		Supdetailed sup=new Supdetailed();
+		 		
+		 		sup.setIdnum(sheet.getCell(0,i).getContents());//身份证号
+		 		sup.setEmployeeName(sheet.getCell(1,i).getContents());//名字
+		 		sup.setSupRadices(Float.parseFloat(sheet.getCell(2,i).getContents()));//基数
+		 		sup.setIndDepositRatio(Float.parseFloat(sheet.getCell(3,i).getContents()));//比例
+		 		sup.setSupMonth(Integer.parseInt(sheet.getCell(4,i).getContents()));//月数
+		 		
+		 		//sup.setSupMoney(Float.parseFloat(sheet.getCell(5,i).getContents()));//总金额
+		 		list.add(sup);
+		 		
+		 	}
+		 	} catch (Exception e) {
+				// TODO: handle exception
+		 		e.printStackTrace();
+			}
+		 	fis.close();
+			wk.close();
 			return list;
 		}
 }

@@ -1,34 +1,33 @@
 package com.aaa.entity;
 
-import java.util.Date;
-
 /**
+ * AbstractSupdetailed entity provides the base persistence definition of the
  * Supdetailed entity. @author MyEclipse Persistence Tools
  */
 
-// 单位补缴信息清册
-public class Supdetailed implements java.io.Serializable {
+public abstract class AbstractSupdetailed implements java.io.Serializable {
+
 	// Fields
+
 	private Integer supDetailedId;
-	private Utinsupapply utinsupapply;// 补缴申请表
-	private String employeeName;// 员工姓名
-	private Float supMoney;// 补缴金额
-	private Integer supMonth;// 补缴月份
-	private Float supRadices;// 基数
-	private String supDate;// 补缴日期
+	private Utinsupapply utinsupapply;
 	private Indaccountinfo indaccountinfo;
+	private String employeeName;
+	private Float supMoney;
+	private Integer supMonth;
+	private Float supRadices;
+	private String supDate;
 	private Float indDepositRatio;
 
-	private String idnum;// 身份证号 虚拟出来
 	// Constructors
 
 	/** default constructor */
-	public Supdetailed() {
+	public AbstractSupdetailed() {
 	}
 
 	/** full constructor */
-	public Supdetailed(Utinsupapply utinsupapply, Indaccountinfo indaccountinfo, String employeeName, Float supMoney,
-			Integer supMonth, Float supRadices, String supDate, Float indDepositRatio) {
+	public AbstractSupdetailed(Utinsupapply utinsupapply, Indaccountinfo indaccountinfo, String employeeName,
+			Float supMoney, Integer supMonth, Float supRadices, String supDate, Float indDepositRatio) {
 		this.utinsupapply = utinsupapply;
 		this.indaccountinfo = indaccountinfo;
 		this.employeeName = employeeName;
@@ -111,14 +110,6 @@ public class Supdetailed implements java.io.Serializable {
 
 	public void setIndDepositRatio(Float indDepositRatio) {
 		this.indDepositRatio = indDepositRatio;
-	}
-
-	public String getIdnum() {
-		return idnum;
-	}
-
-	public void setIdnum(String idnum) {
-		this.idnum = idnum;
 	}
 
 }

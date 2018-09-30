@@ -153,6 +153,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  $("#td8").val(parseInt(data.coborrower));
                  $("#td9").val(parseInt(data.borrowMoneyNumber*10000)-parseInt(data.coborrower));//未还本金
                  $("#td10").val(data.borrowerAnnualRate);
+                   alert(data.status)
+                   alert(data.remark)
+                   alert(data.returnType)
                  $("#status").val(data.status);
                  $("#remark").val(data.remark);
                  $("#ss").html(data.returnType)

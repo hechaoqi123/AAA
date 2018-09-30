@@ -19,7 +19,7 @@ public class TimerTest {
 	private  TimerBiz ti;
 	
 	//0/10 * * * * ? 10秒执行一次
-	// @Scheduled(cron = "0 0 12 * * ?") //0 0 12 * * ?  每天中午12点触发 
+     @Scheduled(cron = "0 0 12 * * ?") //0 0 12 * * ?  每天中午12点触发 
 	public  void ss(){
 		
 

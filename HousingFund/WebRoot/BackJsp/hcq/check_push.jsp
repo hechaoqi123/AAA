@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
            <td colspan="11">
-             <div style="height:400px;">
+             <div style="height:400px; overflow:auto">
                 <table >
                   <c:forEach items="${list}" var="item">
                        <tr>

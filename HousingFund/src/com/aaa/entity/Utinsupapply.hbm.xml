@@ -25,6 +25,18 @@
         <property name="applyDate" type="java.lang.String">
             <column name="ApplyDate" length="50" />
         </property>
+        <property name="utinsupmoney" type="java.lang.Double">
+            <column name="utinsupmoney" precision="255" scale="0" />
+        </property>
+        <property name="utinNmae" type="java.lang.String">
+            <column name="UtinNmae" />
+        </property>
+        <property name="chequeId" type="java.lang.String">
+            <column name="chequeID" length="50" />
+        </property>
+        <property name="supSumple" type="java.lang.Integer">
+            <column name="supSumple" />
+        </property>
         <set name="supdetaileds" inverse="true">
             <key>
                 <column name="ApplyID" />

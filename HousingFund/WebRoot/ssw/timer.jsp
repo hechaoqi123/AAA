@@ -197,12 +197,11 @@ $.ajax({
 		  success:function(data){
 		  if(data==1){
 		  alert("SUCCESS");
-		  window.href.location="HousingFund/ssw/timer.jsp";
+		  window.href.location="HousingFund/LDL/success.jsp";
 		  }
 		  }
 	})
 	}
-	
 	}
 
 </script>

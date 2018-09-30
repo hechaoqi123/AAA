@@ -256,7 +256,7 @@ function get_one_Utinaccountinfo(obj){
 		 type:"post",
 		 dataType:"json",
 		 success:function(data){
-		    alert(data);
+		    //alert(data);
 			 $(".utinid").val(obj);
 			 $(".utinName").html(data[0].utinName);
 			 $(".utinNames").html(data[0].utinName);

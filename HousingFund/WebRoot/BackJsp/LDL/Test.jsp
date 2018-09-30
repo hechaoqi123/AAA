@@ -147,7 +147,7 @@ function get_one_Utinaccountinfo(obj){
 			} */
 		 },
 		 error:function(){
-			 alert(1);
+			 //alert(1);
 		 }
 	 });
 };

@@ -370,6 +370,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="../assets/js/ace.min.js"></script>
 		<script type="text/javascript" src="../bootstrap/jquery.jclock.js"></script>
 	    <script type="text/javascript">
+
 	    $("#cancel").click(function(){
 	        if(confirm("是否退出？")){
 	           return true;

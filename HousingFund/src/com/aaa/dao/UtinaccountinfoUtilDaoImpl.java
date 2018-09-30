@@ -235,7 +235,7 @@ public class UtinaccountinfoUtilDaoImpl implements UtinaccountinfoUtilDao {
 				
 				public List sele_utinid(int id){
 					
-					String sql="select new map(utinAccountId as utinAccountId,utinName as utinName) from Utinaccountinfo where utinAccountId="+id+"";
+					String sql="select new map(utinAccountId as utinAccountId,utinName as utinName,utinDepositRatio as utinDepositRatio) from Utinaccountinfo where utinAccountId="+id+"";
 					
                
 					List list=ht.find(sql);

@@ -55,12 +55,12 @@
 		  <!--  	 <prop key="hibernate.hbm2ddl.auto">正向工程
 		   	  update
 		   	 </prop> -->
-	<!-- 	     <prop key="hibernate.show_sql">  
+ 	     <prop key="hibernate.show_sql">  
 		   		true
 		   	</prop> 
 		   	<prop key="hibernate.format_sql"> 
 		   		true
-		   	</prop>   --> 
+		   	</prop>   
 		   </props>
 		</property>
 		

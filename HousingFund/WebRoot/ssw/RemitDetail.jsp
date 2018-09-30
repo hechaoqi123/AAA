@@ -283,6 +283,7 @@ dian=dian+1;
      success:function(data){
      if(data==false){
      alert("无此账户汇缴纪录信息");
+     window.location.href="<%=basePath%>ssw/RemitDetail.jsp";
      }else{
       var tab="<table id='what' class='table'>";
          tab+="<tr style='background-color:#BFDCEC'>";

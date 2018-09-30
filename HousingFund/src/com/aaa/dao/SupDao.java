@@ -1,8 +1,10 @@
 package com.aaa.dao;
 
+import java.io.File;
 import java.util.List;
 
 import com.aaa.entity.Indaccountinfo;
+import com.aaa.entity.Supdetailed;
 import com.aaa.entity.UtilSup;
 import com.aaa.entity.Utinaccountinfo;
 import com.aaa.entity.Utinsupapply;
@@ -13,6 +15,10 @@ public interface SupDao {
 	public Utinaccountinfo sele_u(int id);
 	//查询个人账户是否存在
 	public Indaccountinfo sele_i(int id);
+	
+	//读取excel表格
+	public List<Supdetailed> add_suo(File file) throws Exception;
+	
 	
 	//添加单位补缴纪录 得到到位ID
 	public abstract int inse_usa(Utinsupapply u, int a);
