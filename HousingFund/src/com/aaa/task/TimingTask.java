@@ -31,7 +31,7 @@ public class TimingTask {
 		System.out.println("---开始计算逾期利息---");
 		repayBiz.task();
 	}
-	//@Scheduled(cron="0/50 * * * * ?")
+	@Scheduled(cron="0/50 * * * * ?")
 	//冲贷还款
 	public void work2(){
 		System.out.println("---开始进行冲贷还款---");

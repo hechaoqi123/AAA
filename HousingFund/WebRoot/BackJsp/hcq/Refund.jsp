@@ -136,30 +136,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               html+="<th>还款状态</th>";
               html+="<th>实收金额</th>";
               html+="<th>还款日期</th>";
+              html+="<th>逾期日期</th>";
               html+="</tr>";  
 				 for(var i=0;i<data.length-1;i++){
                  html+="<tr>";
                  html+="<td>第"+data[i].currentPeriod+"期</td>" ;
-                 html+="<td>"+data[i].currentReturnedCorpus+"</td>" ;
+                 html+="<td>"+parseInt(data[i].currentReturnedCorpus)+"</td>" ;
                  html+="<td>"+data[i].currentReturnedInterest+"</td>" ;
                  html+="<td>"+data[i].overduePrincipalAndInte+"</td>" ;
                  html+="<td>"+data[i].amountOfRepayRecei+"</td>" ;
-                    if(data[i].repaymentStatus=="已还"){
-                     html+="<td style='color:#5ea6eb'>"+data[i].repaymentStatus+"</td>" ;
+                    if(data[i].repaymentStatus=="已还"||data[i].repaymentStatus=="提前还款"){
+                     html+="<td style='color:#5ea6eb'><b>"+data[i].repaymentStatus+"</b></td>" ;
                     }else{
-                     html+="<td  style='color:red'>"+data[i].repaymentStatus+"</td>" ;
+                     html+="<td  style='color:red'><b>"+data[i].repaymentStatus+"</b></td>" ;
                     }
                   if(data[i].repaymentsReceived==null){
                    html+="<td></td>" ;
                    html+="<td></td>" ;
                    success=false;//借款未还清
-                   money+=parseInt(data[i].currentReturnedCorpus);//未还本金累加
+                   money+=parseFloat(data[i].currentReturnedCorpus);//未还本金累加
                    money2+=parseInt(data[i].currentReturnedInterest);//未还利息累加
                   }else{
                    html+="<td>"+data[i].repaymentsReceived+"</td>" ;
                    html+="<td>"+new Date(data[i].repaymentDate).toLocaleDateString()+"</td>" ;
                   }
-                 html+="</tr>" ;
+                  if(data[i].repaymentDeadline==null){
+                  html+="<td>无</td>" ;
+                  }else{
+                  html+="<td>"+new Date(data[i].repaymentDeadline).toLocaleDateString()+"</td>" ;
+                  }
+                  html+="</tr>" ;
                }
                $("#tb").html(html); 
                $("#td1").val(data[data.length-1].nameOfBorrower);
@@ -168,6 +174,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                $("#td4").html(data[data.length-1].annualRate);
                $("#td5").html(data[data.length-1].borrowingBalance);
                $("#td6").html(data[data.length-1].lentYearsNumber);
+                  if((money%1000)==999){//取消误差
+                    money++;
+                  }
                $("#money").html(money);
                $("#money2").html(money2);
             }else{

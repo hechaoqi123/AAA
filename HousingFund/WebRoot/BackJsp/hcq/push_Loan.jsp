@@ -62,10 +62,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
        <tr>
         <th colspan="8">
-           <div style="text-align:left;height:120px;padding-left:30px;font-size:20px; font-weight:15;">
-             <sapn>委托方（甲方）:</sapn><br/>
-             <span style="position: relative;top:-15px;">受托方（乙方）：AAA住房公积金中心</span><br/>
-             <span style="position: relative;top:-30px;">委托信息如下：</span>
+           <div style="text-align:left;height:50px;padding-left:30px;font-size:20px; font-weight:15;">
+             <span style="position: relative;">受托方（乙方）：AAA住房公积金中心</span><br/>
            </div>
         <!-- 委托方信息 -->
           <table style="width:800px;margin-top:10px;">
@@ -135,7 +133,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
    
     </table>
-      <p style="font-size: 17px;color: #999">注：本委托书一式三联，委托方、受托方、贷款银行各留存一份。</p>
     <input name="borrowmoneyagreement.borrowMoneyAgreementId" id="borrid" style="display:none" />
         <input type="submit" value="确认办理"/>
       </form>
