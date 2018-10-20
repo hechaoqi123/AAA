@@ -22,7 +22,7 @@
         <property name="status" type="java.lang.String">
             <column name="status" />
         </property>
-        <set name="logs" inverse="true" fetch="join" cascade="delete">
+        <set name="logs" inverse="true" lazy="false" cascade="delete">
             <key>
                 <column name="fushId" />
             </key>

@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</select>
 					</td>
 					<td>证件号码<span style="color:red">*</span></td>
-					<td><input type="text"  class="form-control idnumber" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)"   value="${indaccountinfoObject.indinfo.idnumber }"/></td>
+					<td><input type="text" id="td1"  class="form-control idnumber" readonly="true" required="required" name="list_indinfo[0].idnumber" onblur="idNum(this)"   value="${indaccountinfoObject.indinfo.idnumber }"/></td>
 	          </tr>
 	          <tr>
 		           <td>单位名称<span style="color:red">*</span></td>
@@ -174,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         </tr>
 	           <tr>
 	           		<td>员工基数<span style="color:red">*</span></td>
-	           		<td><input type='text'  class='form-control' required='required' name="indaccountinfo.indDepositRadices" onblur="MonthDep(this)"value="${indaccountinfoObject.indDepositRadices }"/></td>
+	           		<td><input type='text' id="td2" readonly="true" class='form-control' required='required' name="indaccountinfo.indDepositRadices" onblur="MonthDep(this)"value="${indaccountinfoObject.indDepositRadices }"/></td>
 					<td>单位缴存比例<span style="color:red">*</span></td>
 					<td class="input-group"><input class="form-control utinDepositRatio" readonly="readonly" value="${indaccountinfoObject.utinaccountinfo.utinDepositRatio*100 }"/> <span class="input-group-addon">%</span></td>
 					<td>个人缴存比例<span style="color:red">*</span></td>
@@ -226,6 +226,9 @@ function MonthDep(obj){
 	$(".utinMonthDeputinMonthDep").val(a*2);
 	
 }
+$("#td1").blur();
+$("#td2").blur();
+
 function idNum(obj){
 	//获取输入身份证号码 
 	var idNum = obj.value; 
