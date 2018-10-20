@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
            <td colspan="11">
-             <div style="height:490px;">
+             <div style="height:490px;overflow:auto">
                 <table >
                   <c:forEach items="${entity.list}" var="item">
                        <tr class="tr" ondblclick="find(${item.id})">

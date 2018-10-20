@@ -62,6 +62,7 @@ public class FushAction extends BaseAction<Fush>{
 		       entity.setMaxResult(11);
    	//查询
 	    entity=biz.getPart(entity, criterion);
+	    System.out.println("list数据量=="+entity.getList().size());
 	    return SUCCESS;
    }
 //查看个人冲贷详情

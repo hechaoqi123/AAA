@@ -47,8 +47,6 @@ public class BorrBizImpl implements BorrBiz {
 		   int current=Integer.MAX_VALUE;
 		   Repaymentplandetails repay=null;
 		   for (Repaymentplandetails repaymentplandetails : set) {
-			   System.out.println(repaymentplandetails.getRepaymentStatus());
-			   System.out.println(repaymentplandetails.getRepaymentStatus());
 			   if(repaymentplandetails.getCurrentPeriod()<current&&(repaymentplandetails.getRepaymentStatus().equals("逾期未还")||repaymentplandetails.getRepaymentStatus().equals("未还"))){
 					current=repaymentplandetails.getCurrentPeriod();
 					repay=repaymentplandetails;
@@ -69,7 +67,7 @@ public class BorrBizImpl implements BorrBiz {
 			Repaymentplandetails repay = repayDao.getOne(id);
 			if(repay.getRepaymentStatus().equals("未还")||repay.getRepaymentStatus().equals("逾期未还")){
 				if(repay.getOverduerepayment()!=null){//当此还款逾期时:添加逾期罚息
-					repay.setOverduePrincipalAndInte(repay.getOverduerepayment().getReturnedPriInt());
+					repay.setOverduePrincipalAndInte(repay.getOverduerepayment().getDefaultInterest());
 				}
 				repay.setRepaymentsReceived(Float.valueOf(Math.round(repay.getAmountOfRepayRecei()+repay.getOverduePrincipalAndInte())));
 				repay.setRepaymentStatus("已还");

@@ -60,7 +60,6 @@ public class FushBizImpl implements FushBiz {
 		    	 
 		    	 if(fush.getStatus().equals("正常")){
 		    //取出还款记录
-		    		 System.out.println(fush);
 		    	  Repaymentplandetails repay = borrBiz.getRepay(fush.getBorrowmoneyagreement());
 		        if(repay==null){//未查询到未还款记录
 		        	  System.out.println("异常还款");
@@ -92,7 +91,6 @@ public class FushBizImpl implements FushBiz {
 		        	   Log log=new Log();
 		        	      log.setFush(fush);
 		        		  log.setMoney(String.valueOf(money2));
-		        		  System.out.println("repay"+repay);
 			        	  log.setRepaymentplandetails(repay);
 			        	  log.setRiqi(fmt.format(new Date()));
 			        	  log.setStatus("成功");
