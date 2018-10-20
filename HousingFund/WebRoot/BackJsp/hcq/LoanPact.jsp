@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              </tr>
               <tr>
                <td colspan="4">
-                   <div style="height:1400px;text-align: left;margin-left:50px;width:670px">
+                   <div style="height:1450px;text-align: left;margin-left:50px;width:670px">
                    
                     借款人即抵押人（以下简称甲方）：贷款人即抵押权人（以下简称乙方）：保证人即售房单位（以下简称丙方）：
                     甲方因购买或建造或翻建或大修自有自住住房，根据XX市公积金管理中心和《职工住房抵押贷款办法》规定，向乙方申请借款，愿意以所购买或建修的住房作为抵押。
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <b>第八条：</b>合同公证 　　甲，乙，丙三方自本合同签订之日起的十日内，向公证机关办理本合同和甲，乙方签订的住房抵押合同公证。<br/>
           <b>第九条：</b>合同的变更和解除 　　本合同生效后，任何一方不得擅自变更和解除本合同。甲方如将本合同项下的权利，义务转让给第三方，应符合有关规定，并应事先经一方书面同意（如在保证期间应征得丙方同意），其转让行为在受让方和乙方重新签订借款合同后生效。 　　
                        <br/> <br/>    甲方：<input required="true" id="jia"  style="border:0px; border-bottom:1px solid #000"/>　　　 　       乙方：（私章） 　　　　 丙方：（私章） 　<br/> <br/> 
-                        <span style="padding-left:400px;"></span><span style="position: relative;left: 70px;">合同签订日期:<input id="dat" readonly="true" style="border:0px; border-bottom:1px solid #000"/></span>
+                        <span style="padding-left:390px;"></span><span style="position: relative;left: 70px;">合同签订日期:<input id="dat" readonly="true" style="border:0px; border-bottom:1px solid #000"/></span>
            </dl>
                    </div>
                </td>
