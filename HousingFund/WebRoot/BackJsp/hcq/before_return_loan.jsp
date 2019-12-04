@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>联系方式:<span style="color:red">*</span></td>
             <td colspan="2"><input required="true" name="iphone" type="text"/></td>
             <td colspan="3" id="tr">
-                                    未还利息:<input type="text" name="afterlixi" value="0" id="mm"/>元
+                                    未还利息:<input readonly="true" type="text" name="afterlixi" value="0" id="mm"/>元
             </td>
           </tr>
            <tr>
@@ -152,9 +152,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 'borrowerIdno':number
              },
              success:function(data){//借款合同信息
-                alert("贷款结清证明已领取,请勿重复提交！")
-                alert(data);
-                
                  //未还期数
                var num=parseInt((parseInt(data.borrowMoneyNumber*10000)-parseInt(data.coborrower))/(parseInt(data.borrowMoneyNumber*10000)/data.borrowerFixedYear));
                money=(parseInt(data.borrowMoneyNumber*10000)-parseInt(data.coborrower))*(data.borrowerAnnualRate/12/100)*(data.repaymentPlanDetailsiId);

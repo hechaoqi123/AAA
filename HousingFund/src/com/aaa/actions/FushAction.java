@@ -32,6 +32,13 @@ public class FushAction extends BaseAction<Fush>{
    @Autowired
    private LogBiz logBiz;
    private PageEntity entity;
+   //业务办理申请
+   @Action(value="save_fush",results={@Result(name="success",location="/BackJsp/hcq/SUCCESS.jsp")}) 
+   public String save_fush(){
+	     getModel().setStatus("正常");
+	     biz.work(getModel());
+	   return SUCCESS;
+   }
  //日志查询
    @Action(value="getAllLog",results={@Result(name="success",location="/BackJsp/hcq/showLog.jsp")})
    public String getAllLog(){

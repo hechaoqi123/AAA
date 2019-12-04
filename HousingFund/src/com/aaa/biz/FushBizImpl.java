@@ -56,11 +56,11 @@ public class FushBizImpl implements FushBiz {
 		 SimpleDateFormat fmt=new SimpleDateFormat("yyyy/MM/dd");
 		try {
 		    List<Fush> list=getAll();
-		     System.out.println("冲贷数量:"+list.size());
 		     for (Fush fush : list) {
 		    	 
 		    	 if(fush.getStatus().equals("正常")){
 		    //取出还款记录
+		    		 System.out.println(fush);
 		    	  Repaymentplandetails repay = borrBiz.getRepay(fush.getBorrowmoneyagreement());
 		        if(repay==null){//未查询到未还款记录
 		        	  System.out.println("异常还款");
@@ -107,6 +107,7 @@ public class FushBizImpl implements FushBiz {
 		        	  log.setRiqi(fmt.format(new Date()));
 		        	  log.setStatus("失败");
 		        	  log.setRemark("余额不足。");
+		        	  fush.setStatus("冻结");
 		        	    //记录日志
 		        	  logBiz.add(log);
 		          }

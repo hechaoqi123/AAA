@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
            <tr>
            <td>个人公积金账户<span style="color:red">*</span></td>
-           <td><input type="text" id="account" name="indAccount" required="true"/></td>
+           <td><input type="text" id="account" readonly="true" name="indAccount" required="true"/></td>
            <td>借款金额（万元）<span style="color:red">*</span></td>
            <td><input type="text" name="borrowingBalance" required="true"/></td>
           </tr>
@@ -184,13 +184,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </tr>
            <tr>
             <td>身份证号：<span style="color:red">*</span></td>
-            <td><input name="coborrower.coborrowerIdno" type="text"/></td>
+            <td><input name="coborrower.coborrowerIdno" id="number2" type="text"/></td>
             <td>所在单位 ：<span style="color:red">*</span></td>
             <td><input name="coborrower.coborrowerUtinName" type="text"/></td>
           </tr>
            <tr>
             <td>公积金账户：<span style="color:red">*</span></td>
-            <td><input name="coborrower.coborrowerAccount" id="ddd" type="text"/></td>
+            <td><input name="coborrower.coborrowerAccount" readonly="true" id="ddd" type="text"/></td>
             <td>与借款人关系 <span style="color:red">*</span></td>
             <td><input name="coborrower.relation" type="text"/></td>
           </tr>
@@ -308,6 +308,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
         })
      })
+          //通过身份证号检索个人账户ID
+     $("#number2").change(function(){
+        $.ajax({
+            url:'get_Ind.action',
+            type:'post',
+            dataType:'json',
+            async:false,
+            data:{
+              'loginAccount':$(this).val()
+            },success:function(data){
+               if(data!=null){
+                 $("#ddd").val(data.indAccountId)
+               }else{
+                 alert("未检索到共同借款人账户ID");
+                 $("#ddd").val("");
+               }
+            },error:function(){
+              alert("未检索到账户ID")
+              $("#ddd").val("");
+            }
+        
+        })
+     })
      $("form").submit(function(){
        var result=false;
         $.ajax({//判断个人账户是否存在
@@ -321,8 +344,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             },
             success:function(data){
               
-                alert(data);
-              return false;
                if(data=="true"){
                  result=true;
                }else{
@@ -330,6 +351,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   $("#account").focus();
                    result=false;
                }
+               return result;
             }
         })
        if($("#cc").prop("checked")){//判断共同借款人账户是否为空
@@ -351,16 +373,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 'indAccountId':$("#ddd").val()
             },
             success:function(data){
+               alert("ww"+data)
+               alert(data=="true")
                if(data=="true"){
                  result=true;
                }else{
                   alert("共同借款人公积金账户不存在！")
                   $("#account").focus();
-                   result=false;
+                return false;
                }
+            },error:function(){
+              alert("操作异常！")
             }
         })
        }
+       return false;
         return result;
      })
 </script>

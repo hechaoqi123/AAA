@@ -21,13 +21,18 @@ public class IndAccountInfoAction extends BaseAction<Indaccountinfo> {
 	 //获取个人账户信息
    @Action("get_IndAccountInfo")
    public String get_IndAccountInfo(){
-	   List entity=biz.fingByExample(getModel());
-	   System.out.println(entity.toString());
-	   if(entity.size()<1){
-		   getOut().print(false);
-	   }else{
-		   getOut().print(true);  
-	   }
+	   try {
+		   Object entity=biz.getOne(getModel().getIndAccountId());
+		   if(entity==null){
+			   System.out.println("不存在");
+			   getOut().print(false);
+		   }else{
+			   System.out.println("存在");
+			   getOut().print(true);  
+		   }
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
 	   return null;
    }
    //获取个人账户信息

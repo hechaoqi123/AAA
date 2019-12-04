@@ -47,6 +47,8 @@ public class BorrBizImpl implements BorrBiz {
 		   int current=Integer.MAX_VALUE;
 		   Repaymentplandetails repay=null;
 		   for (Repaymentplandetails repaymentplandetails : set) {
+			   System.out.println(repaymentplandetails.getRepaymentStatus());
+			   System.out.println(repaymentplandetails.getRepaymentStatus());
 			   if(repaymentplandetails.getCurrentPeriod()<current&&(repaymentplandetails.getRepaymentStatus().equals("ÓâÆÚÎ´»¹")||repaymentplandetails.getRepaymentStatus().equals("Î´»¹"))){
 					current=repaymentplandetails.getCurrentPeriod();
 					repay=repaymentplandetails;

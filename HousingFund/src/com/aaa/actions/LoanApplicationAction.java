@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import com.aaa.biz.BorrBiz;
 import com.aaa.biz.LoanApplicationBiz;
 import com.aaa.biz.LoanBookBiz;
+import com.aaa.biz.LoanaccountinfoBiz;
 import com.aaa.biz.RemittanceDetailBiz;
 import com.aaa.dao.LoanBookDao;
 import com.aaa.entity.Coborrower;
@@ -38,6 +39,8 @@ import com.aaa.util.JSON;
 public class LoanApplicationAction extends BaseAction<Loanapplication> {
 	@Autowired
 	 LoanApplicationBiz biz;
+	@Autowired
+	 LoanaccountinfoBiz loanBiz;
 	@Autowired
 	 BorrBiz borBiz;
 	 Loanaccountinfo loanaccountinfoEntity=new Loanaccountinfo();//贷款信息
@@ -159,6 +162,31 @@ public class LoanApplicationAction extends BaseAction<Loanapplication> {
 		  biz.update(getModel().getLoanApplicationId());
 			return SUCCESS;
 		}
+//借款申请书检索
+	@Action("find_Loan")
+	public String fing_Loan(){
+		try {
+			Loanapplication Loan = biz.getOne(getModel());
+			loanaccountinfoEntity.setRemarks(String.valueOf(Loan.getLoanApplicationId()));
+			loanaccountinfoEntity=loanBiz.findByExample(loanaccountinfoEntity);
+			String remark=loanaccountinfoEntity.getGuaranteeMode();
+			   if(Loan.getCoborrower()==null){//判断共同借款人
+				   Coborrower coborrower=new Coborrower();
+				   coborrower.setCoborrowerName("无");
+				   coborrower.setCoborrowerAddress(remark);
+				   Loan.setCoborrower(coborrower);
+			   }else{
+				   Loan.getCoborrower().setCoborrowerAddress(remark);
+			   }
+			String json=JSON.toJsonRelation(Loan);
+			   System.out.println(json);
+			getOut().print(json);
+		} catch (Exception e) {
+			getOut().print("error");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	//get set
 	public Loanaccountinfo getLoanaccountinfoEntity() {
 		return loanaccountinfoEntity;

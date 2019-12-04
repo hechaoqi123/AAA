@@ -26,7 +26,7 @@ public class TimingTask {
 	@Autowired
 	 FushBiz fushBiz;
     //计算逾期
-	//@Scheduled(cron="0/20 * * * * ?")//20秒扫描一次
+	//@Scheduled(cron="0/50 * * * * ?")//20秒扫描一次
 	public void work(){
 		System.out.println("---开始计算逾期利息---");
 		repayBiz.task();

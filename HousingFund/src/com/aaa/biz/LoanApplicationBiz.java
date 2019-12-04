@@ -22,6 +22,7 @@ public interface LoanApplicationBiz{
 	public List<Loanapplication> criteriaAssess(String state);
 	//申请书查询
 	public Loanapplication getOne(int id);
+	public Loanapplication getOne(Loanapplication model);
 	//当前申请书最大可贷额度
 	public Integer getLimit(Integer LoanapplicationId);
 	//更新申请书状态
